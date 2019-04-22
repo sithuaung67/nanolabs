@@ -13,6 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/songs',[
+    'uses'=>'ApiController@getSongs'
+]);
+Route::get('/signers',[
+   'uses'=>'ApiController@getSingers'
+]);
+Route::get('/albums',[
+   'uses'=>'ApiController@getAlbums'
+]);
+Route::get('/category',[
+   'uses'=>'ApiController@getCategory'
+]);
+Route::get('search/{q}',[
+    'uses'=>'ApiController@getSearch'
+]);

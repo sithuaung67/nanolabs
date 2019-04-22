@@ -29,8 +29,10 @@
             <li class="header">MAIN NAVIGATION</li>
 
             <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-
-
+            <li><a href="{{route('category')}}"><i class="fa fa-list"></i> <span>Category</span></a></li>
+            <li><a href="{{route('singer')}}"><i class="fa fa-microphone"></i> <span>Singer</span></a></li>
+            <li><a href="{{route('album')}}"><i class="fa fa-book"></i> <span>Album</span></a></li>
+            <li><a href="{{route('song')}}"><i class="fa fa-music"></i> <span>Song</span></a></li>
 
             <li class="treeview">
                 <a href="#">

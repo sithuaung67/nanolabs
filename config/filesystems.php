@@ -47,6 +47,11 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
+        'songfile' => [
+            'driver' => 'local',
+            'root' => public_path('songfiles'),
+        ],
+
 
         'public' => [
             'driver' => 'local',

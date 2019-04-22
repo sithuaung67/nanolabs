@@ -3,9 +3,9 @@
     <!-- Logo -->
     <a href="{{route('dashboard')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><img src="../../ntg/ntg-logo.png" class="img-circle" style="width: 50px"></span>
+        <span class="logo-mini"><img src="../../ntg/morehead-state-eagle-png-logo-8.png" class="img-circle" style="width: 50px"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="../../ntg/ntg-logo.png" class="img-circle" style="width: 50px"><b>NTG RES-POS</b></span>
+        <span class="logo-lg"><img src="../../ntg/morehead-state-eagle-png-logo-8.png" class="img-circle" style="width: 50px"><b>Healer Music</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
