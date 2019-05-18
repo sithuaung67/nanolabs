@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Category
+    Department
 @stop
 
 @section('style')
@@ -14,11 +14,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-list"></span>Category
+                <span class="fa fa-list"></span>Department
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
-                <li class="active">Category</li>
+                <li class="active">Department</li>
             </ol>
         </section>
 
@@ -29,14 +29,14 @@
               <div class="col-md-8">
                   <div class="panel panel-primary">
                   <div class="panel-heading">
-                      Category data
+                      Department / Data
                   </div>
                   <div class="panel-body">
                       <div class="table">
                           <table class="table table-hover">
                               <tr>
                                   <td>Id</td>
-                                  <td>Category Name</td>
+                                  <td>Department</td>
                                   <td>Created Dated</td>
                                   <td>Edit</td>
                               </tr>
@@ -58,7 +58,7 @@
                                                           </button>
                                                       </div>
                                                       <div class="modal-body">
-                                                         <form method="post" action="{{route('updateCategory',['cat'=>$cats->id])}}">
+                                                         <form method="post" action="{{route('updateDepartment',['cat'=>$cats->id])}}">
                                                              <div class="form-group">
                                                              <label for="cat_name" class="control-label">Category Name</label>
                                                              <input type="text" class="form-control" name="cat_name" value="{{$cats->cat_name}}">
@@ -85,12 +85,12 @@
                 <div class="col-md-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Create Category
+                            Create Department
                         </div>
                         <div class="panel-body">
-                            <form method="post" action="{{route('postCategory')}}">
+                            <form method="post" action="{{route('postDepartment')}}">
                                 <div class="form-group">
-                                    <label for="cat_name" class="control-label" >Category Name</label>
+                                    <label for="cat_name" class="control-label" >Department Name</label>
                                     <input type="text" id="cat_name" name="cat_name" class="form-control">
                                 </div>
                                 <div class="form-group">

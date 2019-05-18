@@ -82,57 +82,26 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateUser',
             'as'=>'user.update'
         ]);
-        Route::get('category',[
-           'uses'=>'SingerController@getCategory',
-           'as'=>'category'
+        Route::get('department',[
+           'uses'=>'DataController@getDepartment',
+           'as'=>'department'
         ]);
-        Route::post('postCategory',[
-           'uses'=>'SingerController@postCategory',
-           'as'=>'postCategory'
+        Route::post('postDepartment',[
+           'uses'=>'DataController@postDepartment',
+           'as'=>'postDepartment'
         ]);
-        Route::get('singer',[
-           'uses'=>'SingerController@getSinger',
-           'as'=>'singer'
+
+        Route::get('data',[
+           'uses'=>'DataController@getData',
+           'as'=>'data'
         ]);
-        Route::post('postSinger',[
-           'uses'=>'SingerController@postSinger',
-           'as'=>'postSinger'
+        Route::post('postData',[
+           'uses'=>'DataController@postData',
+           'as'=>'postData'
         ]);
-        Route::get('album',[
-           'uses'=>'SingerController@getAlbum',
-           'as'=>'album'
-        ]);
-        Route::post('postAlbum',[
-           'uses'=>'SingerController@postAlbum',
-           'as'=>'postAlbum'
-        ]);
-        Route::get('song',[
-           'uses'=>'SingerController@getSong',
-           'as'=>'song'
-        ]);
-        Route::post('postSong',[
-           'uses'=>'SingerController@postSong',
-           'as'=>'postSong'
-        ]);
-        Route::post('updateCategory/{id}',[
-            'uses'=>'SingerController@updateCategory',
-            'as'=>'updateCategory'
-        ]);
-        Route::post('updateSingers/{id}',[
-            'uses'=>'SingerController@updateSinger',
-            'as'=>'updateSinger'
-        ]);
-        Route::get('deleteSong/{id}',[
-           'uses'=>'SingerController@deleteSong',
-           'as'=>'deleteSong'
-        ]);
-        Route::post('updateSong/{id}',[
-            'uses'=>'SingerController@updateSong',
-            'as'=>'updateSong'
-        ]);
-        Route::post('updateAlbum/{id]',[
-           'uses'=>'SingerController@updateAlbum',
-           'as'=>'updateAlbum'
+        Route::post('updateDepartment/{id}',[
+            'uses'=>'DataController@updateDepartment',
+            'as'=>'updateDepartment'
         ]);
 
     });
