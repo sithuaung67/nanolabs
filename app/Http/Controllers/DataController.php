@@ -50,15 +50,15 @@ class DataController extends Controller
             'letter_no'=>'required',
             'date_time'=>'required',
             'title'=>'required',
-            'main_file'=>'required|mimes:pdf',
-            'remark_main_file'=>'required|mimes:pdf',
-            'receive_file_name'=>'required',
-            'remark_receive_file_name'=>'required',
-            'attach_file'=>'required|mimes:pdf',
+            'pdf_main_file'=>'required|mimes:pdf|max:10000',
+            'pdf_remark_main_file'=>'required|mimes:pdf|max:10000',
+            'receive_file'=>'required',
+            'rmreceive_file'=>'required',
+            'pdf_attach_file'=>'required|mimes:pdf|max:10000',
         ]);
 
-        $data_file_name = $request['main_file'] . '.' . $request->file('main_file')->getClientOriginalExtension();
-        $data_file = $request->file('main_file');
+        $data_file_name = $request['main_file'] . '.' . $request->file('pdf_main_file')->getClientOriginalExtension();
+        $data_file = $request->file('pdf_main_file');
 
         $remark_data_file_name = $request['remark_main_file'] . '.' . $request->file('remark_main_file')->getClientOriginalExtension();
         $remark_data_file = $request->file('remark_main_file');

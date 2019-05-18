@@ -59,8 +59,9 @@
                                                       </div>
                                                       <div class="modal-body">
                                                          <form method="post" action="{{route('updateDepartment',['cat'=>$cats->id])}}">
+
                                                              <div class="form-group">
-                                                             <label for="cat_name" class="control-label">Category Name</label>
+                                                             <label for="cat_name" class="control-label">Department Name</label>
                                                              <input type="text" class="form-control" name="cat_name" value="{{$cats->cat_name}}">
                                                              </div>
                                                              <div class="modal-footer">
