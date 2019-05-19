@@ -44,7 +44,7 @@
     <!--jquery-- >
 
      <script src="{{asset('bower_components/jquery/dist/jquery.js')}}"></script>
-    <!-- AdminLTE App -->
+
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 
     <script src="{{asset('datatable/app.js')}}"></script>

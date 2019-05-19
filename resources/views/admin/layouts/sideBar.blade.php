@@ -28,9 +28,9 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
 
-            <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li><a href="{{route('showData')}}"><i class="fa fa-database"></i> <span>All Data</span></a></li>
             <li><a href="{{route('department')}}"><i class="fa fa-list"></i> <span>Department</span></a></li>
-            <li><a href="{{route('data')}}"><i class="fa fa-database"></i> <span>Data</span></a></li>
+            <li><a href="{{route('data')}}"><i class="fa fa-database"></i> <span>Post Data</span></a></li>
 
             <li class="treeview">
                 <a href="#">

@@ -27,7 +27,7 @@ Route::post('/login',[
 Route::group(['middleware'=>'auth'], function (){
 
     Route::get('/', function (){
-        return redirect()->route('dashboard');
+        return redirect()->route('showData');
     });
 
 
@@ -94,6 +94,10 @@ Route::group(['middleware'=>'auth'], function (){
         Route::get('data',[
            'uses'=>'DataController@getData',
            'as'=>'data'
+        ]);
+        Route::get('showData',[
+            'uses'=>'DataController@getShowData',
+            'as'=>'showData'
         ]);
         Route::post('postData',[
            'uses'=>'DataController@postData',

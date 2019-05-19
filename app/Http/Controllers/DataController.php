@@ -41,6 +41,11 @@ class DataController extends Controller
         $song = Song::OrderBy('id', 'desc')->get();
         return view('data')->with(['cat' => $cat])->with(['song' => $song]);
     }
+    public function getShowData()
+    {
+        $songs = Song::OrderBy('id', 'desc')->paginate('5');
+        return view('showdata')->with(['songs' => $songs]);
+    }
 
 
     public function postData(Request $request)
@@ -57,14 +62,14 @@ class DataController extends Controller
             'pdf_attach_file'=>'required|mimes:pdf|max:10000',
         ]);
 
-        $data_file_name = $request['main_file'] . '.' . $request->file('pdf_main_file')->getClientOriginalExtension();
+        $data_file_name = $request['pdf_main_file'] . '.' . $request->file('pdf_main_file')->getClientOriginalExtension();
         $data_file = $request->file('pdf_main_file');
 
-        $remark_data_file_name = $request['remark_main_file'] . '.' . $request->file('remark_main_file')->getClientOriginalExtension();
-        $remark_data_file = $request->file('remark_main_file');
+        $remark_data_file_name = $request['pdf_remark_main_file'] . '.' . $request->file('pdf_remark_main_file')->getClientOriginalExtension();
+        $remark_data_file = $request->file('pdf_remark_main_file');
 
-        $attach_data_file_name= $request['attach_file'] . '.' . $request->file('attach_file')->getClientOriginalExtension();
-        $attach_data_file = $request->file('attach_file');
+        $attach_data_file_name= $request['pdf_attach_file'] . '.' . $request->file('pdf_attach_file')->getClientOriginalExtension();
+        $attach_data_file = $request->file('pdf_attach_file');
 
         $data = new Song();
         $data->department = $request['department'];

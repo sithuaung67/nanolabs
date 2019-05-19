@@ -26,19 +26,20 @@
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
+
+                @if(Session('info'))
+                <div class="alert alert-success alert-dismissible">
+                    {{Session('info')}}
+                    <a href="#" class="close" style="text-align: center" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> Indicates a successful  post data.
+                </div>
+                @endif
+
                 <div class="col-md-8 col-md-offset-2">
                   <div class="panel panel-primary">
                       <div class="panel-heading"><span class="fa fa-database"></span>
                           Data upload
                       </div>
-                      @if(Session('info'))
-                          <div class="alert alert-success alert-dismissible fade show" role="alert">
-                              {{Session('info')}}
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>
-                      @endif
                       <div class="panel-body">
                           <form method="post" action="{{route('postData')}}" enctype="multipart/form-data">
 

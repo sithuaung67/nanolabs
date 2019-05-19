@@ -1,7 +1,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="{{route('dashboard')}}" class="logo">
+    <a href="{{route('showData')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><img src="../../ntg/morehead-state-eagle-png-logo-8.png" class="img-circle" style="width: 50px"></span>
         <!-- logo for regular state and mobile devices -->
