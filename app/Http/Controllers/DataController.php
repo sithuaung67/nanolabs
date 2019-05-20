@@ -23,6 +23,12 @@ class DataController extends Controller
         $cat->save();
         return redirect()->back();
     }
+    public function postDeleteDepartment(Request $request){
+        $id=$request['id'];
+        $cat=Category::where('id', $id)->first();
+        $cat->delete();
+        return redirect()->back()->with('info', "The selected data have been deleted.");
+    }
 
     public function updateDepartment(Request $request)
     {
@@ -43,8 +49,9 @@ class DataController extends Controller
     }
     public function getShowData()
     {
-        $songs = Song::OrderBy('id', 'desc')->paginate('5');
-        return view('showdata')->with(['songs' => $songs]);
+        $cat=Category::all();
+        $songs = Song::all();
+        return view('showdata')->with(['cat'=>$cat])->with(['songs' => $songs]);
     }
 
 
@@ -88,5 +95,60 @@ class DataController extends Controller
         Storage::disk('DataFile')->put($attach_data_file_name, File::get($attach_data_file));
         return redirect()->back()->with(['info'=>'Data Collect Successful']);
     }
+    public function postDeleteData(Request $request){
+        $id=$request['id'];
+        $song=Song::where('id', $id)->first();
+        $song->delete();
+        return redirect()->back()->with('info', "The selected data have been deleted.");
+    }
+    public function postUpdateData(Request $request)
+    {
+        $main=$request->file('pdf_main_file');
+        $remark_main=$request->file('pdf_remark_main_file');
+        $attach=$request->file('pdf_attach_file');
+
+        $id=$request['id'];
+        $song=Song::whereId($id)->firstOrFail();
+        if(!empty($main)){
+            Storage::disk('DataFile')->delete($song->main_file);
+            $data_file_name = $request['pdf_main_file'] . '.' . $request->file('pdf_main_file')->getClientOriginalExtension();
+            $data_file = $request->file('pdf_main_file');
+            Storage::disk('DataFile')->put($data_file_name, File::get($data_file));
+        }
+        if(!empty($remark_main)){
+            Storage::disk('DataFile')->delete($song->remark_main_file);
+            $remark_data_file_name = $request['pdf_remark_main_file'] . '.' . $request->file('pdf_remark_main_file')->getClientOriginalExtension();
+            $remark_data_file = $request->file('pdf_remark_main_file');
+            Storage::disk('DataFile')->put($remark_data_file_name, File::get($remark_data_file));
+        }
+        if(!empty($attach)){
+            Storage::disk('DataFile')->delete($song->attach_file);
+            $attach_file_name = $request['pdf_attach_file'] . '.' . $request->file('pdf_attach_file')->getClientOriginalExtension();
+            $attach_file = $request->file('pdf_attach_file');
+            Storage::disk('DataFile')->put($attach_file_name, File::get($attach_file));
+        }
+        $song->department=$request['department'];
+        $song->letter_no=$request['letter_no'];
+        $song->title=$request['title'];
+        $song->receive_file_name=$request['receive_file'];
+        $song->remark_receive_file_name=$request['rmreceive_file'];
+        $song->update();
+        return redirect()->route('showData');
+
+    }
+
+    public function getSearchDepartment(Request $request){
+        $q=$request['q'];
+        $cat=Category::all();
+        $songs=Song::OrderBy('id','desc')->where('department',"LIKE","%$q%")->get();
+        return view('showdata')->with(['songs'=>$songs,'cat'=>$cat]);
+    }
+    public function getSearchDate(Request $request){
+        $q=$request['q'];
+        $cat=Category::all();
+        $songs=Song::OrderBy('id','desc')->where('date_time',"LIKE","%$q%")->get();
+        return view('showdata')->with(['songs'=>$songs,'cat'=>$cat]);
+    }
+
 
 }

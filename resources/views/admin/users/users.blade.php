@@ -121,21 +121,21 @@
                             <div class="modal fade" id="d{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <form method="post" action="{{route('user.delete')}}">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning"></i> confirm delete user account</h4>
-                                        </div>
-                                        <div class="modal-body text-danger">
-                                            <input type="hidden" name="id" value="{{$user->id}}">
-                                            Are you sure want to delete this user account name of <b>"{{$user->full_name}}"</b>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Confirm</button>
-                                        </div>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-warning"></i> confirm delete user account</h4>
+                                            </div>
+                                            <div class="modal-body text-danger">
+                                                <input type="hidden" name="id" value="{{$user->id}}">
+                                                Are you sure want to delete this user account name of <b>"{{$user->full_name}}"</b>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Confirm</button>
+                                            </div>
 
-                                    </div>
+                                        </div>
                                         {{csrf_field()}}
                                     </form>
                                 </div>

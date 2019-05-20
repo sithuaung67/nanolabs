@@ -25,14 +25,14 @@
 
 <body class="hold-transition login-page">
 <div class="container">
-    <div class="login-box">
+    <div class="login-box bg-primary">
         @if(Session('error')) <div class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span> {{Session('error')}}</div> @endif
         <div class="login-logo">
-            <h1>Your Logo</h1>
+        <span class="logo-lg"><img src="../../ntg/morehead-state-eagle-png-logo-8.png" class="img-circle" style="width: 50px"><p>Login</p></span>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg"><i>Sign in to start your session</i></p>
 
             <form role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
@@ -71,7 +71,7 @@
             </form>
 
             <div class="social-auth-links text-center">
-                <h2>Your Client Logo</h2>
+                <span class="logo-lg"><img src="../../ntg/morehead-state-eagle-png-logo-8.png" class="img-circle" style="width: 50px"> <b>Welcome My Login Page</b></span>
             </div>
 
 

@@ -41,10 +41,9 @@
     <!-- Bootstrap 3.3.7 -->
     <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
-    <!--jquery-- >
-
      <script src="{{asset('bower_components/jquery/dist/jquery.js')}}"></script>
 
+      <!-- AdminLTE App -->
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 
     <script src="{{asset('datatable/app.js')}}"></script>
@@ -59,7 +58,13 @@
            $("#item_table").dataTable();
            $("#user_table").dataTable();
            $("#table_sale_item").dataTable();
+           $("#data_table").dataTable({
+               "bFilter" : false,
+               "bPaginate": false,
+               "bInfo": false
+           });
         });
+
     </script>
 
     @yield('script')

@@ -15,24 +15,54 @@
         <section class="content-header">
             <h1>
                 <span class="fa fa-database"></span> All Data
+
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
-                <li class="active">All Data</li>
-            </ol>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                <form class="form-inline" action="{{route('search.date')}}" method="get">
+                    <input type="date" style="height: 30px" id="q" name="q" class="form-control">
+                    <button class="btn btn-primary" style="color: white;height: 30px" type="submit"><i class="fa fa-search"></i></button>
+                    @csrf
+                </form>
+            </div>
+                <div class="col-md-3">
+                    <form class="form-inline" action="{{route('search.data')}}" method="get">
+                        <select style="height: 30px;" class="form-control" id="q" name="q" >
+                            <option value="">Select Department</option>
+                            @foreach($cat as $cats)
+                                <option value="{{$cats->cat_name}}"> {{$cats->cat_name}}  </option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-primary" style="color: white;height: 30px" type="submit"><i class="fa fa-search"></i></button>
+                        @csrf
+                    </form>
+                </div>
+            </div>
+
         </section>
 
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
+                @if(Session('info'))
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <div class="tem alert alert-success navbar-fixed-bottom"><span class="glyphicon glyphicon-ok-circle"></span> {{Session('info')}}</div>
+                        </div>
+                    </div>
+                @endif
                 <div class="col-md-12">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                              All Data
                         </div>
                         <div class="panel-body table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="data_table">
+                                <thead>
+                                <tr style="background: grey ;color:#fff; font-weight: bold">
                                 <tr>
                                     <td>Id</td>
                                     <td>Department</td>
@@ -40,12 +70,14 @@
                                     <td>Date Time</td>
                                     <td>Title</td>
                                     <td>Main File</td>
-                                    <td>Remark Main File</td>
+                                    <td>Remark File</td>
                                     <td>Receive FileName</td>
-                                    <td>Remark Receive FileName</td>
+                                    <td>Remark FileName</td>
                                     <td>Attach File</td>
+                                    <td>Action</td>
 
                                 </tr>
+                                </thead>
                                 @foreach($songs as $song)
                                     <tr>
                                         <td>{{$song->id}}</td>
@@ -58,80 +90,108 @@
                                         <td>{{$song->receive_file_name}}</td>
                                         <td>{{$song->remark_receive_file_name}}</td>
                                         <td>{{$song->attach_file}}</td>
-                                        {{--<td class="col-sm-3">--}}
-                                            {{--@if($songs->song_file)--}}
-                                                {{--<audio controls src="../songfiles/{{$songs->song_file}}"></audio>--}}
-                                            {{--@endif--}}
-                                        {{--</td>--}}
-                                        {{--<td >--}}
-                                            {{--<a href="{{route('deleteSong',['song'=>$songs->id])}}" class="btn btn-primary "><i class="fa fa-trash"></i> </a>--}}
-                                            {{--<a href="#" data-toggle="modal" data-target="#e{{$songs->id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>--}}
-                                            {{--<input type="hidden" name="id" id="{{$songs->id}}">--}}
-                                            {{--<div class="modal" tabindex="-1" id="e{{$songs->id}}" role="dialog">--}}
-                                                {{--<div class="modal-dialog" role="document">--}}
-                                                    {{--<div class="modal-content">--}}
-                                                        {{--<div class="modal-header">--}}
-                                                            {{--<h5 class="modal-title">Modal title</h5>--}}
-                                                            {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-                                                                {{--<span aria-hidden="true">&times;</span>--}}
-                                                            {{--</button>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="modal-body">--}}
-                                                            {{--<form method="post" action="{{route('updateSong',['song'=>$songs->id])}}" enctype="multipart/form-data">--}}
-                                                                {{--<div class="form-group">--}}
-                                                                    {{--<label for="song_name" class="control-label">Song Name</label>--}}
-                                                                    {{--<input value="{{$songs->song_name}}" type="text" id="song_name" name="song_name" class="form-control">--}}
-                                                                {{--</div>--}}
-                                                                {{--<div class="form-group">--}}
-                                                                    {{--<label for="singer_name" class="control-label">Singer Name</label>--}}
-                                                                    {{--<select class="form-control" id="singer_name" name="singer_name" >--}}
-                                                                        {{--<option value="">select singer</option>--}}
-                                                                        {{--@foreach($singer as $singers)--}}
-                                                                            {{--<option value="{{$singers->id}}">--}}
-                                                                                {{--{{$singers->singer_name}} </option>--}}
-                                                                        {{--@endforeach--}}
+                                        <td class="btn btn-default ">
+                                            <a href="#" data-toggle="modal" data-target="#e{{$song->id}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
 
-                                                                    {{--</select>--}}
-                                                                {{--</div>--}}
-                                                                {{--<div class="form-group">--}}
-                                                                    {{--<label for="album_name" class="control-label">Album Name</label>--}}
-                                                                    {{--<select class="form-control" id="album_name" name="album_name" >--}}
-                                                                        {{--<option value="">select Album</option>--}}
-                                                                        {{--@foreach($album as $albums)--}}
-                                                                            {{--<option value="{{$albums->id}}">--}}
-                                                                                {{--{{$albums->album_name}} </option>--}}
-                                                                        {{--@endforeach--}}
+                                            <!-- Edit Modal -->
+                                            <div class="modal fade" id="e{{$song->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <form method="post" action="{{route('update.data')}}">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="background: blue;color: white">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">Edit data  info for Letter No. <b>"{{$song->letter_no}}"</b></h4>
+                                                            </div>
+                                                            <div class="modal-body text-left">
+                                                                <input type="hidden" name="id" value="{{$song->id}}">
 
-                                                                    {{--</select>--}}
-                                                                {{--</div>--}}
-                                                                {{--<div class="form-group">--}}
-                                                                    {{--<label for="cat_name" class="control-label">Category Name</label>--}}
-                                                                    {{--<select class="form-control" id="cat_name" name="cat_name" >--}}
-                                                                        {{--<option value="">select category</option>--}}
-                                                                        {{--@foreach($cat as $cats)--}}
-                                                                            {{--<option value="{{$cats->id}}">--}}
-                                                                                {{--{{$cats->cat_name}} </option>--}}
-                                                                        {{--@endforeach--}}
+                                                                <div class="form-group has-feedback">
+                                                                    <label for="department" class="control-label">Department</label>
+                                                                    <select class="form-control" id="department" name="department" >
+                                                                        @foreach($cat as $cats)
+                                                                            <option value="{{$cats->cat_name}}"> {{$cats->cat_name}}  </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
 
-                                                                    {{--</select>--}}
-                                                                {{--</div>--}}
-                                                                {{--<div class="form-group">--}}
-                                                                    {{--<label for="song_file" class="control-label">Song file</label>--}}
-                                                                    {{--<input type="file" class="form-control" id="song_file" name="song_file">--}}
-                                                                {{--</div>--}}
-                                                                {{--<div class="modal-footer">--}}
-                                                                    {{--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
-                                                                    {{--<button type="submit" class="btn btn-primary">Save changes</button>--}}
-                                                                {{--</div>--}}
-                                                                {{--@csrf--}}
-                                                            {{--</form>--}}
-                                                        {{--</div>--}}
+                                                                <div class="form-group">
+                                                                    <label for="letter_no" class="control-label">Letter Number</label>
+                                                                    <input value="{{$song->letter_no}}" type="number" id="letter_no" name="letter_no" class="form-control">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="date_time" class="control-label">Date Time</label>
+                                                                    <input type="date" style="height: auto" id="date_time" name="date_time" class="form-control">
+                                                                </div>
 
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</td>--}}
+                                                                <div class="form-group">
+                                                                    <label for="title" class="control-label">Title</label>
+                                                                    <input value="{{$song->title}}" type="text" name="title" id="title" class="form-control">
+                                                                </div>
 
+                                                                <div class="form-group">
+                                                                    <label for="pdf_main_file" class="control-label">Main File</label>
+                                                                    <input type="file" style="height: auto" class="form-control" id="pdf_main_file" name="pdf_main_file">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="pdf_remark_main_file" class="control-label">Remark Main File</label>
+                                                                    <input type="file" style="height: auto" class="form-control" id="pdf_remark_main_file" name="pdf_remark_main_file">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="receive_file" class="control-label">Received FileName</label>
+                                                                    <input value="{{$song->receive_file_name}}" type="text" class="form-control" id="receive_file" name="receive_file">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="rmreceive_file" class="control-label">Remark Received FileName</label>
+                                                                    <input value="{{$song->remark_receive_file_name}}" type="text"  class="form-control" id="rmreceive_file" name="rmreceive_file">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="pdf_attach_file" class="control-label">Attach File</label>
+                                                                    <input type="file" style="height: auto" class="form-control" id="pdf_attach_file" name="pdf_attach_file">
+                                                                </div>
+                                                            </div>
+
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Confirm</button>
+                                                            </div>
+
+                                                        </div>
+                                                        {{csrf_field()}}
+                                                    </form>
+                                                </div>
+                                            </div>
+
+
+
+                                            <a href="#" data-toggle="modal" data-target="#d{{$song->id}}" class="text-danger btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="d{{$song->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <form method="post" action="{{route('data.delete')}}">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" style="color: red" id="myModalLabel"><i class="fa fa-warning" style="color: red"></i> confirm delete data</h4>
+                                                            </div>
+                                                            <div class="modal-body text-danger">
+                                                                <input type="hidden" name="id" value="{{$song->id}}">
+                                                                Are you sure want to delete this letter no of <b>"{{$song->letter_no}}"</b>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Confirm</button>
+                                                            </div>
+
+                                                        </div>
+                                                        {{csrf_field()}}
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>

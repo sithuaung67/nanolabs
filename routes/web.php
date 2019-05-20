@@ -107,6 +107,31 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'DataController@updateDepartment',
             'as'=>'updateDepartment'
         ]);
+        Route::post('/department/delete',[
+            'uses'=>'DataController@postDeleteDepartment',
+            'as'=>'department.delete'
+        ]);
+        Route::post('/data/delete',[
+            'uses'=>'DataController@postDeleteData',
+            'as'=>'data.delete'
+        ]);
+
+        Route::post('/data/update',[
+            'uses'=>'DataController@postUpdateData',
+            'as'=>'data.update'
+        ]);
+        Route::get('/search/department',[
+            'uses'=>'DataController@getSearchDepartment',
+            'as'=>'search.data'
+        ]);
+        Route::get('/search/date',[
+            'uses'=>'DataController@getSearchDate',
+            'as'=>'search.date'
+        ]);
+        Route::post('/data/update',[
+            'uses'=>'DataController@postUpdateData',
+            'as'=>'update.data'
+        ]);
 
     });
 

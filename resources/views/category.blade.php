@@ -26,6 +26,13 @@
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
+                @if(Session('info'))
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <div class="tem alert alert-success navbar-fixed-bottom"><span class="glyphicon glyphicon-ok-circle"></span> {{Session('info')}}</div>
+                        </div>
+                    </div>
+                @endif
               <div class="col-md-8">
                   <div class="panel panel-primary">
                   <div class="panel-heading">
@@ -38,7 +45,8 @@
                                   <td>Id</td>
                                   <td>Department</td>
                                   <td>Created Dated</td>
-                                  <td>Edit</td>
+                                  <td>Action</td>
+
                               </tr>
                               @foreach($cat as $cats)
                                   <tr>
@@ -46,7 +54,7 @@
                                       <td>{{$cats->cat_name}}</td>
                                       <td>{{$cats->created_at->diffForHumans()}}</td>
                                       <td>
-                                          <a href="#" class="btn btn-success" data-toggle="modal" data-target="#e{{$cats->id}}">Edit</a>
+                                          <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#e{{$cats->id}}"><i class="fa fa-edit"></i></a>
                                           <input type="hidden" name="id" value="{{$cats->id}}">
                                           <div class="modal" tabindex="-1" id="e{{$cats->id}}" role="dialog">
                                               <div class="modal-dialog" role="document">
@@ -65,7 +73,7 @@
                                                              <input type="text" class="form-control" name="cat_name" value="{{$cats->cat_name}}">
                                                              </div>
                                                              <div class="modal-footer">
-                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                  <button type="submit" class="btn btn-primary">Save changes</button>
                                                              </div>
                                                              @csrf
@@ -73,6 +81,30 @@
                                                       </div>
 
                                                   </div>
+                                              </div>
+                                          </div>
+                                          <a href="#" data-toggle="modal" data-target="#d{{$cats->id}}" class="text-danger btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                          <!-- Delete Modal -->
+                                          <div class="modal fade" id="d{{$cats->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                              <div class="modal-dialog" role="document">
+                                                  <form method="post" action="{{route('department.delete')}}">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                              <h4 class="modal-title" style="color: red" id="myModalLabel"><i class="fa fa-warning" style="color: red"></i> confirm delete data</h4>
+                                                          </div>
+                                                          <div class="modal-body text-danger">
+                                                              <input type="hidden" name="id" value="{{$cats->id}}">
+                                                              Are you sure want to delete this letter no of <b>"{{$cats->letter_no}}"</b>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                              <button type="submit" class="btn btn-primary">Confirm</button>
+                                                          </div>
+
+                                                      </div>
+                                                      {{csrf_field()}}
+                                                  </form>
                                               </div>
                                           </div>
                                       </td>

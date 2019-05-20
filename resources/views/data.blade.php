@@ -56,7 +56,7 @@
                                   @endif
                               </div>
 
-                              <div class="form-group has-feedback @if($errors->has('letter_no')) has-error @endif">
+                              <div class="form-group @if($errors->has('letter_no')) has-error @endif">
                                   <label for="letter_no" class="control-label">Letter Number</label>
                                   <input type="number" id="letter_no" name="letter_no" class="form-control">
                                   @if ($errors->has('letter_no')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
