@@ -132,7 +132,18 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'DataController@postUpdateData',
             'as'=>'update.data'
         ]);
-
+        Route::get('/view',[
+           'uses'=>'DataController@getViewData',
+           'as'=>'view.data'
+        ]);
+        Route::get('/back',[
+            'uses'=>'DataController@getBack',
+            'as'=>'back'
+        ]);
+        Route::get('/search/data',[
+            'uses'=>'DataController@getSearchAll',
+            'as'=>'search.all'
+        ]);
     });
 
 

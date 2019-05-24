@@ -58,26 +58,44 @@
 
                               <div class="form-group @if($errors->has('letter_no')) has-error @endif">
                                   <label for="letter_no" class="control-label">Letter Number</label>
-                                  <input type="number" id="letter_no" name="letter_no" class="form-control">
-                                  @if ($errors->has('letter_no')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                  <input type="text" id="letter_no" name="letter_no" class="form-control">
+                              @if ($errors->has('letter_no')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                       {{ $errors->first('letter_no') }}</p>
                                   @endif
                               </div>
-                              <div class="form-group has-feedback @if($errors->has('date_time')) has-error @endif">
-                                  <label for="date_time" class="control-label">Date Time</label>
-                                  <input type="date" style="height: auto" id="date_time" name="date_time" class="form-control">
+                              <div class="form-group has-feedback @if($errors->has('date')) has-error @endif">
+                                  <label for="date" class="control-label">Date Time</label>
+                                  <input type="date" style="height: auto" id="date" name="date" class="form-control">
                                   <i class="fa fa-calendar form-control-feedback"></i>
-                                  @if ($errors->has('date_time')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                      {{ $errors->first('date_time') }}</p>
+                                  @if ($errors->has('date')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                      {{ $errors->first('date') }}</p>
                                   @endif
                               </div>
 
                               <div class="form-group has-feedback @if($errors->has('title')) has-error @endif">
                                   <label for="title" class="control-label">Title</label>
-                                  <input type="text" name="title" id="title" class="form-control">
+                                  <textarea name="title" id="title" class="form-control"></textarea>
                                   <i class="fa fa-file-text form-control-feedback"></i>
                                   @if ($errors->has('title')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                       {{ $errors->first('title') }}</p>
+                                  @endif
+                              </div>
+
+                              <div class="form-group has-feedback @if($errors->has('receive_file')) has-error @endif">
+                                  <label for="receive_file" class="control-label">Received FileName</label>
+                                  <textarea class="form-control" id="receive_file" name="receive_file"></textarea>
+                                  <i class="fa fa-file-text form-control-feedback"></i>
+                                  @if ($errors->has('receive_file')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                      {{ $errors->first('receive_file') }}</p>
+                                  @endif
+                              </div>
+
+                              <div class="form-group has-feedback @if($errors->has('rmreceive_file')) has-error @endif">
+                                  <label for="rmreceive_file" class="control-label">Remark Received FileName</label>
+                                  <textarea  class="form-control" id="rmreceive_file" name="rmreceive_file"></textarea>
+                                  <i class="fa fa-file-text form-control-feedback"></i>
+                                  @if ($errors->has('rmreceive_file')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                      {{ $errors->first('rmreceive_file') }}</p>
                                   @endif
                               </div>
 
@@ -99,24 +117,6 @@
                                   @endif
                               </div>
 
-                              <div class="form-group has-feedback @if($errors->has('receive_file')) has-error @endif">
-                                  <label for="receive_file" class="control-label">Received FileName</label>
-                                  <input type="text" class="form-control" id="receive_file" name="receive_file">
-                                  <i class="fa fa-file-text form-control-feedback"></i>
-                                  @if ($errors->has('receive_file')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                      {{ $errors->first('receive_file') }}</p>
-                                  @endif
-                              </div>
-
-                              <div class="form-group has-feedback @if($errors->has('rmreceive_file')) has-error @endif">
-                                  <label for="rmreceive_file" class="control-label">Remark Received FileName</label>
-                                  <input type="text"  class="form-control" id="rmreceive_file" name="rmreceive_file">
-                                  <i class="fa fa-file-text form-control-feedback"></i>
-                                  @if ($errors->has('rmreceive_file')) <p class="help-block"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                      {{ $errors->first('rmreceive_file') }}</p>
-                                  @endif
-                              </div>
-
                               <div class="form-group has-feedback @if($errors->has('pdf_attach_file')) has-error @endif">
                                   <label for="pdf_attach_file" class="control-label">Attach File</label>
                                   <input type="file" style="height: auto" class="form-control" id="pdf_attach_file" name="pdf_attach_file">
@@ -125,7 +125,6 @@
                                       {{ $errors->first('pdf_attach_file') }}</p>
                                   @endif
                               </div>
-
                               <div class="form-group">
                                   <button type="submit" class="btn btn-primary btn-block">Save</button>
                               </div>

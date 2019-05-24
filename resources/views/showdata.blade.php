@@ -14,23 +14,35 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-database"></span> All Data
+                <span class="fa fa-database"></span> <a href="{{url('/admin/showData')}}" style="color: #0f0f0f"> All Data</a>
 
             </h1>
             <div class="row">
-                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <form class="form-inline" action="{{route("search.all")}}" method="get">
+                        <input type="date" style="height: 30px" id="date" name="date" class="form-control">
+                        <select style="height: 30px;" class="form-control" id="department" name="department" >
+                            <option value="">Show All Department</option>
+                            @foreach($cat as $cats)
+                                <option value="{{$cats->cat_name}}"> {{$cats->cat_name}}  </option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-primary" style="color: white;height: 30px" type="submit"><i class="fa fa-search"></i></button>
+                        @csrf
+                    </form>
+                </div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
                 <form class="form-inline" action="{{route('search.date')}}" method="get">
-                    <input type="date" style="height: 30px" id="q" name="q" class="form-control">
+                    <input type="date" style="height: 30px" id="date" name="date" class="form-control">
                     <button class="btn btn-primary" style="color: white;height: 30px" type="submit"><i class="fa fa-search"></i></button>
                     @csrf
                 </form>
             </div>
                 <div class="col-md-3">
                     <form class="form-inline" action="{{route('search.data')}}" method="get">
-                        <select style="height: 30px;" class="form-control" id="q" name="q" >
-                            <option value="">Select Department</option>
+                        <select style="height: 30px;" class="form-control" id="department" name="department" >
+                            <option value="">Show All Department</option>
                             @foreach($cat as $cats)
                                 <option value="{{$cats->cat_name}}"> {{$cats->cat_name}}  </option>
                             @endforeach
@@ -55,7 +67,7 @@
                     </div>
                 @endif
                 <div class="col-md-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                              All Data
                         </div>
@@ -64,35 +76,27 @@
                                 <thead>
                                 <tr style="background: grey ;color:#fff; font-weight: bold">
                                 <tr>
-                                    <td>Id</td>
-                                    <td>Department</td>
                                     <td>Letter No</td>
-                                    <td>Date Time</td>
                                     <td>Title</td>
-                                    <td>Main File</td>
-                                    <td>Remark File</td>
-                                    <td>Receive FileName</td>
-                                    <td>Remark FileName</td>
-                                    <td>Attach File</td>
+                                    <td>Department</td>
+                                    <td>Main File Name</td>
+                                    <td>Date Time</td>
                                     <td>Action</td>
 
                                 </tr>
                                 </thead>
                                 @foreach($songs as $song)
                                     <tr>
-                                        <td>{{$song->id}}</td>
+                                        <td><a href="{{route('view.data',['id'=>$song->id])}}" style="color: #0f0f0f">{{$song->letter_no}}</a> </td>
+                                        <td><a href="{{route('view.data',['id'=>$song->id])}}" style="color: #0f0f0f">{{$song->title}}</a></td>
                                         <td>{{$song->department}}</td>
-                                        <td>{{$song->letter_no}}</td>
-                                        <td>{{$song->date_time}}</td>
-                                        <td>{{$song->title}}</td>
-                                        <td>{{$song->main_file}}</td>
-                                        <td>{{$song->remark_main_file}}</td>
                                         <td>{{$song->receive_file_name}}</td>
-                                        <td>{{$song->remark_receive_file_name}}</td>
-                                        <td>{{$song->attach_file}}</td>
+                                        <td>{{$song->date}}</td>
                                         <td class="btn btn-default ">
-                                            <a href="#" data-toggle="modal" data-target="#e{{$song->id}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                            <!-- View -->
+                                            <a href="{{route('view.data',['id'=>$song->id])}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span> </a>
 
+                                            <a href="#" data-toggle="modal" data-target="#e{{$song->id}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                                             <!-- Edit Modal -->
                                             <div class="modal fade" id="e{{$song->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
@@ -116,16 +120,22 @@
 
                                                                 <div class="form-group">
                                                                     <label for="letter_no" class="control-label">Letter Number</label>
-                                                                    <input value="{{$song->letter_no}}" type="number" id="letter_no" name="letter_no" class="form-control">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="date_time" class="control-label">Date Time</label>
-                                                                    <input type="date" style="height: auto" id="date_time" name="date_time" class="form-control">
+                                                                    <input value="{{$song->letter_no}}" type="text" id="letter_no" name="letter_no" class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="title" class="control-label">Title</label>
-                                                                    <input value="{{$song->title}}" type="text" name="title" id="title" class="form-control">
+                                                                    <textarea name="title" id="title" class="form-control">{{$song->title}}</textarea>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="receive_file" class="control-label">Received FileName</label>
+                                                                    <textarea  class="form-control" id="receive_file" name="receive_file">{{$song->receive_file_name}}</textarea>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="rmreceive_file" class="control-label">Remark Received FileName</label>
+                                                                    <textarea  class="form-control" id="rmreceive_file" name="rmreceive_file">{{$song->remark_receive_file_name}}</textarea>
                                                                 </div>
 
                                                                 <div class="form-group">
@@ -139,24 +149,14 @@
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="receive_file" class="control-label">Received FileName</label>
-                                                                    <input value="{{$song->receive_file_name}}" type="text" class="form-control" id="receive_file" name="receive_file">
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="rmreceive_file" class="control-label">Remark Received FileName</label>
-                                                                    <input value="{{$song->remark_receive_file_name}}" type="text"  class="form-control" id="rmreceive_file" name="rmreceive_file">
-                                                                </div>
-
-                                                                <div class="form-group">
                                                                     <label for="pdf_attach_file" class="control-label">Attach File</label>
                                                                     <input type="file" style="height: auto" class="form-control" id="pdf_attach_file" name="pdf_attach_file">
                                                                 </div>
                                                             </div>
 
-                                                                <div class="modal-footer">
+                                                                <div class="modal-footer bg-primary">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Confirm</button>
+                                                                <button type="submit" class="btn btn-default">Confirm</button>
                                                             </div>
 
                                                         </div>

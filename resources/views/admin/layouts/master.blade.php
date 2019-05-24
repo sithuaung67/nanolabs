@@ -33,7 +33,6 @@
         @include('admin.layouts.navBar')
         @include('admin.layouts.sideBar')
         @yield('content')
-        @include('admin.layouts.footer')
     </div>
 
     <!-- jQuery 3 -->

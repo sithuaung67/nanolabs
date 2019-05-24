@@ -60,7 +60,7 @@ class DataController extends Controller
         $this->validate($request,[
             'department'=>'required',
             'letter_no'=>'required',
-            'date_time'=>'required',
+            'date'=>'required',
             'title'=>'required',
             'pdf_main_file'=>'required|mimes:pdf|max:10000',
             'pdf_remark_main_file'=>'required|mimes:pdf|max:10000',
@@ -81,7 +81,7 @@ class DataController extends Controller
         $data = new Song();
         $data->department = $request['department'];
         $data->letter_no = $request['letter_no'];
-        $data->date_time = $request['date_time'];
+        $data->date = $request['date'];
         $data->title=$request['title'];
         $data->main_file=$data_file_name;
         $data->remark_main_file=$remark_data_file_name;
@@ -138,17 +138,36 @@ class DataController extends Controller
     }
 
     public function getSearchDepartment(Request $request){
-        $q=$request['q'];
+        $q=$request['department'];
         $cat=Category::all();
         $songs=Song::OrderBy('id','desc')->where('department',"LIKE","%$q%")->get();
         return view('showdata')->with(['songs'=>$songs,'cat'=>$cat]);
     }
     public function getSearchDate(Request $request){
-        $q=$request['q'];
+        $date=$request['date'];
         $cat=Category::all();
-        $songs=Song::OrderBy('id','desc')->where('date_time',"LIKE","%$q%")->get();
+        $songs=Song::OrderBy('id','desc')->where('date',"LIKE","%$date%")->get();
         return view('showdata')->with(['songs'=>$songs,'cat'=>$cat]);
     }
 
+    public function getViewData(Request $request)
+    {
+        $id=$request['id'];
+        $data = Song::whereId($id)->firstOrFail();
+        return view('view')->with(['data' => $data]);
+    }
+    public function getBack(){
+        $cat=Category::all();
+        $songs=Song::OrderBy('id','desc')->get();
+        return view('showdata')->with(['songs'=>$songs,'cat'=>$cat]);
+    }
+
+    public function getSearchAll(Request $request){
+        $date=$request['date'];
+        $department=$request['department'];
+        $cat=Category::all();
+        $songs=Song::OrderBy('id','desc')->where('date',"LIKE","%$date%")->where('department',"LIKE" ,"%$department%")->get();
+        return view('showdata')->with(['songs'=>$songs,'cat'=>$cat]);
+    }
 
 }
