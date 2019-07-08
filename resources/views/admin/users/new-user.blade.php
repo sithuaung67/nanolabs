@@ -42,12 +42,7 @@
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         @if($errors->has('name')) <span class="help-block">{{$errors->first('name')}}</span> @endif
                     </div>
-                    <div class="form-group has-feedback @if($errors->has('email')) has-error @endif">
-                        <label for="email" class="control-label">Email Address</label>
-                        <input type="email" name="email" id="email" class="form-control">
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                        @if($errors->has('email')) <span class="help-block">{{$errors->first('email')}}</span> @endif
-                    </div>
+
                     <div class="form-group has-feedback @if($errors->has('role')) has-error @endif">
                         <label for="role" class="control-label">Roles</label>
                         <select name="role" id="role" class="form-control">

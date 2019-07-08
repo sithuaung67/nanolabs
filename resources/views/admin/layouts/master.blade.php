@@ -27,7 +27,7 @@
     @yield('style')
 
 </head>
-<body  class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 
     <div class="wrapper">
         @include('admin.layouts.navBar')

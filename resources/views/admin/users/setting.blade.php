@@ -31,14 +31,12 @@
 
 
                 <div class="text-center">
-                    <span class="fa fa-user-circle fa-5x"></span>
-
+                    <span class="logo-lg"><img src="../../ntg/myint.png" class="img-bordered-sm img-circle img-thumbnail" style="width: 100% ;height: auto"></span>
                 </div>
                 <br>
                 <ul class="list-group">
                     <li class="list-group-item">Full Name : <span class="text-primary">{{Auth::User()->full_name}}</span></li>
                     <li class="list-group-item">Username : <span class="text-primary">{{Auth::User()->name}}</span></li>
-                    <li class="list-group-item">Email : <span class="text-primary">{{Auth::User()->email}}</span></li>
                     <li class="list-group-item">Role : <span class="text-primary">{{Auth::User()->roles->first()->name}}</span></li>
                     <li class="list-group-item">Member Since : <span class="text-primary">{{date('d-M-Y', strtotime(Auth::User()->created_at))}}</span></li>
                     <li class="list-group-item"><small><a data-toggle="modal" data-target="#myModal" href="#" class="btn btn-primary btn-sm btn-block">Change Password</a></small></li>

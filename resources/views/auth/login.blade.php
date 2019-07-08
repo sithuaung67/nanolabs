@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NTG RES-POS | Login</title>
+    <title>LMT | Login</title>
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('plugins/iCheck/square/blue.css')}}">
     <!-- Bootstrap 3.3.7 -->
@@ -28,11 +28,11 @@
     <div class="login-box bg-primary">
         @if(Session('error')) <div class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span> {{Session('error')}}</div> @endif
         <div class="login-logo">
-        <span class="logo-lg"><img src="../../ntg/morehead-state-eagle-png-logo-8.png" class="img-circle" style="width: 50px"><p>Login</p></span>
+        <span class="logo-lg"><img src="ntg/myint.png" class="img-fluid" style="width: 80%"></span>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg"><i>Sign in to start your session</i></p>
+            <p class="login-box-msg"><strong><i>Welcome My Login Page</i></strong></p>
 
             <form role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
@@ -71,7 +71,7 @@
             </form>
 
             <div class="social-auth-links text-center">
-                <span class="logo-lg"><img src="../../ntg/morehead-state-eagle-png-logo-8.png" class="img-circle" style="width: 50px"> <b>Welcome My Login Page</b></span>
+                <span class="logo-lg"><marquee><img src="ntg/myint.png" class="img-circle" style="width: 130px"></marquee></span>
             </div>
 
 

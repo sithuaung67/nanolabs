@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Invoice;
 use App\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -10,18 +11,48 @@ use Illuminate\Support\Facades\Storage;
 
 class DataController extends Controller
 {
-    public function getDepartment()
+    public function getInvoice()
     {
-        $cat = Category::OrderBy('id', 'desc')->get();
-        return view('category')->with(['cat' => $cat]);
+        $invoice = Invoice::all();
+        return view('admin.Invoice.invoices')->with(['invoice' => $invoice]);
+    }
+    public function getNewInvoice(){
+        return view ('admin.Invoice.new-invoice');
     }
 
-    public function postDepartment(Request $request)
+    public function postInvoice(Request $request)
     {
-        $cat = new Category();
-        $cat->cat_name = $request['cat_name'];
-        $cat->save();
-        return redirect()->back();
+        $this->validate($request,[
+            'customer_name'=>'required',
+            'sale_name'=>'required',
+            'date'=>'required',
+            'invoice_number'=>'required',
+            'quantity'=>'required',
+            'shop'=>'required',
+            'select_point'=>'required',
+            'point'=>'required',
+            'kyat'=>'required',
+            'pal'=>'required',
+            'ywaw'=>'required',
+            'gram'=>'required',
+            'coupon'=>'required',
+        ]);
+
+        $invoice=new Invoice();
+        $invoice->customer_name=$request['customer_name'];
+        $invoice->sale_name=$request['sale_name'];
+        $invoice->date=$request['date'];
+        $invoice->invoice_number=$request['invoice_number'];
+        $invoice->shop=$request['shop'];
+        $invoice->quantity=$request['quantity'];
+        $invoice->select_point=$request['select_point'];
+        $invoice->point=$request['point'];
+        $invoice->kyat=$request['kayt'];
+        $invoice->pal=$request['pal'];
+        $invoice->ywaw=$request['ywaw'];
+        $invoice->coupon=$request['coupon'];
+        $invoice->save();
+        return redirect()->back()->with('info', 'The new user account have been created.');
     }
     public function postDeleteDepartment(Request $request){
         $id=$request['id'];
@@ -156,6 +187,7 @@ class DataController extends Controller
         $data = Song::whereId($id)->firstOrFail();
         return view('view')->with(['data' => $data]);
     }
+
     public function getBack(){
         $cat=Category::all();
         $songs=Song::OrderBy('id','desc')->get();

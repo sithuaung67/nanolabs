@@ -24,6 +24,7 @@ Route::post('/login',[
 ]);
 
 
+
 Route::group(['middleware'=>'auth'], function (){
 
     Route::get('/', function (){
@@ -61,6 +62,49 @@ Route::group(['middleware'=>'auth'], function (){
 
     Route::group(['prefix'=>'admin', ], function (){
 
+
+        Route::get('/customers',[
+            'uses'=>'AdminController@getCustomer',
+            'as'=>'customers'
+        ]);
+        Route::get('/customer/new',[
+            'uses'=>'AdminController@getNewCustomer',
+            'as'=>'customer.new'
+        ]);
+        Route::post('/customer/new',[
+            'uses'=>'AdminController@postNewCustomer',
+            'as'=>'post.customer.new'
+        ]);
+        Route::post('/customer/delete',[
+            'uses'=>'AdminController@postDeleteCustomer',
+            'as'=>'customer.delete'
+        ]);
+
+        Route::post('/customer/update',[
+            'uses'=>'AdminController@postUpdateCustomer',
+            'as'=>'customer.update'
+        ]);
+        Route::get('/sales',[
+            'uses'=>'AdminController@getSale',
+            'as'=>'sales'
+        ]);
+        Route::get('/sale/new',[
+            'uses'=>'AdminController@getNewSale',
+            'as'=>'sale.new'
+        ]);
+        Route::post('/sale/new',[
+            'uses'=>'AdminController@postNewSale',
+            'as'=>'post.sale.new'
+        ]);
+        Route::post('/sale/delete',[
+            'uses'=>'AdminController@postDeleteSale',
+            'as'=>'sale.delete'
+        ]);
+
+        Route::post('/sale/update',[
+            'uses'=>'AdminController@postUpdateSale',
+            'as'=>'sale.update'
+        ]);
         Route::get('/users',[
             'uses'=>'AdminController@getUsers',
             'as'=>'users'
@@ -82,13 +126,25 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateUser',
             'as'=>'user.update'
         ]);
-        Route::get('department',[
-           'uses'=>'DataController@getDepartment',
-           'as'=>'department'
+        Route::get('invoice',[
+           'uses'=>'DataController@getInvoice',
+           'as'=>'invoices'
         ]);
-        Route::post('postDepartment',[
-           'uses'=>'DataController@postDepartment',
-           'as'=>'postDepartment'
+        Route::get('/invoice/new',[
+            'uses'=>'DataController@getNewInvoice',
+            'as'=>'get.newInvoice'
+        ]);
+        Route::post('invoice',[
+           'uses'=>'DataController@postInvoice',
+           'as'=>'post.invoice'
+        ]);
+        Route::post('updateDepartment/{id}',[
+            'uses'=>'DataController@updateDepartment',
+            'as'=>'updateDepartment'
+        ]);
+        Route::post('/department/delete',[
+            'uses'=>'DataController@postDeleteDepartment',
+            'as'=>'department.delete'
         ]);
 
         Route::get('data',[
@@ -102,14 +158,6 @@ Route::group(['middleware'=>'auth'], function (){
         Route::post('postData',[
            'uses'=>'DataController@postData',
            'as'=>'postData'
-        ]);
-        Route::post('updateDepartment/{id}',[
-            'uses'=>'DataController@updateDepartment',
-            'as'=>'updateDepartment'
-        ]);
-        Route::post('/department/delete',[
-            'uses'=>'DataController@postDeleteDepartment',
-            'as'=>'department.delete'
         ]);
         Route::post('/data/delete',[
             'uses'=>'DataController@postDeleteData',
@@ -144,6 +192,7 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'DataController@getSearchAll',
             'as'=>'search.all'
         ]);
+
     });
 
 

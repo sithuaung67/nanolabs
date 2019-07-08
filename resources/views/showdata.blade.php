@@ -18,29 +18,9 @@
 
             </h1>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12 text-right">
                     <form class="form-inline" action="{{route("search.all")}}" method="get">
                         <input type="date" style="height: 30px" id="date" name="date" class="form-control">
-                        <select style="height: 30px;" class="form-control" id="department" name="department" >
-                            <option value="">Show All Department</option>
-                            @foreach($cat as $cats)
-                                <option value="{{$cats->cat_name}}"> {{$cats->cat_name}}  </option>
-                            @endforeach
-                        </select>
-                        <button class="btn btn-primary" style="color: white;height: 30px" type="submit"><i class="fa fa-search"></i></button>
-                        @csrf
-                    </form>
-                </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
-                <form class="form-inline" action="{{route('search.date')}}" method="get">
-                    <input type="date" style="height: 30px" id="date" name="date" class="form-control">
-                    <button class="btn btn-primary" style="color: white;height: 30px" type="submit"><i class="fa fa-search"></i></button>
-                    @csrf
-                </form>
-            </div>
-                <div class="col-md-3">
-                    <form class="form-inline" action="{{route('search.data')}}" method="get">
                         <select style="height: 30px;" class="form-control" id="department" name="department" >
                             <option value="">Show All Department</option>
                             @foreach($cat as $cats)
@@ -72,7 +52,7 @@
                              All Data
                         </div>
                         <div class="panel-body table-responsive">
-                            <table class="table table-hover" id="data_table">
+                            <table class="table table-hover table-bordered" id="data_table">
                                 <thead>
                                 <tr style="background: grey ;color:#fff; font-weight: bold">
                                 <tr>
@@ -200,6 +180,7 @@
                 </div>
             </div>
         </section>
+    </div>
 @stop
 
 @section('script')
