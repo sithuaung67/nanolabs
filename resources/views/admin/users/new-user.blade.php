@@ -25,7 +25,7 @@
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('users')}}" class="btn btn-primary"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{route('users')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back</a>
             </div>
             <div class="col-md-6 col-md-offset-3">
                 <form method="post" action="{{route('user.new')}}">

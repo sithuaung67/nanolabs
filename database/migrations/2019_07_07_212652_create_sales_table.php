@@ -22,6 +22,7 @@ class CreateSalesTable extends Migration
             $table->text('address');
             $table->string('phone');
             $table->string('shop');
+            $table->string('town');
             $table->timestamps();
         });
     }

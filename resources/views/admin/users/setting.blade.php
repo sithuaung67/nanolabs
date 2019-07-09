@@ -31,7 +31,7 @@
 
 
                 <div class="text-center">
-                    <span class="logo-lg"><img src="../../ntg/myint.png" class="img-bordered-sm img-circle img-thumbnail" style="width: 100% ;height: auto"></span>
+                    <span class="logo-lg"><img src="../../ntg/myint.png" class="img-bordered-sm img-thumbnail" style="width: 100% ;height: auto"></span>
                 </div>
                 <br>
                 <ul class="list-group">

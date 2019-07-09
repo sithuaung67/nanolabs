@@ -23,14 +23,14 @@
         </section>
 
         <!-- Main content -->
-        <section class="content" style=" padding-bottom: 100%;">
+        <section class="content table-responsive" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('sale.new')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> New Sale User</a>
+                <a href="{{route('sale.new')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-plus-circle"></i> New Sale User</a>
             </div>
 
 
 
-            <table class="table table-hover" id="user_table">
+            <table class="table table-hover table-bordered" id="sale_table">
                 <thead>
                 <tr style="background: grey ;color:#fff; font-weight: bold">
                     <td>ID</td>
@@ -40,8 +40,8 @@
                     <td>Phone</td>
                     <td>Shop</td>
                     <td>Address</td>
+                    <td>Town</td>
                     <td>Member Since</td>
-                    {{--<td>Password</td>--}}
                     <td>Actions</td>
                 </tr>
                 </thead>
@@ -54,6 +54,7 @@
                         <td>{{$customer->phone}}</td>
                         <td>{{$customer->shop}}</td>
                         <td>{{$customer->address}}</td>
+                        <td>{{$customer->town}}</td>
                         <td>{{date("d-M-Y", strtotime($customer->created_at))}}</td>
                         {{--<td>{{bcrypt($customer->password)}}</td>--}}
                         <td class="btn btn-default ">
@@ -105,6 +106,12 @@
                                                     <textarea name="address" id="address" class="form-control">{{$customer->address}}</textarea>
                                                     <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                     @if($errors->has('address')) <span class="help-block">{{$errors->first('address')}}</span> @endif
+                                                </div>
+                                                <div class="form-group has-feedback @if($errors->has('town')) has-error @endif">
+                                                    <label for="town" class="control-label">Town</label>
+                                                    <input value="{{$customer->town}}" type="text" name="town" id="town" class="form-control">
+                                                    <span class="glyphicon glyphicon-book form-control-feedback"></span>
+                                                    @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
                                                 </div>
 
                                                 <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">

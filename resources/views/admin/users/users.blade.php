@@ -23,14 +23,14 @@
         </section>
 
         <!-- Main content -->
-        <section class="content" style=" padding-bottom: 100%;">
+        <section class="content table-responsive" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('user.new')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> New User</a>
+                <a href="{{route('user.new')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-plus-circle"></i> New User</a>
             </div>
 
 
 
-            <table class="table table-hover" id="user_table">
+            <table class="table table-hover table-bordered" id="user_table">
                 <thead>
                 <tr style="background: grey ;color:#fff; font-weight: bold">
                     <td>ID</td>

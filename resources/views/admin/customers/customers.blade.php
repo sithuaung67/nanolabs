@@ -25,10 +25,10 @@
         <!-- Main content -->
         <section class="content table-responsive" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('customer.new')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> New Customer</a>
+                <a href="{{route('customer.new')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-plus-circle"></i> New Customer</a>
             </div>
 
-            <table class="table table-hover table-bordered" id="user_table">
+            <table class="table table-hover table-bordered" id="customer_table">
                 <thead>
                 <tr style="background: grey ;color:#fff; font-weight: bold">
                     <td>ID</td>
@@ -38,8 +38,8 @@
                     <td>Phone</td>
                     <td>Shop</td>
                     <td>Address</td>
+                    <td>Town</td>
                     <td>Member Since</td>
-                    {{--<td>Password</td>--}}
                     <td>Actions</td>
                 </tr>
                 </thead>
@@ -47,11 +47,12 @@
                 <tr>
                     <td>{{$customer->id}}</td>
                     <td>{{$customer->user_name}}</td>
-                    <td>{{$customer->customer_name}}</td>
+                    <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->customer_name}}</a></td>
                     <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>
                     <td>{{$customer->phone}}</td>
                     <td>{{$customer->shop}}</td>
                     <td>{{$customer->address}}</td>
+                    <td>{{$customer->town}}</td>
                     <td>{{date("d-M-Y", strtotime($customer->created_at))}}</td>
                     {{--<td>{{bcrypt($customer->password)}}</td>--}}
                     <td class="btn btn-default ">
@@ -103,6 +104,13 @@
                                                 <textarea name="address" id="address" class="form-control">{{$customer->address}}</textarea>
                                                 <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                 @if($errors->has('address')) <span class="help-block">{{$errors->first('address')}}</span> @endif
+                                            </div>
+
+                                            <div class="form-group has-feedback @if($errors->has('town')) has-error @endif">
+                                                <label for="town" class="control-label">Town</label>
+                                                <input value="{{$customer->town}}" type="text" name="town" id="town" class="form-control">
+                                                <span class="glyphicon glyphicon-book form-control-feedback"></span>
+                                                @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
                                             </div>
 
                                             <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">

@@ -38,9 +38,13 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getUserAccountSetting',
             'as'=>'account.setting'
         ]);
-        Route::post('/password/update',[
+        Route::post('/password/update/user',[
             'uses'=>'AdminController@postUpdatePassword',
             'as'=>'password.update'
+        ]);
+        Route::post('/password/update/customer',[
+            'uses'=>'AdminController@postUpdateCustomerPassword',
+            'as'=>'password.update.customer'
         ]);
         Route::get('/dashboard',[
             'uses'=>'AdminController@getDashboard',
@@ -63,9 +67,17 @@ Route::group(['middleware'=>'auth'], function (){
     Route::group(['prefix'=>'admin', ], function (){
 
 
+        Route::get('/customerInfo',[
+            'uses'=>'AdminController@getCustomerInfo',
+            'as'=>'get.customerInfo'
+        ]);
         Route::get('/customers',[
             'uses'=>'AdminController@getCustomer',
             'as'=>'customers'
+        ]);
+        Route::get('/customers/InvoiceHistory',[
+            'uses'=>'AdminController@getCustomerInvoiceHistory',
+            'as'=>'customers.invoice.history'
         ]);
         Route::get('/customer/new',[
             'uses'=>'AdminController@getNewCustomer',
@@ -79,11 +91,12 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postDeleteCustomer',
             'as'=>'customer.delete'
         ]);
-
         Route::post('/customer/update',[
             'uses'=>'AdminController@postUpdateCustomer',
             'as'=>'customer.update'
         ]);
+
+
         Route::get('/sales',[
             'uses'=>'AdminController@getSale',
             'as'=>'sales'
@@ -100,11 +113,13 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postDeleteSale',
             'as'=>'sale.delete'
         ]);
-
         Route::post('/sale/update',[
             'uses'=>'AdminController@postUpdateSale',
             'as'=>'sale.update'
         ]);
+
+
+
         Route::get('/users',[
             'uses'=>'AdminController@getUsers',
             'as'=>'users'
@@ -127,25 +142,27 @@ Route::group(['middleware'=>'auth'], function (){
             'as'=>'user.update'
         ]);
         Route::get('invoice',[
-           'uses'=>'DataController@getInvoice',
+           'uses'=>'AdminController@getInvoice',
            'as'=>'invoices'
         ]);
         Route::get('/invoice/new',[
-            'uses'=>'DataController@getNewInvoice',
+            'uses'=>'AdminController@getNewInvoice',
             'as'=>'get.newInvoice'
         ]);
-        Route::post('invoice',[
-           'uses'=>'DataController@postInvoice',
-           'as'=>'post.invoice'
+        Route::post('/invoice/new',[
+           'uses'=>'AdminController@postNewInvoice',
+           'as'=>'post.invoice.new'
         ]);
-        Route::post('updateDepartment/{id}',[
-            'uses'=>'DataController@updateDepartment',
-            'as'=>'updateDepartment'
+        Route::post('/invoice/delete',[
+            'uses'=>'AdminController@postDeleteInvoice',
+            'as'=>'invoice.delete'
         ]);
-        Route::post('/department/delete',[
-            'uses'=>'DataController@postDeleteDepartment',
-            'as'=>'department.delete'
+        Route::post('/invoice/update',[
+            'uses'=>'AdminController@postUpdateInvoice',
+            'as'=>'invoice.update'
         ]);
+
+
 
         Route::get('data',[
            'uses'=>'DataController@getData',

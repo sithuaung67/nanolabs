@@ -54,14 +54,27 @@
         $(function () {
            $(".tem").fadeOut(5000);
 
-           $("#item_table").dataTable();
-           $("#user_table").dataTable();
-           $("#table_sale_item").dataTable();
-           $("#data_table").dataTable({
+           $("#dataTable").dataTable({
                "bFilter" : false,
-               "bPaginate": false,
-               "bInfo": false
+               "bPaginate": true,
+               "bInfo": true
            });
+           $("#user_table").dataTable({
+               "bFilter" : false,
+               "bPaginate": true,
+               "bInfo": true
+           });
+           $("#customer_table").dataTable({
+               "bFilter" : false,
+               "bPaginate": true,
+               "bInfo": true
+           });
+           $("#sale_table").dataTable({
+               "bFilter" : false,
+               "bPaginate": true,
+               "bInfo": true
+           });
+
         });
 
     </script>

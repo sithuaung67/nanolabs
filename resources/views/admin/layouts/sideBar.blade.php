@@ -26,8 +26,6 @@
             {{--</form>--}}
 
             <li><a href="{{route('users')}}"><i class="fa fa-database"></i> <span>Dashboard</span></a></li>
-            <li><a href="{{route('users')}}"><i class="fa fa-list"></i> <span>Customer Detail</span></a></li>
-            <li><a href="{{route('users')}}"><i class="fa fa-list"></i> <span>Sale Detail</span></a></li>
             <li><a href="{{route('invoices')}}"><i class="fa fa-list"></i> <span>Invoice</span></a></li>
             <li><a href="{{route('users')}}"><i class="fa fa-list"></i> <span>Order</span></a></li>
             <li><a href="{{route('users')}}"><i class="fa fa-info-circle"></i> <span>Notification</span></a></li>

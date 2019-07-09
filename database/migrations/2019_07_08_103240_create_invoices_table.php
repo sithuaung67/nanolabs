@@ -23,9 +23,9 @@ class CreateInvoicesTable extends Migration
             $table->integer('quantity');
             $table->integer('select_point');
             $table->integer('point');
-            $table->integer('kyat');
-            $table->integer('pal');
-            $table->integer('ywaw');
+            $table->string('kyat');
+            $table->string('pal');
+            $table->string('ywaw');
             $table->string('gram');
             $table->string('coupon');
             $table->timestamps();

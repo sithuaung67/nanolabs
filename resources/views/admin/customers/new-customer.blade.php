@@ -25,7 +25,7 @@
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('customers')}}" class="btn btn-primary"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{route('customers')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back</a>
             </div>
             <div class="col-md-6 col-md-offset-3">
                 <form method="post" action="{{route('post.customer.new')}}">
@@ -65,6 +65,12 @@
                         <textarea name="address" id="address" class="form-control"></textarea>
                         <span class="glyphicon glyphicon-book form-control-feedback"></span>
                         @if($errors->has('address')) <span class="help-block">{{$errors->first('address')}}</span> @endif
+                    </div>
+                    <div class="form-group has-feedback @if($errors->has('town')) has-error @endif">
+                        <label for="town" class="control-label">Town</label>
+                        <input type="text" name="town" id="town" class="form-control">
+                        <span class="glyphicon glyphicon-book form-control-feedback"></span>
+                        @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
                     </div>
 
                     <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">
