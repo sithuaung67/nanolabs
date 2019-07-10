@@ -112,9 +112,16 @@ class AdminController extends Controller
     public function getCustomerInvoiceHistory(Request $request){
         $id=$request['id'];
         $invoice=Invoice::all();
-        $customer=Customer::where('id',$id)->first();
+        $customer=Customer::where('id', $id)->first();
         $sale=Sale::all();
         return view ('admin.customers.invoicehistory')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
+    }
+    public function getCustomerInvoiceInfo(Request $request){
+        $ids=$request['id'];
+        $invoice=Invoice::where('id',$ids)->first();
+        $customer=Customer::all();
+        $sale=Sale::all();
+        return view ('admin.customers.invoiceDetail')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
     }
     public function getNewCustomer(){
         return view ('admin.customers.new-customer');

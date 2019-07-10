@@ -71,6 +71,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getCustomerInfo',
             'as'=>'get.customerInfo'
         ]);
+        Route::get('/customerInvoiceInfo',[
+            'uses'=>'AdminController@getCustomerInvoiceInfo',
+            'as'=>'get.customerInvoiceInfo'
+        ]);
         Route::get('/customers',[
             'uses'=>'AdminController@getCustomer',
             'as'=>'customers'

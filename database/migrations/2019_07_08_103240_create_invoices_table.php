@@ -21,7 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->date('date');
             $table->string('invoice_number');
             $table->integer('quantity');
-            $table->integer('select_point');
+            $table->float('select_point');
             $table->integer('point');
             $table->string('kyat');
             $table->string('pal');

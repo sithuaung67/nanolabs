@@ -48,13 +48,19 @@
     <script src="{{asset('datatable/app.js')}}"></script>
 
     <script src="{{asset('js/action.js')}}"></script>
+    <script src="{{asset('jquery.tableTotal.js')}}"></script>
 
 
     <script>
         $(function () {
-           $(".tem").fadeOut(5000);
+            $(".tem").fadeOut(5000);
 
            $("#dataTable").dataTable({
+               "bFilter" : false,
+               "bPaginate": true,
+               "bInfo": true
+           });
+           $("#dataTable1").dataTable({
                "bFilter" : false,
                "bPaginate": true,
                "bInfo": true
@@ -77,6 +83,30 @@
 
         });
 
+    </script>
+    <script language="javascript" type="text/javascript">
+        var tds = document.getElementById('dataTable1').getElementsByTagName('td');
+        var sum1 = 0;
+        var sum2 = 0;
+        var sum3 = 0;
+        for(var i = 0; i < tds.length; i ++) {
+            if(tds[i].className == 'point') {
+                sum2 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'quantity') {
+                sum1 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'gram') {
+                sum3 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+
+        }
+        document.getElementById('dataTable1').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td id="point"><b>' + sum1 + '<b></td> <td></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        document.getElementById('dataTable1').innerHTML += '<tr> <td><b></b></td><td></td><td></td><td></td> <td id="point"><b>Total:' + sum1 + '<b></td> <td></td> <td><b>Total:' + sum2+ '</b></td><td></td><td></td><td></td><td><b>Total:' + sum3+ '</b></td> </tr> ';
+        document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point</b><br><b>' + sum2 + '<b> </td> </tr>';
+        document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
+        document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
+        document.getElementById('TotalGam').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
     </script>
 
     @yield('script')

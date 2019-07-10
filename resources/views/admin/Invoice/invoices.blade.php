@@ -107,9 +107,9 @@
                                                                   <div class="form-group has-feedback @if($errors->has('customer_name')) has-error @endif">
                                                                       <label for="customer_name" class="control-label">Customer Name</label>
                                                                       <select name="customer_name" id="customer_name" class="form-control">
-                                                                          <option value="">{{$customer->customer_name}}</option>
+                                                                          <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
                                                                           @foreach($customers as $cus)
-                                                                              <option value="{{$cus->customer_name}}">{{$cus->customer_name}}</option>
+                                                                              <option value="{{$cus->id}}">{{$cus->customer_name}}</option>
                                                                           @endforeach
                                                                       </select>
                                                                       <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -118,9 +118,9 @@
                                                                   <div class="form-group has-feedback @if($errors->has('sale_name')) has-error @endif">
                                                                       <label for="sale_name" class="control-label">Sale Name</label>
                                                                       <select name="sale_name" id="sale_name" class="form-control">
-                                                                          <option value="">{{$customer->sale_name}}</option>
+                                                                          <option value="{{$customer->id}}">{{$customer->sale_name}}</option>
                                                                           @foreach($sale as $cus)
-                                                                              <option value="{{$cus->sale_name}}">{{$cus->sale_name}}</option>
+                                                                              <option value="{{$cus->id}}">{{$cus->sale_name}}</option>
                                                                           @endforeach
                                                                       </select>
                                                                       <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -154,7 +154,7 @@
                                                                   <div class="form-group has-feedback @if($errors->has('select_point')) has-error @endif">
                                                                       <label for="select_point" class="control-label">Select Point</label>
                                                                       <select name="select_point" id="select_point" class="form-control">
-                                                                          <option value="0">{{$customer->select_point}}</option>
+                                                                          <option value="{{$customer->select_point}}">{{$customer->select_point}}</option>
                                                                           <option value="1">Normal</option>
                                                                           <option value="0.8">0.8</option>
                                                                       </select>

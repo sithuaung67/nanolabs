@@ -30,7 +30,8 @@
                         <a href="{{route('customers')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back Customer</a>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="{{route('customers.invoice.history',['id'=>$customers->id])}}" class="btn" style="background: #1e282c;color: #ffffff;">Customer Invoice <i class="fa fa-forward"></i></a>
+                        <a href="{{route('customers.invoice.history',['id'=>$customers->id])}}" class="btn" style="background: #1e282c;color: #ffffff;">Customer Invoice <i class="fa fa-forward"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -58,7 +59,8 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">Date Of Birthday</td>
-                        <td style="color: #1c00cf">{{$customers->birthday}}</td>
+                        <td style="color: #1c00cf">{{date("d-M-Y", strtotime($customers->birthday))}}</td>
+
                     </tr>
                     <tr>
                         <td class="col-md-4">Phone</td>

@@ -28,29 +28,25 @@
                 <a href="{{route('get.customerInfo',['id'=>$customer->id])}}" class="btn" style="background: #1e282c;color: white;"><i class="fa fa-backward"></i> Back Account</a>
             </div>
             <div class="row">
-                <div class="col-md-8 table-responsive">
-                    <table class="table table-bordered" style="background: white;">
-                        <tr style="background: grey;color: white;">
-                            <td>Invoice Number</td>
-                            <td>Points</td>
-                            <td>Total Qty</td>
-                            <td>Total Gram</td>
-                        </tr>
-                        @foreach($invoice as $customers)
-                            @if($customer->id==$customers->customer_name)
-                            <tr>
-                            <td>{{$customers->invoice_number}}</td>
-                            <td>{{$customers->point}}</td>
-                            <td>a</td>
-                            <td>{{$customers->gram}}</td>
-                        </tr>
-                            @endif
-                        @endforeach
-                        <tr>
-                            <td> Total Amount ==>></td>
-                            <td></td>
-                        </tr>
-                    </table>
+                <div class="col-md-12 table-responsive">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <table id="TotalPoint" class="table text-center" style="background: grey;color: white;width: 100%;">
+                            </table>
+                        </div>
+                        <div class="col-md-3">
+                            <table id="TotalQuantity" class="table text-center" style="background: grey;color: white;width: 100%;">
+                            </table>
+                        </div>
+                        <div class="col-md-3">
+                            <table id="TotalGram" class="table text-center" style="background: grey;color: white;width: 100%;">
+                            </table>
+                        </div>
+                        <div class="col-md-3">
+                            <table id="TotalGam" class="table text-center" style="background: grey;color: white;width: 100%;">
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Small boxes (Stat box) -->
@@ -66,7 +62,7 @@
                     <div class="panel">
 
                         <div class="panel-body table-responsive">
-                            <table class="table table-hover table-bordered" id="dataTable">
+                            <table class="table table-hover table-bordered" id="dataTable1">
                                 <thead>
                                 <tr style="background: grey ;color:#fff; font-weight: bold">
                                     <td>Shop</td>
@@ -101,14 +97,15 @@
                                                 @endif
                                             @endforeach
                                         </td>
-                                        <td class="text-primary">{{$customers->invoice_number}}</td>
-                                        <td>{{$customers->quantity}}</td>
+
+                                        <td><a style="color: #1c00cf;" href="{{route('get.customerInvoiceInfo',['id'=>$customers->id])}}">{{$customers->invoice_number}}</a></td>
+                                        <td class="quantity">{{$customers->quantity}}</td>
                                         <td>{{$customers->select_point}}</td>
-                                        <td>{{$customers->point}}</td>
+                                        <td class="point">{{$customers->point}}</td>
                                         <td>{{$customers->kyat}}</td>
                                         <td>{{$customers->pal}}</td>
                                         <td>{{$customers->ywaw}}</td>
-                                        <td>{{$customers->gram}}</td>
+                                        <td class="gram">{{$customers->gram}}</td>
                                         <td>{{$customers->coupon}}</td>
                                         <td>{{date("d-M-Y", strtotime($customers->date))}}</td>
                                     </tr>
