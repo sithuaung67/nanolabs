@@ -68,8 +68,8 @@
                                     <td>ID</td>
                                     <td>Invoice_No</td>
                                     <td>Shop</td>
-                                    <td>Customer Name</td>
                                     <td>Sale Name</td>
+                                    <td>Customer Name</td>
                                     <td>Quantity</td>
                                     <td>Promotion Point</td>
                                     <td>Point</td>
@@ -84,33 +84,33 @@
                                 </thead>
                                 <?php $total = 0; ?>
                                 <?php $totals = 0; ?>
-                            @foreach($invoice as $customers)
-                                    @if($customer->id==$customers->customer_name)
+                                @foreach($invoice as $customers)
+                                    @if($sale->id==$customers->sale_name)
                                         <?php $total ++== $total; ?>
                                         <?php $totals += $customers->point; ?>
 
                                         <tr>
-                                         <td>{{$total}}</td>
-                                        <td><a id="invoiceHistory" href="{{route('get.customerInvoiceInfo',['id'=>$customers->id])}}">{{$customers->invoice_number}}</a></td>
-                                        <td>{{$customers->shop}}</td>
-                                        <td>{{$customer->customer_name}}</td>
-                                       <td>
-                                            @foreach($sale as $sal)
-                                                @if($sal->id==$customers->sale_name)
-                                                {{$sal->sale_name}}
-                                                @endif
-                                            @endforeach
-                                        </td>
-                                        <td class="quantity">{{$customers->quantity}}</td>
-                                        <td>{{$customers->select_point}}</td>
-                                        <td class="point">{{$customers->point}}</td>
-                                        <td>{{$totals}}</td>
-                                        <td>{{$customers->kyat}}</td>
-                                        <td>{{$customers->pal}}</td>
-                                        <td>{{$customers->ywaw}}</td>
-                                        <td class="gram">{{$customers->gram}}</td>
-                                        <td>{{$customers->coupon}}</td>
-                                        <td>{{date("d-M-Y", strtotime($customers->date))}}</td>
+                                            <td>{{$total}}</td>
+                                            <td><a id="invoiceHistory" href="{{route('get.saleInvoiceInfo',['id'=>$customers->id])}}">{{$customers->invoice_number}}</a></td>
+                                            <td>{{$customers->shop}}</td>
+                                            <td>{{$sale->sale_name}}</td>
+                                            <td>
+                                                @foreach($customer as $cust)
+                                                    @if($cust->id==$customers->customer_name)
+                                                        {{$cust->customer_name}}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td class="quantity">{{$customers->quantity}}</td>
+                                            <td>{{$customers->select_point}}</td>
+                                            <td class="point">{{$customers->point}}</td>
+                                            <td>{{$totals}}</td>
+                                            <td>{{$customers->kyat}}</td>
+                                            <td>{{$customers->pal}}</td>
+                                            <td>{{$customers->ywaw}}</td>
+                                            <td class="gram">{{$customers->gram}}</td>
+                                            <td>{{$customers->coupon}}</td>
+                                            <td>{{date("d-M-Y", strtotime($customers->date))}}</td>
                                         </tr>
                                     @endif
                                 @endforeach

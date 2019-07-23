@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Invoice;
+use App\Order;
 use App\Sale;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -182,6 +183,28 @@ class AdminController extends Controller
         $customer->update();
         return redirect()->back()->with('info','The selected user account have been updated.');
     }
+    public function getSearchCustomer(Request $request){
+        $birthday=$request['birthday'];
+        $shop=$request['shop'];
+        $user_name=$request['user_name'];
+        $customer_name=$request['customer_name'];
+        $phone=$request['phone'];
+        $town=$request['town'];
+        $customers=Customer::OrderBy('id','asc')
+            ->where('birthday',"LIKE","%$birthday%")
+            ->where('shop' , "LIKE" , "%$shop%")
+            ->where('user_name' , "LIKE" , "%$user_name%")
+            ->where('customer_name' , "LIKE" , "%$customer_name%")
+            ->where('phone' , "LIKE" , "%$phone%")
+            ->where('town' , "LIKE" , "%$town%")
+            ->get();
+        return view('admin.customers.customers')->with(['customers'=>$customers]);
+    }
+
+
+
+
+
     public function getSale(){
         $sale=Sale::all();
         return view ('admin.sales.sale')->with(['sale'=>$sale]);
@@ -245,12 +268,61 @@ class AdminController extends Controller
         $customer->update();
         return redirect()->back()->with('info','The selected user account have been updated.');
     }
+    public function getSaleInfo(Request $request){
+        $id=$request['id'];
+        $sale=Sale::where('id', $id)->first();
+        return view ('admin.sales.saleInfo')->with(['sale'=>$sale]);
+    }
+    public function getSaleInvoiceHistory(Request $request){
+        $id=$request['id'];
+        $invoice=Invoice::all();
+        $sale=Sale::where('id', $id)->first();
+        $customer=Customer::all();
+        return view ('admin.sales.saleHistory')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
+    }
+    public function getSaleInvoiceInfo(Request $request){
+        $ids=$request['id'];
+        $invoice=Invoice::where('id',$ids)->first();
+        $customer=Customer::all();
+        $sale=Sale::all();
+        return view ('admin.sales.saleDetail')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
+    }
+    public function getSearchSale(Request $request){
+        $birthday=$request['birthday'];
+        $shop=$request['shop'];
+        $user_name=$request['user_name'];
+        $sale_name=$request['sale_name'];
+        $phone=$request['phone'];
+        $town=$request['town'];
+        $sale=Sale::OrderBy('id','asc')
+            ->where('birthday',"LIKE","%$birthday%")
+            ->where('shop' , "LIKE" , "%$shop%")
+            ->where('user_name' , "LIKE" , "%$user_name%")
+            ->where('sale_name' , "LIKE" , "%$sale_name%")
+            ->where('phone' , "LIKE" , "%$phone%")
+            ->where('town' , "LIKE" , "%$town%")
+            ->get();
+        return view('admin.sales.sale')->with(['sale'=>$sale]);
+    }
+
+
+
+
+
+
     public function getInvoice()
     {
         $customers=Customer::all();
         $sale=Sale::all();
         $invoice = Invoice::all();
         return view('admin.Invoice.invoices')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
+    }
+    public function getInvoicePrint()
+    {
+        $customers=Customer::all();
+        $sale=Sale::all();
+        $invoice = Invoice::all();
+        return view('admin.Invoice.invoicePrint')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
     }
     public function getNewInvoice(){
         $sale=Sale::all();
@@ -333,5 +405,150 @@ class AdminController extends Controller
         $user=Invoice::where('id', $id)->first();
         $user->delete();
         return redirect()->back()->with('info', "The selected user account have been deleted.");
+    }
+    public function getSearchInvoice(Request $request){
+        $customers=Customer::all();
+        $sale=Sale::all();
+        $date=$request['date'];
+        $shop=$request['shop'];
+        $invoice_number=$request['invoice_number'];
+        $invoice=Invoice::OrderBy('id','asc')
+            ->where('date',"LIKE","%$date%")
+            ->where('shop' , "LIKE" , "%$shop%")
+            ->where('invoice_number' , "LIKE" , "%$invoice_number%")
+            ->get();
+        return view('admin.Invoice.invoices')->with(['invoice'=>$invoice,'invoice_number'=>$invoice_number,'customers'=>$customers,'sale'=>$sale]);
+    }
+
+
+
+
+
+    public function getSearchOrder(Request $request){
+        $customers=Customer::all();
+        $sale=Sale::all();
+        $date=$request['date'];
+        $shop=$request['shop'];
+        $invoice_number=$request['order_number'];
+        $invoice=Order::OrderBy('id','asc')
+            ->where('date',"LIKE","%$date%")
+            ->where('shop' , "LIKE" , "%$shop%")
+            ->where('order_number' , "LIKE" , "%$invoice_number%")
+            ->get();
+        return view('admin.order.orders')->with(['invoice'=>$invoice,'invoice_number'=>$invoice_number,'customers'=>$customers,'sale'=>$sale]);
+    }
+    public function getOrder()
+    {
+        $customers=Customer::all();
+        $sale=Sale::all();
+        $invoice = Order::all();
+        return view('admin.order.orders')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
+    }
+    public function getOrderPrint()
+    {
+        $customers=Customer::all();
+        $sale=Sale::all();
+        $invoice = Order::all();
+        return view('admin.order.orderPrint')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
+    }
+    public function getNewOrder(){
+        $sale=Sale::all();
+        $customer=Customer::all();
+        return view ('admin.order.new-order')->with(['customer'=>$customer])->with(['sale'=>$sale]);
+    }
+
+    public function postNewOrder(Request $request)
+    {
+        $this->validate($request,[
+            'customer_name'=>'required',
+            'sale_name'=>'required',
+            'date'=>'required',
+            'order_number'=>'required',
+            'quantity'=>'required',
+            'shop'=>'required',
+            'select_point'=>'required',
+            'point'=>'required',
+            'kyat'=>'required',
+            'pae'=>'required',
+            'yway'=>'required',
+            'gram'=>'required',
+            'coupon'=>'required',
+        ]);
+
+        $invoice=new Order();
+        $invoice->customer_name=$request['customer_name'];
+        $invoice->sale_name=$request['sale_name'];
+        $invoice->date=$request['date'];
+        $invoice->order_number=$request['order_number'];
+        $invoice->shop=$request['shop'];
+        $invoice->quantity=$request['quantity'];
+        $invoice->select_point=$request['select_point'];
+        $invoice->point=$request['point'];
+        $invoice->kyat=$request['kyat'];
+        $invoice->pae=$request['pae'];
+        $invoice->yway=$request['yway'];
+        $invoice->gram=$request['gram'];
+        $invoice->coupon=$request['coupon'];
+        $invoice->Save();
+
+        return redirect()->back()->with('info','The new user account have been created.');
+    }
+    public function postUpdateOrder(Request $request){
+        $id=$request['id'];
+        $customer_name=$request['customer_name'];
+        $sale_name=$request['sale_name'];
+        $date=$request['date'];
+        $order_number=$request['order_number'];
+        $shop=$request['shop'];
+        $quantity=$request['quantity'];
+        $select_point=$request['select_point'];
+        $point=$request['point'];
+        $kyat=$request['kyat'];
+        $pae=$request['pae'];
+        $yway=$request['yway'];
+        $gram=$request['gram'];
+        $coupon=$request['coupon'];
+
+
+        $invoice=Order::where('id', $id)->first();
+        $invoice->customer_name=$customer_name;
+        $invoice->sale_name=$sale_name;
+        $invoice->date=$date;
+        $invoice->order_number=$order_number;
+        $invoice->shop=$shop;
+        $invoice->quantity=$quantity;
+        $invoice->select_point=$select_point;
+        $invoice->point=$point;
+        $invoice->kyat=$kyat;
+        $invoice->pae=$pae;
+        $invoice->yway=$yway;
+        $invoice->gram=$gram;
+        $invoice->coupon=$coupon;
+        $invoice->update();
+        return redirect()->back()->with('info','The selected user account have been updated.');
+    }
+    public function postDeleteOrder(Request $request){
+        $id=$request['id'];
+        $user=Order::where('id', $id)->first();
+        $user->delete();
+        return redirect()->back()->with('info', "The selected user account have been deleted.");
+    }
+    public function getRank()
+    {
+        $customer=Customer::all();
+        return view('admin.rank.rank')->with(['customer'=>$customer]);
+    }
+    public function getNoti(){
+        $customers=Customer::all();
+        return view('admin.Noti.notification')->with(['customers'=>$customers]);
+    }
+    public function postNoti(Request $request){
+        $id=$request['id'];
+        $customer=Customer::where('id', $id)->first();
+
+        $customer->notification=$request['about'];
+
+        $customer->save();
+        return redirect()->back()->with(['info'=>'You post notification successfully']);
     }
 }

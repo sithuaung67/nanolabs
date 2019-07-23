@@ -25,14 +25,14 @@
         <!-- Main content -->
         <section class="content table-responsive" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('user.new')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-plus-circle"></i> New User</a>
+                <a href="{{route('user.new')}}" id="SearchButton" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-plus-circle"></i> New User</a>
             </div>
 
 
 
             <table class="table table-hover table-bordered" id="user_table">
                 <thead>
-                <tr style="background: grey ;color:#fff; font-weight: bold">
+                <tr style="background: #1e282c ;color:#fff; font-weight: bold">
                     <td>ID</td>
                     <td>Username</td>
                     <td>Full Name</td>
@@ -41,9 +41,11 @@
                     <td>Actions</td>
                 </tr>
                 </thead>
-                @foreach($users as $user)
+                <?php $total = 0; ?>
+            @foreach($users as $user)
+                    <?php $total ++== $total; ?>
                     <tr >
-                        <td>{{$user->id}}</td>
+                        <td>{{$total}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->full_name}}</td>
                         <td class="text-primary">

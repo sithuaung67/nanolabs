@@ -25,14 +25,43 @@
         <!-- Main content -->
         <section class="content table-responsive" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('sale.new')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-plus-circle"></i> New Sale User</a>
+                <a href="{{route('sale.new')}}" id="SearchButton" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-plus-circle"></i> New Sale User</a>
             </div>
 
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-md-12">
+                    <form class="form-inline" action="{{route('search.sale')}}" method="get">
+                        <input type="date" style="height: auto;" id="birthday" name="birthday" class="form-control">
+                        <select style="height: 48px;" class="form-control" id="user_name" name="user_name" >
+                            <option value="">Account Name</option>
+                            @foreach($sale as $sal)
+                                <option value="{{$sal->user_name}}"> {{$sal->user_name}}  </option>
+                            @endforeach
+                        </select>
+                        <select style="height: 48px;" class="form-control" id="sale_name" name="sale_name" >
+                            <option value="">Sale Name</option>
+                            @foreach($sale as $sal)
+                                <option value="{{$sal->sale_name}}"> {{$sal->sale_name}}  </option>
+                            @endforeach
+                        </select>
+                        <select style="height: 48px;" class="form-control" id="phone" name="phone" >
+                            <option value="">Phone Number</option>
+                            @foreach($sale as $sal)
+                                <option value="{{$sal->phone}}"> {{$sal->phone}}  </option>
+                            @endforeach
+                        </select>
+                        <input type="text" style="height: 48px;width: 150px;" placeholder="Town" id="town" name="town" class="form-control">
+                        <input type="text" style="height: 48px;width: 150px;" placeholder="Select Shop" id="shop" name="shop" class="form-control">
 
+                        <button id="SearchButton" class="btn" type="submit"><i class="fa fa-search"></i></button>
+                        @csrf
+                    </form>
+                </div>
+            </div>
 
             <table class="table table-hover table-bordered" id="sale_table">
                 <thead>
-                <tr style="background: grey ;color:#fff; font-weight: bold">
+                <tr style="background: #1e282c ;color:#fff; font-weight: bold">
                     <td>ID</td>
                     <td>Account Name</td>
                     <td>Saler Name</td>
@@ -45,11 +74,13 @@
                     <td>Actions</td>
                 </tr>
                 </thead>
-                @foreach($sale as $customer)
+                <?php $total = 0; ?>
+            @foreach($sale as $customer)
+                    <?php $total ++== $total; ?>
                     <tr>
-                        <td>{{$customer->id}}</td>
+                        <td>{{$total}}</td>
                         <td>{{$customer->user_name}}</td>
-                        <td>{{$customer->sale_name}}</td>
+                        <td><a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->id])}}">{{$customer->sale_name}}</a></td>
                         <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>
                         <td>{{$customer->phone}}</td>
                         <td>{{$customer->shop}}</td>

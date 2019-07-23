@@ -25,14 +25,14 @@
 
 <body class="hold-transition login-page">
 <div class="container">
-    <div class="login-box bg-primary">
+    <div class="login-box" style="background: #1e282c;">
         @if(Session('error')) <div class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span> {{Session('error')}}</div> @endif
         <div class="login-logo">
-        <span class="logo-lg"><img src="ntg/myint.png" class="img-fluid" style="width: 80%"></span>
+        <span class="logo-lg"><img src="ntg/myint.png" class="img-fluid" style="width: 70%"></span>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg"><strong><i>Welcome My Login Page</i></strong></p>
+            <p class="login-box-msg"><b><i>Welcome My Login Page</i></b></p>
 
             <form role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
@@ -64,7 +64,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" style="background: #1e282c;color: #fff0ff" class="btn btn-block btn-flat">Sign In</button>
                     </div>
                     <!-- /.col -->
                 </div>

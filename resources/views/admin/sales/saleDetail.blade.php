@@ -58,15 +58,15 @@
                                     <tr>
                                         <td>Customer Name</td>
                                         <td>
-                                            @foreach($customer as $cus)
-                                                @if($cus->id==$invoice->customer_name)
-                                                    {{$cus->customer_name}}
+                                            @foreach($customer as $cust)
+                                                @if($cust->id==$invoice->customer_name)
+                                                    {{$cust->customer_name}}
                                                 @endif
                                             @endforeach
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Saler Name</td>
+                                        <td>Sale Name</td>
                                         <td>
                                             @foreach($sale as $sal)
                                                 @if($sal->id==$invoice->sale_name)

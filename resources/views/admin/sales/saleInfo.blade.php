@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Customer Account Setting
+    Sale Account Setting
 @stop
 
 @section('style')
@@ -14,11 +14,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-cog"></span> Customer Account Setting
+                <span class="fa fa-cog"></span> Sale Account Setting
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-cog"></i> Admin Panel</a></li>
-                <li class="active">Customer Account Setting</li>
+                <li class="active">Sale Account Setting</li>
             </ol>
         </section>
 
@@ -37,7 +37,7 @@
                         {{--<a href="{{route('customers')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back Customer</a>--}}
                     </div>
                     <div class="col-md-6 text-right">
-                        <a id="gobutton" href="{{route('customers.invoice.history',['id'=>$customers->id])}}" class="btn">Customer Invoice <i class="fa fa-forward"></i></a>
+                        <a id="gobutton" href="{{route('sales.invoice.history',['id'=>$sale->id])}}" class="btn">Sale Invoice <i class="fa fa-forward"></i></a>
 
                     </div>
                 </div>
@@ -54,36 +54,36 @@
                     <tbody>
                     <tr>
                         <td class="col-md-4">ID</td>
-                        <td style="color: #1c00cf">{{$customers->id}}</td>
+                        <td style="color: #1c00cf">{{$sale->id}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">User Name</td>
-                        <td style="color: #1c00cf">{{$customers->user_name}}</td>
+                        <td style="color: #1c00cf">{{$sale->user_name}}</td>
                     </tr>
                     <tr>
-                        <td class="col-md-4">Customer Name</td>
-                        <td style="color: #1c00cf">{{$customers->customer_name}}</td>
+                        <td class="col-md-4">Saler Name</td>
+                        <td style="color: #1c00cf">{{$sale->sale_name}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Date Of Birthday</td>
-                        <td style="color: #1c00cf">{{date("d-M-Y", strtotime($customers->birthday))}}</td>
+                        <td style="color: #1c00cf">{{date("d-M-Y", strtotime($sale->birthday))}}</td>
 
                     </tr>
                     <tr>
                         <td class="col-md-4">Phone</td>
-                        <td style="color: #1c00cf">{{$customers->phone}}</td>
+                        <td style="color: #1c00cf">{{$sale->phone}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Shop Name</td>
-                        <td style="color: #1c00cf">{{$customers->shop}}</td>
+                        <td style="color: #1c00cf">{{$sale->shop}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Address</td>
-                        <td style="color: #1c00cf">{{$customers->address}}</td>
+                        <td style="color: #1c00cf">{{$sale->address}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Township</td>
-                        <td style="color: #1c00cf">{{$customers->town}}</td>
+                        <td style="color: #1c00cf">{{$sale->town}}</td>
                     </tr>
 
                     <tr>
@@ -104,7 +104,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Change Your Password</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <input type="hidden" name="id" value="{{$customers->id}}">
+                                    <input type="hidden" name="id" value="{{$sale->id}}">
                                     <div class="form-group">
                                         <label for="new_password" class="control-label">New Password</label>
                                         <input required type="password" name="new_password" id="new_password" class="form-control">

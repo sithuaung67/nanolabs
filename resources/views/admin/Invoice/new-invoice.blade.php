@@ -29,19 +29,6 @@
             </div>
             <div class="col-md-6 col-md-offset-3">
                 <form enctype="multipart/form-data" method="post" action="{{route('post.invoice.new')}}">
-                    {{--<div class="col-md-12">--}}
-                        {{----}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-12">--}}
-
-                    {{--</div>--}}
-                    {{--<div class="col-md-12">--}}
-
-                    {{--</div>--}}
-                    {{--<div class="col-md-12">--}}
-
-                    {{--</div>--}}
-
                     <div class="form-group has-feedback @if($errors->has('customer_name')) has-error @endif">
                         <label for="customer_name" class="control-label">Customer Name</label>
                         <select name="customer_name" id="customer_name" class="form-control">
@@ -84,14 +71,14 @@
                     </div>
                     <div class="form-group has-feedback @if($errors->has('quantity')) has-error @endif">
                         <label for="quantity" class="control-label">Quantity</label>
-                        <input type="number" name="quantity" id="quantity" class="form-control">
+                        <input type="number" name="quantity" id="quantity" class="form-control prc">
                         <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                         @if($errors->has('quantity')) <span class="help-block">{{$errors->first('quantity')}}</span> @endif
                     </div>
 
                     <div class="form-group has-feedback @if($errors->has('select_point')) has-error @endif">
                         <label for="select_point" class="control-label">Select Point</label>
-                        <select name="select_point" id="select_point" class="form-control">
+                        <select name="select_point" id="select_point" class="form-control prc">
                             <option value="0">Select Point</option>
                             <option value="1">Normal</option>
                             <option value="0.8">0.8</option>
@@ -111,13 +98,13 @@
                         @if($errors->has('kyat')) <span class="help-block">{{$errors->first('kyat')}}</span> @endif
                     </div>
                     <div class="form-group has-feedback @if($errors->has('pal')) has-error @endif">
-                        <label for="pal" class="control-label">Pal</label>
+                        <label for="pal" class="control-label">Pae</label>
                         <input type="number" name="pal" id="pal" class="form-control">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         @if($errors->has('pal')) <span class="help-block">{{$errors->first('pal')}}</span> @endif
                     </div>
                     <div class="form-group has-feedback @if($errors->has('ywaw')) has-error @endif">
-                        <label for="ywaw" class="control-label">Ywaw</label>
+                        <label for="ywaw" class="control-label">Yway</label>
                         <input type="number" name="ywaw" id="ywaw" class="form-control">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         @if($errors->has('ywaw')) <span class="help-block">{{$errors->first('ywaw')}}</span> @endif

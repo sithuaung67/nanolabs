@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Invoice
+    Order
 @stop
 
 @section('style')
@@ -14,40 +14,27 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-user-plus"></span> New Invoice
+                <span class="fa fa-user-plus"></span> New Order
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-user-plus"></i> Admin Panel</a></li>
-                <li class="active">New Invoice</li>
+                <li class="active">New Order</li>
             </ol>
         </section>
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('invoices')}}" class="btn" style="color: white;background: #1e282c;"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{route('orders')}}" class="btn" style="color: white;background: #1e282c;"><i class="fa fa-backward"></i> Back</a>
             </div>
             <div class="col-md-6 col-md-offset-3">
-                <form enctype="multipart/form-data" method="post" action="{{route('post.invoice.new')}}">
-                    {{--<div class="col-md-12">--}}
-                        {{----}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-12">--}}
-
-                    {{--</div>--}}
-                    {{--<div class="col-md-12">--}}
-
-                    {{--</div>--}}
-                    {{--<div class="col-md-12">--}}
-
-                    {{--</div>--}}
-
+                <form enctype="multipart/form-data" method="post" action="{{route('post.order.new')}}">
                     <div class="form-group has-feedback @if($errors->has('customer_name')) has-error @endif">
                         <label for="customer_name" class="control-label">Customer Name</label>
                         <select name="customer_name" id="customer_name" class="form-control">
                             <option value="">Select Customer Name</option>
                             @foreach($customer as $cus)
-                                <option value="{{$cus->customer_name}}">{{$cus->customer_name}}</option>
+                                <option value="{{$cus->id}}">{{$cus->customer_name}}</option>
                             @endforeach
                         </select>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -58,7 +45,7 @@
                         <select name="sale_name" id="sale_name" class="form-control">
                             <option value="">Select Sale Name</option>
                             @foreach($sale as $cus)
-                                <option value="{{$cus->sale_name}}">{{$cus->sale_name}}</option>
+                                <option value="{{$cus->id}}">{{$cus->sale_name}}</option>
                             @endforeach
                         </select>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -76,22 +63,22 @@
                         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                         @if($errors->has('date')) <span class="help-block">{{$errors->first('date')}}</span> @endif
                     </div>
-                    <div class="form-group has-feedback @if($errors->has('invoice_number')) has-error @endif">
-                        <label for="invoice_number" class="control-label">Invoice Number</label>
-                        <input type="text" name="invoice_number" id="invoice_number" class="form-control">
+                    <div class="form-group has-feedback @if($errors->has('order_number')) has-error @endif">
+                        <label for="order_number" class="control-label">Order Number</label>
+                        <input type="text" name="order_number" id="order_number" class="form-control">
                         <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
-                        @if($errors->has('invoice_number')) <span class="help-block">{{$errors->first('invoice_number')}}</span> @endif
+                        @if($errors->has('order_number')) <span class="help-block">{{$errors->first('order_number')}}</span> @endif
                     </div>
                     <div class="form-group has-feedback @if($errors->has('quantity')) has-error @endif">
                         <label for="quantity" class="control-label">Quantity</label>
-                        <input type="number" name="quantity" id="quantity" class="form-control">
+                        <input type="number" name="quantity" id="quantity" class="form-control prc">
                         <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                         @if($errors->has('quantity')) <span class="help-block">{{$errors->first('quantity')}}</span> @endif
                     </div>
 
                     <div class="form-group has-feedback @if($errors->has('select_point')) has-error @endif">
                         <label for="select_point" class="control-label">Select Point</label>
-                        <select name="select_point" id="select_point" class="form-control">
+                        <select name="select_point" id="select_point" class="form-control prc">
                             <option value="0">Select Point</option>
                             <option value="1">Normal</option>
                             <option value="0.8">0.8</option>
@@ -110,17 +97,17 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         @if($errors->has('kyat')) <span class="help-block">{{$errors->first('kyat')}}</span> @endif
                     </div>
-                    <div class="form-group has-feedback @if($errors->has('pal')) has-error @endif">
-                        <label for="pal" class="control-label">Pal</label>
-                        <input type="number" name="pal" id="pal" class="form-control">
+                    <div class="form-group has-feedback @if($errors->has('pae')) has-error @endif">
+                        <label for="pae" class="control-label">Pae</label>
+                        <input type="number" name="pae" id="pae" class="form-control">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        @if($errors->has('pal')) <span class="help-block">{{$errors->first('pal')}}</span> @endif
+                        @if($errors->has('pae')) <span class="help-block">{{$errors->first('pae')}}</span> @endif
                     </div>
-                    <div class="form-group has-feedback @if($errors->has('ywaw')) has-error @endif">
-                        <label for="ywaw" class="control-label">Ywaw</label>
-                        <input type="number" name="ywaw" id="ywaw" class="form-control">
+                    <div class="form-group has-feedback @if($errors->has('yway')) has-error @endif">
+                        <label for="yway" class="control-label">Yway</label>
+                        <input type="number" name="yway" id="yway" class="form-control">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        @if($errors->has('ywaw')) <span class="help-block">{{$errors->first('ywaw')}}</span> @endif
+                        @if($errors->has('yway')) <span class="help-block">{{$errors->first('yway')}}</span> @endif
                     </div>
                     <div class="form-group has-feedback @if($errors->has('gram')) has-error @endif">
                         <label for="gram" class="control-label">Gram</label>

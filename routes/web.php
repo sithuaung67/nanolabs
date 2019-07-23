@@ -28,7 +28,7 @@ Route::post('/login',[
 Route::group(['middleware'=>'auth'], function (){
 
     Route::get('/', function (){
-        return redirect()->route('showData');
+        return redirect()->route('invoices');
     });
 
 
@@ -67,6 +67,31 @@ Route::group(['middleware'=>'auth'], function (){
     Route::group(['prefix'=>'admin', ], function (){
 
 
+        Route::get('/leaderboard', 'DataController@leaderboard');
+
+        //user
+        Route::get('/users',[
+            'uses'=>'AdminController@getUsers',
+            'as'=>'users'
+        ]);
+        Route::get('/user/new',[
+            'uses'=>'AdminController@getNewUser',
+            'as'=>'user.new'
+        ]);
+        Route::post('/user/new',[
+            'uses'=>'AdminController@postNewUser',
+            'as'=>'user.new'
+        ]);
+        Route::post('/user/delete',[
+            'uses'=>'AdminController@postDeleteUser',
+            'as'=>'user.delete'
+        ]);
+        Route::post('/user/update',[
+            'uses'=>'AdminController@postUpdateUser',
+            'as'=>'user.update'
+        ]);
+
+        //customer
         Route::get('/customerInfo',[
             'uses'=>'AdminController@getCustomerInfo',
             'as'=>'get.customerInfo'
@@ -99,8 +124,13 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateCustomer',
             'as'=>'customer.update'
         ]);
+        Route::get('/search/customer',[
+            'uses'=>'AdminController@getSearchCustomer',
+            'as'=>'search.customer'
+        ]);
 
 
+        //sale
         Route::get('/sales',[
             'uses'=>'AdminController@getSale',
             'as'=>'sales'
@@ -121,30 +151,25 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateSale',
             'as'=>'sale.update'
         ]);
-
-
-
-        Route::get('/users',[
-            'uses'=>'AdminController@getUsers',
-            'as'=>'users'
+        Route::get('/saleInfo',[
+            'uses'=>'AdminController@getSaleInfo',
+            'as'=>'get.saleInfo'
         ]);
-        Route::get('/user/new',[
-            'uses'=>'AdminController@getNewUser',
-            'as'=>'user.new'
+        Route::get('/saleInvoiceInfo',[
+            'uses'=>'AdminController@getSaleInvoiceInfo',
+            'as'=>'get.saleInvoiceInfo'
         ]);
-        Route::post('/user/new',[
-            'uses'=>'AdminController@postNewUser',
-            'as'=>'user.new'
+        Route::get('/sales/InvoiceHistory',[
+            'uses'=>'AdminController@getSaleInvoiceHistory',
+            'as'=>'sales.invoice.history'
         ]);
-        Route::post('/user/delete',[
-            'uses'=>'AdminController@postDeleteUser',
-            'as'=>'user.delete'
+        Route::get('/search/sale',[
+            'uses'=>'AdminController@getSearchSale',
+            'as'=>'search.sale'
         ]);
 
-        Route::post('/user/update',[
-            'uses'=>'AdminController@postUpdateUser',
-            'as'=>'user.update'
-        ]);
+
+        //invoice
         Route::get('invoice',[
            'uses'=>'AdminController@getInvoice',
            'as'=>'invoices'
@@ -152,6 +177,10 @@ Route::group(['middleware'=>'auth'], function (){
         Route::get('/invoice/new',[
             'uses'=>'AdminController@getNewInvoice',
             'as'=>'get.newInvoice'
+        ]);
+        Route::get('invoice/print',[
+            'uses'=>'AdminController@getInvoicePrint',
+            'as'=>'print.Invoice'
         ]);
         Route::post('/invoice/new',[
            'uses'=>'AdminController@postNewInvoice',
@@ -165,54 +194,109 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateInvoice',
             'as'=>'invoice.update'
         ]);
+        Route::get('/search/invoice',[
+            'uses'=>'AdminController@getSearchInvoice',
+            'as'=>'search.invoice'
+        ]);
+
+
+        //order
+        Route::get('/search/order',[
+            'uses'=>'AdminController@getSearchOrder',
+            'as'=>'search.order'
+        ]);
+        Route::get('order',[
+           'uses'=>'AdminController@getOrder',
+           'as'=>'orders'
+        ]);
+        Route::get('/order/new',[
+            'uses'=>'AdminController@getNewOrder',
+            'as'=>'get.newOrder'
+        ]);
+        Route::get('order/print',[
+            'uses'=>'AdminController@getOrderPrint',
+            'as'=>'print.Order'
+        ]);
+        Route::post('/order/new',[
+           'uses'=>'AdminController@postNewOrder',
+           'as'=>'post.order.new'
+        ]);
+        Route::post('/order/delete',[
+            'uses'=>'AdminController@postDeleteOrder',
+            'as'=>'order.delete'
+        ]);
+        Route::post('/order/update',[
+            'uses'=>'AdminController@postUpdateOrder',
+            'as'=>'order.update'
+        ]);
+        Route::get('ranks',[
+            'uses'=>'AdminController@getRank',
+            'as'=>'ranks'
+        ]);
+
+        //For Notification
+        Route::get('notification',[
+           'uses'=>'AdminController@getNoti',
+           'as'=>'getNotification'
+        ]);
+        Route::post('notification',[
+           'uses'=>'AdminController@postNoti',
+           'as'=>'postNotification'
+        ]);
 
 
 
-        Route::get('data',[
-           'uses'=>'DataController@getData',
-           'as'=>'data'
-        ]);
-        Route::get('showData',[
-            'uses'=>'DataController@getShowData',
-            'as'=>'showData'
-        ]);
-        Route::post('postData',[
-           'uses'=>'DataController@postData',
-           'as'=>'postData'
-        ]);
-        Route::post('/data/delete',[
-            'uses'=>'DataController@postDeleteData',
-            'as'=>'data.delete'
-        ]);
 
-        Route::post('/data/update',[
-            'uses'=>'DataController@postUpdateData',
-            'as'=>'data.update'
-        ]);
-        Route::get('/search/department',[
-            'uses'=>'DataController@getSearchDepartment',
-            'as'=>'search.data'
-        ]);
-        Route::get('/search/date',[
-            'uses'=>'DataController@getSearchDate',
-            'as'=>'search.date'
-        ]);
-        Route::post('/data/update',[
-            'uses'=>'DataController@postUpdateData',
-            'as'=>'update.data'
-        ]);
-        Route::get('/view',[
-           'uses'=>'DataController@getViewData',
-           'as'=>'view.data'
-        ]);
-        Route::get('/back',[
-            'uses'=>'DataController@getBack',
-            'as'=>'back'
-        ]);
-        Route::get('/search/data',[
-            'uses'=>'DataController@getSearchAll',
-            'as'=>'search.all'
-        ]);
+
+//        Route::get('data',[
+//           'uses'=>'DataController@getData',
+//           'as'=>'data'
+//        ]);
+//        Route::get('showData',[
+//            'uses'=>'DataController@getShowData',
+//            'as'=>'showData'
+//        ]);
+//        Route::get('ranking',[
+//            'uses'=>'DataController@getRanking',
+//            'as'=>'getRanking'
+//        ]);
+//        Route::post('postData',[
+//           'uses'=>'DataController@postData',
+//           'as'=>'postData'
+//        ]);
+//        Route::post('/data/delete',[
+//            'uses'=>'DataController@postDeleteData',
+//            'as'=>'data.delete'
+//        ]);
+//
+//        Route::post('/data/update',[
+//            'uses'=>'DataController@postUpdateData',
+//            'as'=>'data.update'
+//        ]);
+//        Route::get('/search/department',[
+//            'uses'=>'DataController@getSearchDepartment',
+//            'as'=>'search.data'
+//        ]);
+//        Route::get('/search/date',[
+//            'uses'=>'DataController@getSearchDate',
+//            'as'=>'search.date'
+//        ]);
+//        Route::post('/data/update',[
+//            'uses'=>'DataController@postUpdateData',
+//            'as'=>'update.data'
+//        ]);
+//        Route::get('/view',[
+//           'uses'=>'DataController@getViewData',
+//           'as'=>'view.data'
+//        ]);
+//        Route::get('/back',[
+//            'uses'=>'DataController@getBack',
+//            'as'=>'back'
+//        ]);
+//        Route::get('/search/data',[
+//            'uses'=>'DataController@getSearchAll',
+//            'as'=>'search.all'
+//        ]);
 
     });
 

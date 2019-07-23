@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Invoice
+    Order
 @stop
 
 @section('style')
@@ -14,11 +14,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-list"></span> Invoice
+                <span class="fa fa-list"></span> Order
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
-                <li class="active">Invoice</li>
+                <li class="active">Order</li>
             </ol>
         </section>
 
@@ -27,36 +27,14 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="{{route('get.newInvoice')}}" id="SearchButton" class="btn" style="background: #1e282c;color: white;"><i class="fa fa-plus-circle"></i> New Invoice</a>
+                        <a href="{{route('get.newOrder')}}" id="SearchButton" class="btn" style="background: #1e282c;color: white;"><i class="fa fa-plus-circle"></i> New Invoice</a>
                     </div>
                     <div class="col-md-6">
                         <div class="text-right">
-                            <a href="{{route('print.Invoice')}}" id="print" class="btn">Print <i class="fa fa-forward"></i></a>
+                            <a href="{{route('print.Order')}}" id="print" class="btn">Print <i class="fa fa-forward"></i></a>
+
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="row" style="margin-bottom: 10px">
-                <div class="col-md-12">
-                    <form class="form-inline" action="{{route("search.invoice")}}" method="get">
-                        <input type="date" style="height: auto;" id="date" name="date" class="form-control">
-                        <select style="height: 48px;" class="form-control" id="invoice_number" name="invoice_number" >
-                            <option value="">Invoice Number</option>
-                            @foreach($invoice as $cats)
-                                <option value="{{$cats->invoice_number}}"> {{$cats->invoice_number}}  </option>
-                            @endforeach
-                        </select>
-                        {{--<select style="height: 48px;" class="form-control" id="shop" name="shop" >--}}
-                            {{--<option value="">Shop</option>--}}
-                                {{--@foreach($invoice as $cats)--}}
-                                    {{--<option value="{{$cats->shop}}"> {{$cats->shop}}  </option>--}}
-                                {{--@endforeach--}}
-                        {{--</select>--}}
-                        <input type="text" style="height: 48px;width: 150px;" placeholder="Select Shop" id="shop" name="shop" class="form-control">
-                        <button id="SearchButton" class="btn" type="submit"><i class="fa fa-search"></i></button>
-                        @csrf
-                    </form>
                 </div>
             </div>
             <div class="row">
@@ -81,6 +59,28 @@
                     </div>
                 </div>
             </div>
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-md-12">
+                    <form class="form-inline" action="{{route("search.order")}}" method="get">
+                        <input type="date" style="height: auto;" id="date" name="date" class="form-control">
+                        <select style="height: 48px;" class="form-control" id="order_number" name="order_number" >
+                            <option value="">Order Number</option>
+                            @foreach($invoice as $cats)
+                                <option value="{{$cats->order_number}}"> {{$cats->order_number}}  </option>
+                            @endforeach
+                        </select>
+                        {{--<select style="height: 48px;" class="form-control" id="shop" name="shop" >--}}
+                            {{--<option value="">Shop</option>--}}
+                            {{--@foreach($invoice as $cats)--}}
+                                {{--<option value="{{$cats->shop}}"> {{$cats->shop}}  </option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                        <input type="text" style="height: 48px;width: 150px;" placeholder="Select Shop" id="shop" name="shop" class="form-control">
+                        <button id="SearchButton" class="btn" type="submit"><i class="fa fa-search"></i></button>
+                        @csrf
+                    </form>
+                </div>
+            </div>
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 @if(Session('info'))
@@ -93,17 +93,17 @@
               <div class="col-md-12">
                     <div class="panel">
                           <div class="panel-heading" style="background: #1e282c;color: #ffffff">
-                              Invoice / List
+                              Order / List
                           </div>
                           <div class="panel-body table-responsive">
-                              <table class="table table-hover table-bordered" id="dataTableInvoice">
+                              <table class="table table-hover table-bordered" id="dataTable">
                                   <thead>
                                   <tr style="background: #1e282c ;color:#fff; font-weight: bold">
                                       <td>ID</td>
                                       <td>Shop</td>
                                       <td>Customer Name</td>
                                       <td>Sale Name</td>
-                                      <td>Invoice_number</td>
+                                      <td>Order_number</td>
                                       <td>Quantity</td>
                                       <td>Promotion Point</td>
                                       <td>Point</td>
@@ -116,7 +116,8 @@
                                       <td>Actions</td>
                                   </tr>
                                   </thead>
-                                  <?php $total = 0; ?>
+                                  <?php $total =0; ?>
+
                               @foreach($invoice as $customer)
                                       <?php $total ++== $total; ?>
                                       <tr>
@@ -126,7 +127,7 @@
                                               <a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->customer_name])}}">
                                                   @foreach($customers as $cust)
                                                       @if($cust->id==$customer->customer_name)
-                                                        {{$cust->customer_name}}
+                                                          {{$cust->customer_name}}
                                                       @endif
                                                   @endforeach
                                               </a>
@@ -135,18 +136,18 @@
                                               <a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->sale_name])}}">
                                                   @foreach($sale as $sal)
                                                       @if($sal->id==$customer->sale_name)
-                                                        {{$sal->sale_name}}
+                                                          {{$sal->sale_name}}
                                                       @endif
                                                   @endforeach
                                               </a>
                                           </td>
-                                          <td>{{$customer->invoice_number}}</td>
+                                          <td>{{$customer->order_number}}</td>
                                           <td class="quantity">{{$customer->quantity}}</td>
                                           <td>{{$customer->select_point}}</td>
                                           <td class="point">{{$customer->point}}</td>
                                           <td>{{$customer->kyat}}</td>
-                                          <td>{{$customer->pal}}</td>
-                                          <td>{{$customer->ywaw}}</td>
+                                          <td>{{$customer->pae}}</td>
+                                          <td>{{$customer->yway}}</td>
                                           <td class="gram">{{$customer->gram}}</td>
                                           <td>{{$customer->coupon}}</td>
                                           <td>{{date("d-M-Y", strtotime($customer->date))}}</td>
@@ -156,11 +157,11 @@
                                               <!-- Edit Modal -->
                                               <div class="modal fade" id="e{{$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                   <div class="modal-dialog" role="document">
-                                                      <form method="post" action="{{route('invoice.update')}}">
+                                                      <form method="post" action="{{route('order.update')}}">
                                                           <div class="modal-content">
                                                               <div class="modal-header">
                                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                  <h4 class="modal-title" id="myModalLabel"><b>Edit Invoice Information</b></h4>
+                                                                  <h4 class="modal-title" id="myModalLabel">Edit Order Information</h4>
                                                               </div>
                                                               <div class="modal-body text-left">
                                                                   <input type="hidden" name="id" value="{{$customer->id}}">
@@ -198,11 +199,11 @@
                                                                       <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                                                                       @if($errors->has('date')) <span class="help-block">{{$errors->first('date')}}</span> @endif
                                                                   </div>
-                                                                  <div class="form-group has-feedback @if($errors->has('invoice_number')) has-error @endif">
-                                                                      <label for="invoice_number" class="control-label">Invoice Number</label>
-                                                                      <input value="{{$customer->invoice_number}}" type="text" name="invoice_number" id="invoice_number" class="form-control">
+                                                                  <div class="form-group has-feedback @if($errors->has('order_number')) has-error @endif">
+                                                                      <label for="order_number" class="control-label">Order Number</label>
+                                                                      <input value="{{$customer->order_number}}" type="text" name="order_number" id="order_number" class="form-control">
                                                                       <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
-                                                                      @if($errors->has('invoice_number')) <span class="help-block">{{$errors->first('invoice_number')}}</span> @endif
+                                                                      @if($errors->has('order_number')) <span class="help-block">{{$errors->first('order_number')}}</span> @endif
                                                                   </div>
                                                                   <div class="form-group has-feedback @if($errors->has('quantity')) has-error @endif">
                                                                       <label for="quantity" class="control-label">Quantity</label>
@@ -232,17 +233,17 @@
                                                                       <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                                                       @if($errors->has('kyat')) <span class="help-block">{{$errors->first('kyat')}}</span> @endif
                                                                   </div>
-                                                                  <div class="form-group has-feedback @if($errors->has('pal')) has-error @endif">
-                                                                      <label for="pal" class="control-label">Pae</label>
-                                                                      <input value="{{$customer->pal}}" type="number" name="pal" id="pal" class="form-control">
+                                                                  <div class="form-group has-feedback @if($errors->has('pae')) has-error @endif">
+                                                                      <label for="pae" class="control-label">Pae</label>
+                                                                      <input value="{{$customer->pae}}" type="number" name="pae" id="pae" class="form-control">
                                                                       <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                                                      @if($errors->has('pal')) <span class="help-block">{{$errors->first('pal')}}</span> @endif
+                                                                      @if($errors->has('pae')) <span class="help-block">{{$errors->first('pae')}}</span> @endif
                                                                   </div>
-                                                                  <div class="form-group has-feedback @if($errors->has('ywaw')) has-error @endif">
-                                                                      <label for="ywaw" class="control-label">Yway</label>
-                                                                      <input value="{{$customer->ywaw}}" type="number" name="ywaw" id="ywaw" class="form-control">
+                                                                  <div class="form-group has-feedback @if($errors->has('yway')) has-error @endif">
+                                                                      <label for="yway" class="control-label">Yway</label>
+                                                                      <input value="{{$customer->yway}}" type="number" name="yway" id="yway" class="form-control">
                                                                       <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                                                      @if($errors->has('ywaw')) <span class="help-block">{{$errors->first('ywaw')}}</span> @endif
+                                                                      @if($errors->has('yway')) <span class="help-block">{{$errors->first('yway')}}</span> @endif
                                                                   </div>
                                                                   <div class="form-group has-feedback @if($errors->has('gram')) has-error @endif">
                                                                       <label for="gram" class="control-label">Gram</label>
@@ -274,7 +275,7 @@
                                               <!-- Delete Modal -->
                                               <div class="modal fade" id="d{{$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                   <div class="modal-dialog" role="document">
-                                                      <form method="post" action="{{route('invoice.delete')}}">
+                                                      <form method="post" action="{{route('order.delete')}}">
                                                           <div class="modal-content">
                                                               <div class="modal-header">
                                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
