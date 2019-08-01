@@ -100,6 +100,63 @@
                     box-shadow: 0 5px #666;
                     transform: translateY(4px);
                 }
+        #back_invoices_price {
+            padding: 10px 20px;
+            font-size: 15px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+            background-color: #1e282c;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 7px #999;
+        }
+        #back_invoices_price:hover {background-color: #312e25}
+
+        #back_invoices_price:active {
+            background-color: #1e282c;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        #back_invoices_price {
+                    padding: 10px 25px;
+                    font-size: 13px;
+                    text-align: center;
+                    cursor: pointer;
+                    outline: none;
+                    color: #fff;
+                    background-color: #1e282c;
+                    border: none;
+                    border-radius: 30px;
+                    box-shadow: 0 7px #999;
+                }
+        #CustomerQrcode:hover {background-color: #312e25}
+
+        #CustomerQrcode:active {
+                    background-color: #1e282c;
+                    box-shadow: 0 5px #666;
+                    transform: translateY(4px);
+                }
+        #SaleQrcode {
+                    padding: 10px 25px;
+                    font-size: 13px;
+                    text-align: center;
+                    cursor: pointer;
+                    outline: none;
+                    color: #fff;
+                    background-color: #1e282c;
+                    border: none;
+                    border-radius: 30px;
+                    box-shadow: 0 7px #999;
+                }
+        #SaleQrcode:hover {background-color: #312e25}
+
+        #SaleQrcode:active {
+                    background-color: #1e282c;
+                    box-shadow: 0 5px #666;
+                    transform: translateY(4px);
+                }
         #RankButton {
                     padding: 10px 25px;
                     font-size: 13px;
@@ -120,7 +177,7 @@
                     transform: translateY(4px);
                 }
         #SearchButton {
-            padding: 13px 35px;
+            padding: 9px 45px;
             font-size: 13px;
             text-align: center;
             cursor: pointer;
@@ -153,6 +210,25 @@
         #invoiceHistory:hover {background-color: #312e25}
 
         #invoiceHistory:active {
+                    background-color: #1e282c;
+                    box-shadow: 0 5px #666;
+                    transform: translateY(4px);
+                }
+        #CustomerQrcode {
+                    padding: 10px 25px;
+                    font-size: 13px;
+                    text-align: center;
+                    cursor: pointer;
+                    outline: none;
+                    color: #fff;
+                    background-color: #1e282c;
+                    border: none;
+                    border-radius: 30px;
+                    box-shadow: 0 4px #999;
+                }
+        #CustomerQrcode:hover {background-color: #312e25}
+
+        #CustomerQrcode:active {
                     background-color: #1e282c;
                     box-shadow: 0 5px #666;
                     transform: translateY(4px);
@@ -224,7 +300,7 @@
                "bInfo": true
            });
            $("#dataTableInvoice").dataTable({
-               "bFilter" : false,
+               "bFilter" : true,
                "bPaginate": true,
                "bInfo": true
            });
@@ -264,6 +340,30 @@
         $('#button').on('click',function(){
             printData();
         });
+        function printData3()
+        {
+            var divToPrint=document.getElementById("QrcodeCustomer");
+            newWin= window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            // newWin.close();
+        }
+
+        $('#CustomerQrcode').on('click',function(){
+            printData3();
+        });
+        function printData2()
+        {
+            var divToPrint=document.getElementById("QrcodeSale");
+            newWin= window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            // newWin.close();
+        }
+
+        $('#SaleQrcode').on('click',function(){
+            printData2();
+        });
         function printData1()
         {
             var divToPrint=document.getElementById("dataTableInvoicePrint");
@@ -288,6 +388,18 @@
         $('#RankButton').on('click',function(){
             printRank();
         });
+        function Qrcode()
+        {
+            var divToPrint=document.getElementById("RankTable");
+            newWin= window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            // newWin.close();
+        }
+
+        $('#Qrcode').on('click',function(){
+            printRank();
+        });
     </script>
     <script language="javascript" type="text/javascript">
         var tds = document.getElementById('dataTable1').getElementsByTagName('td');
@@ -306,7 +418,7 @@
             }
 
         }
-        document.getElementById('dataTable1').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        document.getElementById('dataTable1').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td><b>' + sum1 + '<b></td>  <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
         document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point</b><br><b>' + sum2 + '<b> </td> </tr>';
         document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
         document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
@@ -318,7 +430,7 @@
         var sum2 = 0;
         var sum3 = 0;
         for(var i = 0; i < tds.length; i ++) {
-            if(tds[i].className == 'point') {
+            if(tds[i].className == 'point_eight') {
                 sum2 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
             }
             if(tds[i].className == 'quantity') {
@@ -329,8 +441,8 @@
             }
 
         }
-        document.getElementById('dataTable').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
-        document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point</b><br><b>' + sum2 + '<b> </td> </tr>';
+        document.getElementById('dataTable').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        document.getElementById('TotalPointEight').innerHTML += '<tr><td><b>Total Point Eight</b><br><b>' + sum2 + '<b> </td> </tr>';
         document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
         document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
         document.getElementById('TotalGam').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
@@ -341,7 +453,7 @@
         var sum2 = 0;
         var sum3 = 0;
         for(var i = 0; i < tds.length; i ++) {
-            if(tds[i].className == 'point') {
+            if(tds[i].className == 'point_eight') {
                 sum2 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
             }
             if(tds[i].className == 'quantity') {
@@ -352,8 +464,8 @@
             }
 
         }
-        document.getElementById('dataTableInvoice').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
-        document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point</b><br><b>' + sum2 + '<b> </td> </tr>';
+        document.getElementById('dataTableInvoice').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point Eight</b><br><b>' + sum2 + '<b> </td> </tr>';
         document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
         document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
         document.getElementById('TotalGam').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
@@ -369,7 +481,56 @@
             });
             $('#point').val(totalSum);
         });
+        $('.form-group').on('input','.pc0',function () {
+            var totalSum=0;
+            $('.form-group .pc0').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum +=parseFloat(inputVal);
+                }
+            });
+            $('#text1').val(totalSum);
+        });
     </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#hide").click(function(){
+                $(".id").toggle();
+                $("#id").toggle();
+
+            });
+            $("#ring").click(function(){
+                $(".ring").toggle();
+            });
+            $("#hide9").click(function(){
+                $(".ring").hide();
+            });
+
+            $("#ring0").click(function(){
+                $(".ring0").toggle();
+
+            });
+            $("#hide0").click(function(){
+                $(".ring0").hide();
+            });
+            $("#ring1").click(function(){
+                $(".ring1").toggle();
+
+            });
+            $("#hide1").click(function(){
+                $(".ring1").hide();
+            });
+            $("#ring2").click(function(){
+                $(".ring2").toggle();
+            });
+            $("#hide2").click(function(){
+                $(".ring2").hide();
+            });
+        });
+    </script>
+    
+
 
     @yield('script')
 

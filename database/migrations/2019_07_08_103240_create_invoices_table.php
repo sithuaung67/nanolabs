@@ -15,19 +15,19 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('shop');
-            $table->string('customer_name');
-            $table->string('sale_name');
-            $table->date('date');
-            $table->string('invoice_number');
-            $table->integer('quantity');
-            $table->float('select_point');
-            $table->integer('point');
-            $table->string('kyat');
-            $table->string('pal');
-            $table->string('ywaw');
-            $table->string('gram');
-            $table->string('coupon');
+            $table->string('shop')->default(null);
+            $table->string('customer_name')->default(null);
+            $table->string('sale_name')->default(null);
+            $table->date('date')->default(null);
+            $table->string('invoice_number')->default(null);
+            $table->integer('quantity')->default(null);
+            $table->float('select_point')->default(null);
+            $table->integer('point')->default(null);
+            $table->string('kyat')->default(null);
+            $table->string('pal')->default(null);
+            $table->string('ywaw')->default(null);
+            $table->string('gram')->default(null);
+            $table->string('coupon')->default(null);
             $table->timestamps();
         });
     }

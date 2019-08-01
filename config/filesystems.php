@@ -51,6 +51,10 @@ return [
             'driver' => 'local',
             'root' => public_path('Datas'),
         ],
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path('ntg'),
+        ],
 
 
         'public' => [

@@ -30,28 +30,33 @@
             <div class="row" style="margin-bottom: 10px">
                 <div class="col-md-12">
                     <form class="form-inline" action="{{route('search.customer')}}" method="get">
-                        <input type="date" style="height: auto;" id="birthday" name="birthday" class="form-control">
-                        <select style="height: 48px;" class="form-control" id="user_name" name="user_name" >
+                        <input type="date" id="birthday" name="birthday" class="form-control">
+                        <select  class="form-control" id="user_name" name="user_name" >
                             <option value="">Account Name</option>
                             @foreach($customers as $sal)
                                 <option value="{{$sal->user_name}}"> {{$sal->user_name}}  </option>
                             @endforeach
                         </select>
-                        <select style="height: 48px;" class="form-control" id="customer_name" name="customer_name" >
+                        <select class="form-control" id="customer_name" name="customer_name" >
                             <option value="">Customer Name</option>
                             @foreach($customers as $sal)
                                 <option value="{{$sal->customer_name}}"> {{$sal->customer_name}}  </option>
                             @endforeach
                         </select>
-                        <select style="height: 48px;" class="form-control" id="phone" name="phone" >
+                        <select class="form-control" id="phone" name="phone" >
                             <option value="">Phone Number</option>
                             @foreach($customers as $sal)
                                 <option value="{{$sal->phone}}"> {{$sal->phone}}  </option>
                             @endforeach
                         </select>
-                        <input type="text" style="height: 48px;width: 150px;" placeholder="Town" id="town" name="town" class="form-control">
-                        <input type="text" style="height: 48px;width: 150px;" placeholder="Select Shop" id="shop" name="shop" class="form-control">
-
+                        <input type="text" style="width: 100px;" placeholder="Town" id="town" name="town" class="form-control">
+                        <input type="text" style="width: 100px;" placeholder="Select Shop" id="shop" name="shop" class="form-control">
+                        <select class="form-control" id="phone" name="phone" >
+                            <option value="">NRC</option>
+                            @foreach($customers as $sal)
+                                <option value="{{$sal->nrc}}"> {{$sal->nrc}}  </option>
+                            @endforeach
+                        </select>
                         <button id="SearchButton" class="btn" type="submit"><i class="fa fa-search"></i></button>
                         @csrf
                     </form>
@@ -64,7 +69,9 @@
                         <tr style="background: #1e282c ;color:#fff; font-weight: bold">
                             <td>ID</td>
                             <td>Account Name</td>
+                            <td>Qrcode</td>
                             <td>Customer Name</td>
+                            <td>NRC</td>
                             <td>Birthday</td>
                             <td>Phone</td>
                             <td>Shop</td>
@@ -80,7 +87,14 @@
                             <tr>
                                 <td>{{$total}}</td>
                                 <td>{{$customer->user_name}}</td>
+                                {{--<td><a style="color: #1c00cf;" href="{{route('get.viewCustomerQrcode',['id'=>$customer->id])}}">{!! QrCode::size(60)->generate($customer->customer_name); !!}</a></td>--}}
+                                {{--<td>{!! base64_encode(QrCode::format('png')->generate($customer->customer_name))!!} </td>--}}
+                                {{--<td><img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(60)->generate($customer->customer_name))!!} "></td>--}}
+
+                                <td> {!! QrCode::generate('public/ntg/'.$customer->id.'.png') !!}</td>
+
                                 <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->customer_name}}</a></td>
+                                <td>{{$customer->nrc}}</td>
                                 <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>
                                 <td>{{$customer->phone}}</td>
                                 <td>{{$customer->shop}}</td>

@@ -25,7 +25,7 @@
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('sales')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{route('sales')}}" class="btn" id="back_invoices_price" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back</a>
             </div>
             <div class="col-md-6 col-md-offset-3">
                 <form method="post" action="">
@@ -54,12 +54,6 @@
                         <span class="glyphicon glyphicon-book form-control-feedback"></span>
                         @if($errors->has('phone')) <span class="help-block">{{$errors->first('phone')}}</span> @endif
                     </div>
-                    <div class="form-group has-feedback @if($errors->has('shop')) has-error @endif">
-                        <label for="shop" class="control-label">Shop</label>
-                        <input type="text" name="shop" id="shop" class="form-control">
-                        <span class="glyphicon glyphicon-book form-control-feedback"></span>
-                        @if($errors->has('shop')) <span class="help-block">{{$errors->first('shop')}}</span> @endif
-                    </div>
                     <div class="form-group has-feedback @if($errors->has('address')) has-error @endif">
                         <label for="address" class="control-label">Address</label>
                         <textarea name="address" id="address" class="form-control"></textarea>
@@ -72,13 +66,6 @@
                         <input type="text" name="town" id="town" class="form-control">
                         <span class="glyphicon glyphicon-book form-control-feedback"></span>
                         @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
-                    </div>
-
-                    <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">
-                        <label for="password" class="control-label">Password</label>
-                        <input type="password" name="password" id="password" class="form-control">
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        @if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg">Create</button>

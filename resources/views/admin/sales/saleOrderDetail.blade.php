@@ -46,7 +46,7 @@
                         <div class="panel">
                             <div class="panel-body table-responsive">
                                 <table class="table table-hover table-bordered" cellpadding="13" border="1"  id="dataTable4">
-                                    <h3 class="text-center">Invoice Number : {{$invoice->voucher_number}}</h3>
+                                    <h3 class="text-center">Order Number : {{$invoice->voucher_number}}</h3>
                                     <tr>
                                         <td>Voucher Number</td>
                                         <td>{{$invoice->voucher_number}}</td>

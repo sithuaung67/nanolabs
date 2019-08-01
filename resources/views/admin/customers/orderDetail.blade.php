@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Invoice History Detail
+    Order History Detail
 @stop
 
 @section('style')
@@ -14,11 +14,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-list"></span> Invoice Detail
+                <span class="fa fa-list"></span> Order Detail
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
-                <li class="active">Invoice Detail</li>
+                <li class="active">Order Detail</li>
             </ol>
         </section>
 
@@ -45,8 +45,8 @@
                     <div class="col-md-6 col-md-offset-3">
                         <div class="panel">
                             <div class="panel-body table-responsive">
-                                <table class="table table-hover table-bordered" cellpadding="13" border="1"  id="dataTable4">
-                                    <h3 class="text-center">Invoice Number : {{$invoice->voucher_number}}</h3>
+                                <table class="table table-hover table-bordered" border="1"  id="dataTable4">
+                                    <h3 class="text-center">Order Number : {{$invoice->voucher_number}}</h3>
                                     <tr>
                                         <td>Voucher Number</td>
                                         <td>{{$invoice->voucher_number}}</td>

@@ -22,11 +22,13 @@
             </ol>
         </section>
 
+
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
             <div class="page-header">
-                <a href="{{route('customers')}}" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{route('customers')}}" id="back_invoices_price" class="btn" style="background: #1e282c;color: #ffffff;"><i class="fa fa-backward"></i> Back</a>
             </div>
+
             <div class="col-md-6 col-md-offset-3">
                 <form method="post" action="{{route('post.customer.new')}}">
 
@@ -73,15 +75,16 @@
                         @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
                     </div>
 
-                    <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">
-                        <label for="password" class="control-label">Password</label>
-                        <input type="password" name="password" id="password" class="form-control">
+                    <div class="form-group has-feedback @if($errors->has('nrc')) has-error @endif">
+                        <label for="nrc" class="control-label">NRC</label>
+                        <input type="text" name="nrc" id="nrc" class="form-control">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        @if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif
+                        @if($errors->has('nrc')) <span class="help-block">{{$errors->first('nrc')}}</span> @endif
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg">Create</button>
                     </div>
+
                     {{csrf_field()}}
                 </form>
             </div>

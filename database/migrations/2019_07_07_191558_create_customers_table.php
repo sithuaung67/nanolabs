@@ -17,13 +17,15 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('customer_name')->default(null);
             $table->string('user_name')->default(null);
-            $table->string('password')->default(null);
             $table->string('birthday')->default(null);
             $table->text('address')->default(null);
             $table->string('phone')->default(null);
             $table->string('shop')->default(null);
             $table->string('town')->default(null)   ;
             $table->text('notification')->default(null);
+            $table->text('nrc')->default(null);
+            $table->text('path')->default(null);
+            $table->text('profile')->default(null);
             $table->timestamps();
         });
     }

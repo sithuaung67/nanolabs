@@ -100,6 +100,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getCustomerInvoiceInfo',
             'as'=>'get.customerInvoiceInfo'
         ]);
+        Route::get('/customerOrderInfo',[
+            'uses'=>'AdminController@getCustomerOrderInfo',
+            'as'=>'get.customerOrderInfo'
+        ]);
         Route::get('/customers',[
             'uses'=>'AdminController@getCustomer',
             'as'=>'customers'
@@ -107,6 +111,10 @@ Route::group(['middleware'=>'auth'], function (){
         Route::get('/customers/InvoiceHistory',[
             'uses'=>'AdminController@getCustomerInvoiceHistory',
             'as'=>'customers.invoice.history'
+        ]);
+        Route::get('/customers/OrderHistory',[
+            'uses'=>'AdminController@getCustomerOrderHistory',
+            'as'=>'customers.order.history'
         ]);
         Route::get('/customer/new',[
             'uses'=>'AdminController@getNewCustomer',
@@ -159,9 +167,17 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getSaleInvoiceInfo',
             'as'=>'get.saleInvoiceInfo'
         ]);
+        Route::get('/saleOrderInfo',[
+            'uses'=>'AdminController@getSaleOrderInfo',
+            'as'=>'get.saleOrderInfo'
+        ]);
         Route::get('/sales/InvoiceHistory',[
             'uses'=>'AdminController@getSaleInvoiceHistory',
             'as'=>'sales.invoice.history'
+        ]);
+        Route::get('/sales/OrderHistory',[
+            'uses'=>'AdminController@getSaleOrderHistory',
+            'as'=>'sales.order.history'
         ]);
         Route::get('/search/sale',[
             'uses'=>'AdminController@getSearchSale',
@@ -229,9 +245,15 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateOrder',
             'as'=>'order.update'
         ]);
+        //Customer Ranks
         Route::get('ranks',[
             'uses'=>'AdminController@getRank',
             'as'=>'ranks'
+        ]);
+        //Report
+        Route::get('report',[
+            'uses'=>'AdminController@getReport',
+            'as'=>'reports'
         ]);
 
         //For Notification
@@ -245,58 +267,19 @@ Route::group(['middleware'=>'auth'], function (){
         ]);
 
 
-
-
-
-//        Route::get('data',[
-//           'uses'=>'DataController@getData',
-//           'as'=>'data'
-//        ]);
-//        Route::get('showData',[
-//            'uses'=>'DataController@getShowData',
-//            'as'=>'showData'
-//        ]);
-//        Route::get('ranking',[
-//            'uses'=>'DataController@getRanking',
-//            'as'=>'getRanking'
-//        ]);
-//        Route::post('postData',[
-//           'uses'=>'DataController@postData',
-//           'as'=>'postData'
-//        ]);
-//        Route::post('/data/delete',[
-//            'uses'=>'DataController@postDeleteData',
-//            'as'=>'data.delete'
-//        ]);
-//
-//        Route::post('/data/update',[
-//            'uses'=>'DataController@postUpdateData',
-//            'as'=>'data.update'
-//        ]);
-//        Route::get('/search/department',[
-//            'uses'=>'DataController@getSearchDepartment',
-//            'as'=>'search.data'
-//        ]);
-//        Route::get('/search/date',[
-//            'uses'=>'DataController@getSearchDate',
-//            'as'=>'search.date'
-//        ]);
-//        Route::post('/data/update',[
-//            'uses'=>'DataController@postUpdateData',
-//            'as'=>'update.data'
-//        ]);
-//        Route::get('/view',[
-//           'uses'=>'DataController@getViewData',
-//           'as'=>'view.data'
-//        ]);
-//        Route::get('/back',[
-//            'uses'=>'DataController@getBack',
-//            'as'=>'back'
-//        ]);
-//        Route::get('/search/data',[
-//            'uses'=>'DataController@getSearchAll',
-//            'as'=>'search.all'
-//        ]);
+        //Dashboard
+        Route::get('dashboard',[
+            'uses'=>'AdminController@getDashboard',
+            'as'=>'dashboard'
+        ]);
+        Route::get('viewSaleQrcode',[
+            'uses'=>'AdminController@getSaleQrcode',
+            'as'=>'get.viewSaleQrcode'
+        ]);
+        Route::get('viewCustomerQrcode',[
+            'uses'=>'AdminController@getCustomerQrcode',
+            'as'=>'get.viewCustomerQrcode'
+        ]);
 
     });
 

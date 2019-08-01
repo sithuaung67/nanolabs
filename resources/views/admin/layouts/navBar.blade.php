@@ -3,7 +3,7 @@
     <!-- Logo -->
     <a href="{{route('users')}}" class="logo" style="background: #1e282c">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><img src="../../ntg/myint.png" class="img-circle" style="width: 50px"></span>
+        <span class="logo-mini"><img src="../../ntg/myint1.jpg" class="img-circle" style="width: 40px"></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><img src="../../ntg/myint.png" class="img-circle" style="width: 55% ;height: auto"></span>
     </a>

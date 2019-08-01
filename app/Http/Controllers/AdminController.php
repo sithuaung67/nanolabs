@@ -5,8 +5,14 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Invoice;
 use App\Order;
+use App\OrderInvoice;
 use App\Sale;
+use App\SaleInvoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Spatie\Permission\Models\Role;
 use App\User;
 use Auth;
@@ -15,14 +21,7 @@ use Auth;
 
 class AdminController extends Controller
 {
-    public function getDashboard(){
-        $users=User::all();
-
-        return view ('admin.dashboard.index')->with(['users'=>$users]);
-    }
-    public function getError(){
-        return view ('admin.dashboard.error');
-    }
+    //admin or user
     public function getUsers(){
         $users=User::all();
         $roles=Role::all();
@@ -86,20 +85,7 @@ class AdminController extends Controller
         $user->update();
         return redirect()->back()->with('info', 'Your account password have been updated.');
     }
-    public function postUpdateCustomerPassword(Request $request){
-//            $this->validate($request,[
-//               'new_password'=>'required',
-//               'new_password_again'=>'required|same:new_password'
-//            ]);
-            $id=$request['id'];
-            $password=$request['password'];
-            $customer=Customer::where('id', $id)->first();
-        if($password){
-            $customer->password=bcrypt($password);
-        }
-            $customer->update();
-            return redirect()->back()->with('info', 'Your account password have been updated.');
-        }
+
 
     public function getCustomer(){
         $customers=Customer::all();
@@ -112,14 +98,28 @@ class AdminController extends Controller
     }
     public function getCustomerInvoiceHistory(Request $request){
         $id=$request['id'];
-        $invoice=Invoice::all();
-        $customer=Customer::where('id', $id)->first();
+        $invoice=SaleInvoice::all();
+        $customers=Customer::where('id', $id)->first();
         $sale=Sale::all();
-        return view ('admin.customers.invoicehistory')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
+        return view ('admin.customers.invoicehistory')->with(['invoice'=>$invoice])->with(['customers'=>$customers,'sale'=>$sale]);
+    }
+    public function getCustomerOrderHistory(Request $request){
+        $id=$request['id'];
+        $invoice=OrderInvoice::all();
+        $customers=Customer::where('id', $id)->first();
+        $sale=Sale::all();
+        return view ('admin.customers.orderhistory')->with(['invoice'=>$invoice])->with(['customers'=>$customers,'sale'=>$sale]);
+    }
+    public function getCustomerOrderInfo(Request $request){
+        $ids=$request['id'];
+        $invoice=OrderInvoice::where('id',$ids)->first();
+        $customer=Customer::all();
+        $sale=Sale::all();
+        return view ('admin.customers.orderDetail')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
     }
     public function getCustomerInvoiceInfo(Request $request){
         $ids=$request['id'];
-        $invoice=Invoice::where('id',$ids)->first();
+        $invoice=SaleInvoice::where('id',$ids)->first();
         $customer=Customer::all();
         $sale=Sale::all();
         return view ('admin.customers.invoiceDetail')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
@@ -129,26 +129,32 @@ class AdminController extends Controller
     }
     public function postNewCustomer(Request $request){
         $this->validate($request,[
-            'name'=>'required',
+//            'name'=>'required',
             'full_name'=>'required',
-            'birthday'=>'required',
-            'phone'=>'required',
-            'shop'=>'required',
-            'address'=>'required',
-            'town'=>'required',
-            'password'=>'required|min:5'
+//            'birthday'=>'required',
+//            'phone'=>'required',
+//            'shop'=>'required',
+//            'address'=>'required',
+//            'town'=>'required',
+//            'nrc'=>'required',
         ]);
+        $full_name=$request['full_name'];
+
+        $img_name=$full_name.'.'.QrCode::size(500)->format('png')->generate($full_name, public_path("ntg/$full_name.png"));
 
         $customer=new Customer();
         $customer->user_name=$request['name'];
-        $customer->customer_name=$request['full_name'];
+        $customer->customer_name=$full_name;
         $customer->birthday=$request['birthday'];
         $customer->phone=$request['phone'];
         $customer->shop=$request['shop'];
         $customer->address=$request['address'];
         $customer->town=$request['town'];
-        $customer->password=bcrypt($request['password']);
+        $customer->nrc=$request['nrc'];
+        $customer->path=$img_name;
         $customer->save();
+
+//        QrCode::size(500)->format('png')->generate($full_name, public_path("ntg/$full_name.png"));
         return redirect()->back()->with('info', 'The new user account have been created.');
     }
     public function postDeleteCustomer(Request $request){
@@ -166,13 +172,10 @@ class AdminController extends Controller
         $shop=$request['shop'];
         $address=$request['address'];
         $town=$request['town'];
-        $password=$request['password'];
+        $nrc=$request['nrc'];
 
         $customer=Customer::where('id', $id)->first();
 
-        if($password){
-            $customer->password=bcrypt($password);
-        }
         $customer->user_name=$name;
         $customer->customer_name=$full_name;
         $customer->birthday=$birthday;
@@ -180,6 +183,7 @@ class AdminController extends Controller
         $customer->shop=$shop;
         $customer->address=$address;
         $customer->town=$town;
+        $customer->nrc=$nrc;
         $customer->update();
         return redirect()->back()->with('info','The selected user account have been updated.');
     }
@@ -190,6 +194,7 @@ class AdminController extends Controller
         $customer_name=$request['customer_name'];
         $phone=$request['phone'];
         $town=$request['town'];
+        $nrc=$request['nrc'];
         $customers=Customer::OrderBy('id','asc')
             ->where('birthday',"LIKE","%$birthday%")
             ->where('shop' , "LIKE" , "%$shop%")
@@ -197,6 +202,7 @@ class AdminController extends Controller
             ->where('customer_name' , "LIKE" , "%$customer_name%")
             ->where('phone' , "LIKE" , "%$phone%")
             ->where('town' , "LIKE" , "%$town%")
+            ->where('nrc' , "LIKE" , "%$nrc%")
             ->get();
         return view('admin.customers.customers')->with(['customers'=>$customers]);
     }
@@ -204,7 +210,7 @@ class AdminController extends Controller
 
 
 
-
+//sale
     public function getSale(){
         $sale=Sale::all();
         return view ('admin.sales.sale')->with(['sale'=>$sale]);
@@ -218,10 +224,8 @@ class AdminController extends Controller
             'full_name'=>'required',
             'birthday'=>'required',
             'phone'=>'required',
-            'shop'=>'required',
             'address'=>'required',
             'town'=>'required',
-            'password'=>'required|min:5'
         ]);
 
         $customer=new Sale();
@@ -229,10 +233,8 @@ class AdminController extends Controller
         $customer->sale_name=$request['full_name'];
         $customer->birthday=$request['birthday'];
         $customer->phone=$request['phone'];
-        $customer->shop=$request['shop'];
         $customer->address=$request['address'];
         $customer->town=$request['town'];
-        $customer->password=bcrypt($request['password']);
         $customer->save();
         return redirect()->back()->with('info', 'The new user account have been created.');
     }
@@ -248,21 +250,15 @@ class AdminController extends Controller
         $full_name=$request['full_name'];
         $birthday=$request['birthday'];
         $phone=$request['phone'];
-        $shop=$request['shop'];
         $address=$request['address'];
         $town=$request['town'];
-        $password=$request['password'];
 
         $customer=Sale::where('id', $id)->first();
 
-        if($password){
-            $customer->password=bcrypt($password);
-        }
         $customer->user_name=$name;
         $customer->sale_name=$full_name;
         $customer->birthday=$birthday;
         $customer->phone=$phone;
-        $customer->shop=$shop;
         $customer->address=$address;
         $customer->town=$town;
         $customer->update();
@@ -275,28 +271,40 @@ class AdminController extends Controller
     }
     public function getSaleInvoiceHistory(Request $request){
         $id=$request['id'];
-        $invoice=Invoice::all();
+        $invoice=SaleInvoice::all();
         $sale=Sale::where('id', $id)->first();
-        $customer=Customer::all();
-        return view ('admin.sales.saleHistory')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
+        $customers=Customer::all();
+        return view ('admin.sales.saleHistory')->with(['invoice'=>$invoice])->with(['customers'=>$customers,'sale'=>$sale]);
+    }
+    public function getSaleOrderHistory(Request $request){
+        $id=$request['id'];
+        $invoice=OrderInvoice::all();
+        $sale=Sale::where('id', $id)->first();
+        $customers=Customer::all();
+        return view ('admin.sales.saleOrderHistory')->with(['invoice'=>$invoice])->with(['customers'=>$customers,'sale'=>$sale]);
     }
     public function getSaleInvoiceInfo(Request $request){
         $ids=$request['id'];
-        $invoice=Invoice::where('id',$ids)->first();
+        $invoice=SaleInvoice::where('id',$ids)->first();
         $customer=Customer::all();
         $sale=Sale::all();
         return view ('admin.sales.saleDetail')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
     }
+    public function getSaleOrderInfo(Request $request){
+        $ids=$request['id'];
+        $invoice=OrderInvoice::where('id',$ids)->first();
+        $customer=Customer::all();
+        $sale=Sale::all();
+        return view ('admin.sales.saleOrderDetail')->with(['invoice'=>$invoice])->with(['customer'=>$customer,'sale'=>$sale]);
+    }
     public function getSearchSale(Request $request){
         $birthday=$request['birthday'];
-        $shop=$request['shop'];
         $user_name=$request['user_name'];
         $sale_name=$request['sale_name'];
         $phone=$request['phone'];
         $town=$request['town'];
         $sale=Sale::OrderBy('id','asc')
             ->where('birthday',"LIKE","%$birthday%")
-            ->where('shop' , "LIKE" , "%$shop%")
             ->where('user_name' , "LIKE" , "%$user_name%")
             ->where('sale_name' , "LIKE" , "%$sale_name%")
             ->where('phone' , "LIKE" , "%$phone%")
@@ -308,20 +316,19 @@ class AdminController extends Controller
 
 
 
-
-
+    //Invoice
     public function getInvoice()
     {
         $customers=Customer::all();
         $sale=Sale::all();
-        $invoice = Invoice::all();
+        $invoice = SaleInvoice::all();
         return view('admin.Invoice.invoices')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
     }
     public function getInvoicePrint()
     {
         $customers=Customer::all();
         $sale=Sale::all();
-        $invoice = Invoice::all();
+        $invoice = SaleInvoice::orderBy('id')->paginate('6');
         return view('admin.Invoice.invoicePrint')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
     }
     public function getNewInvoice(){
@@ -332,108 +339,177 @@ class AdminController extends Controller
 
     public function postNewInvoice(Request $request)
     {
-        $this->validate($request,[
-            'customer_name'=>'required',
-            'sale_name'=>'required',
-            'date'=>'required',
-            'invoice_number'=>'required',
-            'quantity'=>'required',
-            'shop'=>'required',
-            'select_point'=>'required',
-            'point'=>'required',
-            'kyat'=>'required',
-            'pal'=>'required',
-            'ywaw'=>'required',
-            'gram'=>'required',
-            'coupon'=>'required',
-        ]);
+//        $this->validate($request,[
+//            'customer_name'=>'required',
+//            'sale_name'=>'required',
+//            'date'=>'required',
+//            'invoice_number'=>'required',
+//            'quantity'=>'required',
+//            'shop'=>'required',
+//            'select_point'=>'required',
+//            'point'=>'required',
+//            'kyat'=>'required',
+//            'pal'=>'required',
+//            'ywaw'=>'required',
+//            'gram'=>'required',
+//            'coupon'=>'required',
+//        ]);
 
-        $invoice=new Invoice();
-        $invoice->customer_name=$request['customer_name'];
-        $invoice->sale_name=$request['sale_name'];
-        $invoice->date=$request['date'];
-        $invoice->invoice_number=$request['invoice_number'];
-        $invoice->shop=$request['shop'];
-        $invoice->quantity=$request['quantity'];
-        $invoice->select_point=$request['select_point'];
-        $invoice->point=$request['point'];
+        $invoice=new SaleInvoice();
+        $invoice->sale_user_name=$request['sale_user_name'];
+        $invoice->voucher_number=$request['voucher_number'];
+        $invoice->order_date=$request['order_date'];
+        $invoice->qty=$request['qty'];
+        $invoice->point_eight=$request['point_eight'];
         $invoice->kyat=$request['kyat'];
         $invoice->pal=$request['pal'];
-        $invoice->ywaw=$request['ywaw'];
+        $invoice->yae=$request['yae'];
         $invoice->gram=$request['gram'];
-        $invoice->coupon=$request['coupon'];
+        $invoice->cupon_code=$request['cupon_code'];
+
+        $invoice->customer_id=$request['customer_id'];
+        $invoice->ring=$request['ring'];
+        $invoice->ring_number=$request['ring_number'];
+        $invoice->ring_point_eight=$request['ring_point_eight'];
+        $invoice->ring_kyat=$request['ring_kyat'];
+        $invoice->ring_pal=$request['ring_pal'];
+        $invoice->ring_yae=$request['ring_yae'];
+        $invoice->bangles=$request['bangles'];
+        $invoice->bangles_number=$request['bangles_number'];
+        $invoice->bangles_point_eight=$request['bangles_point_eight'];
+        $invoice->bangles_kyat=$request['bangles_kyat'];
+        $invoice->bangles_pal=$request['bangles_pal'];
+        $invoice->bangles_yae=$request['bangles_yae'];
+        $invoice->necklace=$request['necklace'];
+        $invoice->necklace_number=$request['necklace_number'];
+        $invoice->necklace_point_eight=$request['necklace_point_eight'];
+        $invoice->necklace_kyat=$request['necklace_kyat'];
+        $invoice->necklace_pal=$request['necklace_pal'];
+        $invoice->necklace_yae=$request['necklace_yae'];
+        $invoice->earring=$request['earring'];
+        $invoice->earring_number=$request['earring_number'];
+        $invoice->earring_point_eight=$request['earring_point_eight'];
+        $invoice->earring_kyat=$request['earring_kyat'];
+        $invoice->earring_pal=$request['earring_pal'];
+        $invoice->earring_yae=$request['earring_yae'];
         $invoice->Save();
 
         return redirect()->back()->with('info','The new user account have been created.');
     }
     public function postUpdateInvoice(Request $request){
         $id=$request['id'];
-        $customer_name=$request['customer_name'];
-        $sale_name=$request['sale_name'];
-        $date=$request['date'];
-        $invoice_number=$request['invoice_number'];
-        $shop=$request['shop'];
-        $quantity=$request['quantity'];
-        $select_point=$request['select_point'];
-        $point=$request['point'];
+        $sale_user_name=$request['sale_user_name'];
+        $voucher_number=$request['voucher_number'];
+        $order_date=$request['order_date'];
+        $qty=$request['qty'];
+        $point_eight=$request['point_eight'];
         $kyat=$request['kyat'];
         $pal=$request['pal'];
-        $ywaw=$request['ywaw'];
+        $yae=$request['yae'];
         $gram=$request['gram'];
-        $coupon=$request['coupon'];
+        $cupon_code=$request['cupon_code'];
+        $customer_id=$request['customer_id'];
+        $ring=$request['ring'];
+        $ring_number=$request['ring_number'];
+        $ring_point_eight=$request['ring_point_eight'];
+        $ring_kyat=$request['ring_kyat'];
+        $ring_pal=$request['ring_pal'];
+        $ring_yae=$request['ring_yae'];
+        $bangles=$request['bangles'];
+        $bangles_number=$request['bangles_number'];
+        $bangles_point_eight=$request['bangles_point_eight'];
+        $bangles_kyat=$request['bangles_kyat'];
+        $bangles_pal=$request['bangles_pal'];
+        $bangles_yae=$request['bangles_yae'];
+        $necklace=$request['necklace'];
+        $necklace_number=$request['necklace_number'];
+        $necklace_point_eight=$request['necklace_point_eight'];
+        $necklace_kyat=$request['necklace_kyat'];
+        $necklace_pal=$request['necklace_pal'];
+        $necklace_yae=$request['necklace_yae'];
+        $earring=$request['earring'];
+        $earring_number=$request['earring_number'];
+        $earring_point_eight=$request['earring_point_eight'];
+        $earring_kyat=$request['earring_kyat'];
+        $earring_pal=$request['earring_pal'];
+        $earring_yae=$request['earring_yae'];
 
-
-        $invoice=Invoice::where('id', $id)->first();
-        $invoice->customer_name=$customer_name;
-        $invoice->sale_name=$sale_name;
-        $invoice->date=$date;
-        $invoice->invoice_number=$invoice_number;
-        $invoice->shop=$shop;
-        $invoice->quantity=$quantity;
-        $invoice->select_point=$select_point;
-        $invoice->point=$point;
+        $invoice=SaleInvoice::where('id', $id)->first();
+        $invoice->sale_user_name=$sale_user_name;
+        $invoice->voucher_number=$voucher_number;
+        $invoice->order_date=$order_date;
+        $invoice->qty=$qty;
+        $invoice->point_eight=$point_eight;
         $invoice->kyat=$kyat;
         $invoice->pal=$pal;
-        $invoice->ywaw=$ywaw;
+        $invoice->yae=$yae;
         $invoice->gram=$gram;
-        $invoice->coupon=$coupon;
+        $invoice->cupon_code=$cupon_code;
+        $invoice->customer_id=$customer_id;
+        $invoice->ring=$ring;
+        $invoice->ring_number=$ring_number;
+        $invoice->ring_point_eight=$ring_point_eight;
+        $invoice->ring_kyat=$ring_kyat;
+        $invoice->ring_pal=$ring_pal;
+        $invoice->ring_yae=$ring_yae;
+        $invoice->bangles=$bangles;
+        $invoice->bangles_number=$bangles_number;
+        $invoice->bangles_point_eight=$bangles_point_eight;
+        $invoice->bangles_kyat=$bangles_kyat;
+        $invoice->bangles_pal=$bangles_pal;
+        $invoice->bangles_yae=$bangles_yae;
+        $invoice->necklace=$necklace;
+        $invoice->necklace_number=$necklace_number;
+        $invoice->necklace_point_eight=$necklace_point_eight;
+        $invoice->necklace_kyat=$necklace_kyat;
+        $invoice->necklace_pal=$necklace_pal;
+        $invoice->necklace_yae=$necklace_yae;
+        $invoice->earring=$earring;
+        $invoice->earring_number=$earring_number;
+        $invoice->earring_point_eight=$earring_point_eight;
+        $invoice->earring_kyat=$earring_kyat;
+        $invoice->earring_pal=$earring_pal;
+        $invoice->earring_yae=$earring_yae;
         $invoice->update();
         return redirect()->back()->with('info','The selected user account have been updated.');
     }
     public function postDeleteInvoice(Request $request){
         $id=$request['id'];
-        $user=Invoice::where('id', $id)->first();
+        $user=SaleInvoice::where('id', $id)->first();
         $user->delete();
         return redirect()->back()->with('info', "The selected user account have been deleted.");
     }
     public function getSearchInvoice(Request $request){
         $customers=Customer::all();
         $sale=Sale::all();
-        $date=$request['date'];
-        $shop=$request['shop'];
-        $invoice_number=$request['invoice_number'];
-        $invoice=Invoice::OrderBy('id','asc')
-            ->where('date',"LIKE","%$date%")
-            ->where('shop' , "LIKE" , "%$shop%")
-            ->where('invoice_number' , "LIKE" , "%$invoice_number%")
+        $date=$request['order_date'];
+        $sale_user_name=$request['sale_user_name'];
+        $customer_id=$request['customer_id'];
+        $invoice_number=$request['voucher_number'];
+        $invoice=SaleInvoice::OrderBy('id','asc')
+            ->where('order_date',"LIKE","%$date%")
+            ->where('sale_user_name',"LIKE","%$sale_user_name%")
+            ->where('customer_id',"LIKE","%$customer_id%")
+            ->where('voucher_number' , "LIKE" , "%$invoice_number%")
             ->get();
         return view('admin.Invoice.invoices')->with(['invoice'=>$invoice,'invoice_number'=>$invoice_number,'customers'=>$customers,'sale'=>$sale]);
     }
 
 
 
-
-
+    //order
     public function getSearchOrder(Request $request){
         $customers=Customer::all();
         $sale=Sale::all();
-        $date=$request['date'];
-        $shop=$request['shop'];
-        $invoice_number=$request['order_number'];
-        $invoice=Order::OrderBy('id','asc')
-            ->where('date',"LIKE","%$date%")
-            ->where('shop' , "LIKE" , "%$shop%")
-            ->where('order_number' , "LIKE" , "%$invoice_number%")
+        $date=$request['order_date'];
+        $sale_user_name=$request['sale_user_name'];
+        $customer_id=$request['customer_id'];
+        $invoice_number=$request['voucher_number'];
+        $invoice=OrderInvoice::OrderBy('id','asc')
+            ->where('order_date',"LIKE","%$date%")
+            ->where('sale_user_name',"LIKE","%$sale_user_name%")
+            ->where('customer_id',"LIKE","%$customer_id%")
+            ->where('voucher_number' , "LIKE" , "%$invoice_number%")
             ->get();
         return view('admin.order.orders')->with(['invoice'=>$invoice,'invoice_number'=>$invoice_number,'customers'=>$customers,'sale'=>$sale]);
     }
@@ -441,14 +517,14 @@ class AdminController extends Controller
     {
         $customers=Customer::all();
         $sale=Sale::all();
-        $invoice = Order::all();
+        $invoice = OrderInvoice::all();
         return view('admin.order.orders')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
     }
     public function getOrderPrint()
     {
         $customers=Customer::all();
         $sale=Sale::all();
-        $invoice = Order::all();
+        $invoice = OrderInvoice::orderBy('id')->paginate('6');
         return view('admin.order.orderPrint')->with(['invoice' => $invoice,'customers'=>$customers,'sale'=>$sale]);
     }
     public function getNewOrder(){
@@ -459,84 +535,192 @@ class AdminController extends Controller
 
     public function postNewOrder(Request $request)
     {
-        $this->validate($request,[
-            'customer_name'=>'required',
-            'sale_name'=>'required',
-            'date'=>'required',
-            'order_number'=>'required',
-            'quantity'=>'required',
-            'shop'=>'required',
-            'select_point'=>'required',
-            'point'=>'required',
-            'kyat'=>'required',
-            'pae'=>'required',
-            'yway'=>'required',
-            'gram'=>'required',
-            'coupon'=>'required',
-        ]);
+//        $this->validate($request,[
+//            'customer_name'=>'required',
+//            'sale_name'=>'required',
+//            'date'=>'required',
+//            'order_number'=>'required',
+//            'quantity'=>'required',
+//            'shop'=>'required',
+//            'select_point'=>'required',
+//            'point'=>'required',
+//            'kyat'=>'required',
+//            'pae'=>'required',
+//            'yway'=>'required',
+//            'gram'=>'required',
+//            'coupon'=>'required',
+//        ]);
+//
+//        $invoice=new Order();
+//        $invoice->customer_name=$request['customer_name'];
+//        $invoice->sale_name=$request['sale_name'];
+//        $invoice->date=$request['date'];
+//        $invoice->order_number=$request['order_number'];
+//        $invoice->shop=$request['shop'];
+//        $invoice->quantity=$request['quantity'];
+//        $invoice->select_point=$request['select_point'];
+//        $invoice->point=$request['point'];
+//        $invoice->kyat=$request['kyat'];
+//        $invoice->pae=$request['pae'];
+//        $invoice->yway=$request['yway'];
+//        $invoice->gram=$request['gram'];
+//        $invoice->coupon=$request['coupon'];
+//        $invoice->Save();
 
-        $invoice=new Order();
-        $invoice->customer_name=$request['customer_name'];
-        $invoice->sale_name=$request['sale_name'];
-        $invoice->date=$request['date'];
-        $invoice->order_number=$request['order_number'];
-        $invoice->shop=$request['shop'];
-        $invoice->quantity=$request['quantity'];
-        $invoice->select_point=$request['select_point'];
-        $invoice->point=$request['point'];
+
+        $invoice=new OrderInvoice();
+        $invoice->sale_user_name=$request['sale_user_name'];
+        $invoice->voucher_number=$request['voucher_number'];
+        $invoice->order_date=$request['order_date'];
+        $invoice->qty=$request['qty'];
+        $invoice->point_eight=$request['point_eight'];
         $invoice->kyat=$request['kyat'];
-        $invoice->pae=$request['pae'];
-        $invoice->yway=$request['yway'];
+        $invoice->pal=$request['pal'];
+        $invoice->yae=$request['yae'];
         $invoice->gram=$request['gram'];
-        $invoice->coupon=$request['coupon'];
+        $invoice->cupon_code=$request['cupon_code'];
+
+        $invoice->customer_id=$request['customer_id'];
+        $invoice->ring=$request['ring'];
+        $invoice->ring_number=$request['ring_number'];
+        $invoice->ring_point_eight=$request['ring_point_eight'];
+        $invoice->ring_kyat=$request['ring_kyat'];
+        $invoice->ring_pal=$request['ring_pal'];
+        $invoice->ring_yae=$request['ring_yae'];
+        $invoice->bangles=$request['bangles'];
+        $invoice->bangles_number=$request['bangles_number'];
+        $invoice->bangles_point_eight=$request['bangles_point_eight'];
+        $invoice->bangles_kyat=$request['bangles_kyat'];
+        $invoice->bangles_pal=$request['bangles_pal'];
+        $invoice->bangles_yae=$request['bangles_yae'];
+        $invoice->necklace=$request['necklace'];
+        $invoice->necklace_number=$request['necklace_number'];
+        $invoice->necklace_point_eight=$request['necklace_point_eight'];
+        $invoice->necklace_kyat=$request['necklace_kyat'];
+        $invoice->necklace_pal=$request['necklace_pal'];
+        $invoice->necklace_yae=$request['necklace_yae'];
+        $invoice->earring=$request['earring'];
+        $invoice->earring_number=$request['earring_number'];
+        $invoice->earring_point_eight=$request['earring_point_eight'];
+        $invoice->earring_kyat=$request['earring_kyat'];
+        $invoice->earring_pal=$request['earring_pal'];
+        $invoice->earring_yae=$request['earring_yae'];
         $invoice->Save();
 
         return redirect()->back()->with('info','The new user account have been created.');
     }
     public function postUpdateOrder(Request $request){
         $id=$request['id'];
-        $customer_name=$request['customer_name'];
-        $sale_name=$request['sale_name'];
-        $date=$request['date'];
-        $order_number=$request['order_number'];
-        $shop=$request['shop'];
-        $quantity=$request['quantity'];
-        $select_point=$request['select_point'];
-        $point=$request['point'];
+        $sale_user_name=$request['sale_user_name'];
+        $voucher_number=$request['voucher_number'];
+        $order_date=$request['order_date'];
+        $qty=$request['qty'];
+        $point_eight=$request['point_eight'];
         $kyat=$request['kyat'];
-        $pae=$request['pae'];
-        $yway=$request['yway'];
+        $pal=$request['pal'];
+        $yae=$request['yae'];
         $gram=$request['gram'];
-        $coupon=$request['coupon'];
+        $cupon_code=$request['cupon_code'];
+        $customer_id=$request['customer_id'];
+        $ring=$request['ring'];
+        $ring_number=$request['ring_number'];
+        $ring_point_eight=$request['ring_point_eight'];
+        $ring_kyat=$request['ring_kyat'];
+        $ring_pal=$request['ring_pal'];
+        $ring_yae=$request['ring_yae'];
+        $bangles=$request['bangles'];
+        $bangles_number=$request['bangles_number'];
+        $bangles_point_eight=$request['bangles_point_eight'];
+        $bangles_kyat=$request['bangles_kyat'];
+        $bangles_pal=$request['bangles_pal'];
+        $bangles_yae=$request['bangles_yae'];
+        $necklace=$request['necklace'];
+        $necklace_number=$request['necklace_number'];
+        $necklace_point_eight=$request['necklace_point_eight'];
+        $necklace_kyat=$request['necklace_kyat'];
+        $necklace_pal=$request['necklace_pal'];
+        $necklace_yae=$request['necklace_yae'];
+        $earring=$request['earring'];
+        $earring_number=$request['earring_number'];
+        $earring_point_eight=$request['earring_point_eight'];
+        $earring_kyat=$request['earring_kyat'];
+        $earring_pal=$request['earring_pal'];
+        $earring_yae=$request['earring_yae'];
 
 
-        $invoice=Order::where('id', $id)->first();
-        $invoice->customer_name=$customer_name;
-        $invoice->sale_name=$sale_name;
-        $invoice->date=$date;
-        $invoice->order_number=$order_number;
-        $invoice->shop=$shop;
-        $invoice->quantity=$quantity;
-        $invoice->select_point=$select_point;
-        $invoice->point=$point;
+        $invoice=OrderInvoice::where('id', $id)->first();
+        $invoice->sale_user_name=$sale_user_name;
+        $invoice->voucher_number=$voucher_number;
+        $invoice->order_date=$order_date;
+        $invoice->qty=$qty;
+        $invoice->point_eight=$point_eight;
         $invoice->kyat=$kyat;
-        $invoice->pae=$pae;
-        $invoice->yway=$yway;
+        $invoice->pal=$pal;
+        $invoice->yae=$yae;
         $invoice->gram=$gram;
-        $invoice->coupon=$coupon;
+        $invoice->cupon_code=$cupon_code;
+        $invoice->customer_id=$customer_id;
+        $invoice->ring=$ring;
+        $invoice->ring_number=$ring_number;
+        $invoice->ring_point_eight=$ring_point_eight;
+        $invoice->ring_kyat=$ring_kyat;
+        $invoice->ring_pal=$ring_pal;
+        $invoice->ring_yae=$ring_yae;
+        $invoice->bangles=$bangles;
+        $invoice->bangles_number=$bangles_number;
+        $invoice->bangles_point_eight=$bangles_point_eight;
+        $invoice->bangles_kyat=$bangles_kyat;
+        $invoice->bangles_pal=$bangles_pal;
+        $invoice->bangles_yae=$bangles_yae;
+        $invoice->necklace=$necklace;
+        $invoice->necklace_number=$necklace_number;
+        $invoice->necklace_point_eight=$necklace_point_eight;
+        $invoice->necklace_kyat=$necklace_kyat;
+        $invoice->necklace_pal=$necklace_pal;
+        $invoice->necklace_yae=$necklace_yae;
+        $invoice->earring=$earring;
+        $invoice->earring_number=$earring_number;
+        $invoice->earring_point_eight=$earring_point_eight;
+        $invoice->earring_kyat=$earring_kyat;
+        $invoice->earring_pal=$earring_pal;
+        $invoice->earring_yae=$earring_yae;
         $invoice->update();
         return redirect()->back()->with('info','The selected user account have been updated.');
     }
     public function postDeleteOrder(Request $request){
         $id=$request['id'];
-        $user=Order::where('id', $id)->first();
+        $user=OrderInvoice::where('id', $id)->first();
         $user->delete();
         return redirect()->back()->with('info', "The selected user account have been deleted.");
     }
-    public function getRank()
+
+    public function getDashboard()
     {
-        $customer=Customer::all();
+        $invoice=Invoice::all();
+        return view('admin.Dashboard.dashboard')->with(['invoice'=>$invoice]);
+    }
+    public function getCustomerQrcode(Request $request)
+        {
+            $id=$request['id'];
+            $customer=Customer::where('id',$id)->first();
+            return view('admin.Qrcode.viewCustomerQrcode')->with(['customer'=>$customer]);
+        }
+    public function getSaleQrcode(Request $request)
+            {
+                $id=$request['id'];
+                $sale=Sale::where('id',$id)->first();
+                return view('admin.Qrcode.viewSaleQrcode')->with(['sale'=>$sale]);
+            }
+
+    public function getRank()
+    {$customer=Customer::all();
         return view('admin.rank.rank')->with(['customer'=>$customer]);
+    }
+    public function getReport()
+    {
+       $invoice=SaleInvoice::all();
+       $customer=Customer::all();
+        return view('admin.Report.report')->with(['invoice'=>$invoice,'customer'=>$customer]);
     }
     public function getNoti(){
         $customers=Customer::all();

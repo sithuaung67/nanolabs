@@ -26,7 +26,7 @@
         <section class="content">
             <div class="col-md-8">
                 <div class="panel">
-                    <div class="panel-heading" style="background: #1e282c;color: #fff0ff;">Notification</div>
+                    <div class="panel-heading" style="background: #1e282c;color: #fff0ff;"><h4>Notification</h4></div>
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <thead>
@@ -55,18 +55,9 @@
             </div>
             <div class="col-md-4">
                 <div class="panel">
-                    <div class="panel-heading" style="background: #1e282c;color: #fff0ff;">Notification</div>
+                    <div class="panel-heading" style="background: #1e282c;color: #fff0ff;"><h4>Notification</h4></div>
                     <div class="panel-body">
                         <form enctype="multipart/form-data" action="{{route('postNotification')}}" method="post">
-                            {{--<div class="form-group">--}}
-                            {{--<label for="customer_name" class="control-label">Customer Name</label>--}}
-                            {{--<select name="customer_name" id="customer_name" class="form-control">--}}
-                            {{--<option value="">Select Customer</option>--}}
-                            {{--@foreach($customers as $cus)--}}
-                            {{--<option value="{{$cus->id}}">{{$cus->customer_name}}</option>--}}
-                            {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--</div>--}}
                             <div class="form-group">
                                 <label for="about" class="control-label">About Notification</label>
                                 <textarea style="height: 150px;" class="form-control" name="about" id="about" placeholder="Yow write about notification"></textarea>

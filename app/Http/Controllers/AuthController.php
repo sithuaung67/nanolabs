@@ -18,7 +18,7 @@ class AuthController extends Controller
         $name=$request['name'];
         $password=$request['password'];
         if(Auth::attempt(['name'=>$name, 'password'=>$password])){
-            return redirect()->route('users');
+            return redirect()->route('invoices');
 
         }else{
             return redirect()->back()->with('error','User login failed.');

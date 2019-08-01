@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Invoice
+    Sale Order
 @stop
 
 @section('style')
@@ -14,11 +14,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-list"></span> Invoice
+                <span class="fa fa-list"></span> Sale Order
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
-                <li class="active">Invoice</li>
+                <li class="active">Sale Order</li>
             </ol>
         </section>
 
@@ -104,55 +104,53 @@
                                 </tr>
                                 </thead>
                                 <?php $total = 0; ?>
-                                <?php $totals = 0; ?>
-                            @foreach($invoice as $customer)
-                                    @if($customers->id==$customer->customer_id)
+                                @foreach($invoice as $customer)
+                                    @if($sale->id==$customer->sale_user_name)
                                         <?php $total ++== $total; ?>
-                                        <?php $totals += $customer->point; ?>
-                                            <tr>
-                                                <td>{{$total}}</td>
-                                                <td><a id="invoiceHistory" href="{{route('get.customerInvoiceInfo',['id'=>$customer->id])}}">{{$customer->voucher_number}}</a></td>
-                                                <td>{{$customers->customer_name}}</td>
-                                                <td>
-                                                    @foreach($sale as $sal)
-                                                        @if($sal->id==$customer->sale_user_name)
-                                                            {{$sal->sale_name}}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                                <td class="quantity">{{$customer->qty}}</td>
-                                                <td class="point">{{$customer->point_eight}}</td>
-                                                <td>{{$customer->kyat}}</td>
-                                                <td>{{$customer->pal}}</td>
-                                                <td>{{$customer->yae}}</td>
-                                                <td class="gram">{{$customer->gram}}</td>
-                                                <td>{{$customer->cupon_code}}</td>
-                                                <td>{{$customer->ring}}</td>
-                                                <td>{{$customer->ring_number}}</td>
-                                                <td>{{$customer->ring_point_eight}}</td>
-                                                <td>{{$customer->ring_kyat}}</td>
-                                                <td>{{$customer->ring_pal}}</td>
-                                                <td>{{$customer->ring_yae}}</td>
-                                                <td>{{$customer->bangles}}</td>
-                                                <td>{{$customer->bangles_number}}</td>
-                                                <td>{{$customer->bangles_point_eight}}</td>
-                                                <td>{{$customer->bangles_kyat}}</td>
-                                                <td>{{$customer->bangles_pal}}</td>
-                                                <td>{{$customer->bangles_yae}}</td>
-                                                <td>{{$customer->necklace}}</td>
-                                                <td>{{$customer->necklace_number}}</td>
-                                                <td>{{$customer->necklace_point_eight}}</td>
-                                                <td>{{$customer->necklace_kyat}}</td>
-                                                <td>{{$customer->necklace_pal}}</td>
-                                                <td>{{$customer->necklace_yae}}</td>
-                                                <td>{{$customer->earring}}</td>
-                                                <td>{{$customer->earring_number}}</td>
-                                                <td>{{$customer->earring_point_eight}}</td>
-                                                <td>{{$customer->earring_kyat}}</td>
-                                                <td>{{$customer->earring_pal}}</td>
-                                                <td>{{$customer->earring_yae}}</td>
-                                                <td>{{date("d-M-Y", strtotime($customer->order_date))}}</td>
-                                            </tr>
+                                        <tr>
+                                            <td>{{$total}}</td>
+                                            <td><a id="invoiceHistory" href="{{route('get.saleOrderInfo',['id'=>$customer->id])}}">{{$customer->voucher_number}}</a></td>
+                                            <td>
+                                                @foreach($customers as $cust)
+                                                    @if($cust->id==$customer->customer_id)
+                                                        {{$cust->customer_name}}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{$sale->sale_name}}</td>
+                                            <td class="quantity">{{$customer->qty}}</td>
+                                            <td class="point">{{$customer->point_eight}}</td>
+                                            <td>{{$customer->kyat}}</td>
+                                            <td>{{$customer->pal}}</td>
+                                            <td>{{$customer->yae}}</td>
+                                            <td class="gram">{{$customer->gram}}</td>
+                                            <td>{{$customer->cupon_code}}</td>
+                                            <td>{{$customer->ring}}</td>
+                                            <td>{{$customer->ring_number}}</td>
+                                            <td>{{$customer->ring_point_eight}}</td>
+                                            <td>{{$customer->ring_kyat}}</td>
+                                            <td>{{$customer->ring_pal}}</td>
+                                            <td>{{$customer->ring_yae}}</td>
+                                            <td>{{$customer->bangles}}</td>
+                                            <td>{{$customer->bangles_number}}</td>
+                                            <td>{{$customer->bangles_point_eight}}</td>
+                                            <td>{{$customer->bangles_kyat}}</td>
+                                            <td>{{$customer->bangles_pal}}</td>
+                                            <td>{{$customer->bangles_yae}}</td>
+                                            <td>{{$customer->necklace}}</td>
+                                            <td>{{$customer->necklace_number}}</td>
+                                            <td>{{$customer->necklace_point_eight}}</td>
+                                            <td>{{$customer->necklace_kyat}}</td>
+                                            <td>{{$customer->necklace_pal}}</td>
+                                            <td>{{$customer->necklace_yae}}</td>
+                                            <td>{{$customer->earring}}</td>
+                                            <td>{{$customer->earring_number}}</td>
+                                            <td>{{$customer->earring_point_eight}}</td>
+                                            <td>{{$customer->earring_kyat}}</td>
+                                            <td>{{$customer->earring_pal}}</td>
+                                            <td>{{$customer->earring_yae}}</td>
+                                            <td>{{date("d-M-Y", strtotime($customer->order_date))}}</td>
+                                        </tr>
                                     @endif
                                 @endforeach
                             </table>
