@@ -21,6 +21,7 @@ class CreateSalesTable extends Migration
             $table->text('address')->default(null);
             $table->string('phone')->default(null);
             $table->string('town')->default(null);
+            $table->text('profile')->default(null);
             $table->timestamps();
         });
     }

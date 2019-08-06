@@ -21,6 +21,59 @@
                 <li class="active">Order</li>
             </ol>
         </section>
+    <?php
+    $sql = DB::select('select * from order_invoices');
+    $length=count($sql);
+    $j=0;
+    $sum=0;
+    $name=0;
+    $customer_name="";
+    $aa=DB::select("DELETE FROM `scores`");
+    for($i=1;$i<=$length;$i++){
+        $sql1 = DB::select('select * from order_invoices where customer_id = ?', [$i] );
+        foreach ($sql1 as $result){
+            $sum+=$result->qty;
+
+            $name=$result->customer_id;
+        }
+        $cus=DB::select('select * from customers');
+        foreach ($cus as $cu){
+            if($cu->id==$name){
+                $customer_name= $cu->id;
+                $sql2=DB::select("INSERT INTO `scores`(`score`,`name`) VALUES ($sum,$customer_name)");
+                $name=0;
+                $sum =0;
+                $customer_name="";
+            }
+        }
+    }
+    ?>
+    <?php
+    $sql = DB::select('select * from order_invoices');
+    $length=count($sql);
+    $j=0;
+    $sum=0;
+    $name=0;
+    $sale_name="";
+    $aa=DB::select("DELETE FROM `reports`");
+    for($i=1;$i<=$length;$i++){
+        $sql1 = DB::select('select * from order_invoices where sale_user_name = ?', [$i] );
+        foreach ($sql1 as $result){
+            $sum+=$result->qty;
+            $name=$result->sale_user_name;
+        }
+        $cus=DB::select('select * from sales');
+        foreach ($cus as $cu){
+            if($cu->id==$name){
+                $sale_name= $cu->id;
+                $sql2=DB::select("INSERT INTO `reports`(`point`,`sale_name`) VALUES ($sum,$sale_name)");
+                $name=0;
+                $sum =0;
+                $sale_name="";
+            }
+        }
+    }
+    ?>
 
         <!-- Main content -->
         <section class="content">

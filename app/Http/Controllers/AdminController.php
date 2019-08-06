@@ -6,6 +6,7 @@ use App\Customer;
 use App\Invoice;
 use App\Order;
 use App\OrderInvoice;
+use App\Rank;
 use App\Sale;
 use App\SaleInvoice;
 use Illuminate\Http\Request;
@@ -140,7 +141,7 @@ class AdminController extends Controller
         ]);
         $full_name=$request['full_name'];
 
-        $img_name=$full_name.'.'.QrCode::size(500)->format('png')->generate($full_name, public_path("ntg/$full_name.png"));
+        $img_name=public_path("ntg/$full_name.png");
 
         $customer=new Customer();
         $customer->user_name=$request['name'];
@@ -154,7 +155,7 @@ class AdminController extends Controller
         $customer->path=$img_name;
         $customer->save();
 
-//        QrCode::size(500)->format('png')->generate($full_name, public_path("ntg/$full_name.png"));
+        QrCode::size(500)->format('png')->generate($full_name, public_path("ntg/$full_name.png"));
         return redirect()->back()->with('info', 'The new user account have been created.');
     }
     public function postDeleteCustomer(Request $request){
@@ -568,6 +569,7 @@ class AdminController extends Controller
 //        $invoice->Save();
 
 
+
         $invoice=new OrderInvoice();
         $invoice->sale_user_name=$request['sale_user_name'];
         $invoice->voucher_number=$request['voucher_number'];
@@ -713,14 +715,27 @@ class AdminController extends Controller
             }
 
     public function getRank()
-    {$customer=Customer::all();
-        return view('admin.rank.rank')->with(['customer'=>$customer]);
+    {
+        $ranks=DB::select("SELECT * FROM scores ORDER BY 'score' DESC ");
+        $sql6=DB::select("SELECT name,score, FIND_IN_SET( score, (
+                          SELECT GROUP_CONCAT( DISTINCT score
+                          ORDER BY score DESC ) FROM scores)
+                          ) AS rank
+                          FROM scores");
+        $customer=OrderInvoice::all();
+        $name=Customer::all();
+        return view('admin.rank.rank')->with(['customer'=>$customer,'name'=>$name,'ranks'=>$ranks,'sql6'=>$sql6]);
     }
     public function getReport()
     {
+        $sql6=DB::select("SELECT sale_name,point, FIND_IN_SET( point, (
+                          SELECT GROUP_CONCAT( DISTINCT point
+                          ORDER BY point DESC ) FROM reports)
+                          ) AS rank
+                          FROM reports");
        $invoice=SaleInvoice::all();
        $customer=Customer::all();
-        return view('admin.Report.report')->with(['invoice'=>$invoice,'customer'=>$customer]);
+        return view('admin.Report.report')->with(['invoice'=>$invoice,'customer'=>$customer,'sql6'=>$sql6]);
     }
     public function getNoti(){
         $customers=Customer::all();

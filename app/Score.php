@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rank extends Model
+class Score extends Model
 {
     //
 }

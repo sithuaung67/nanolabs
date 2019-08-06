@@ -69,7 +69,6 @@
                         <tr style="background: #1e282c ;color:#fff; font-weight: bold">
                             <td>ID</td>
                             <td>Account Name</td>
-                            <td>Qrcode</td>
                             <td>Customer Name</td>
                             <td>NRC</td>
                             <td>Birthday</td>
@@ -87,12 +86,6 @@
                             <tr>
                                 <td>{{$total}}</td>
                                 <td>{{$customer->user_name}}</td>
-                                {{--<td><a style="color: #1c00cf;" href="{{route('get.viewCustomerQrcode',['id'=>$customer->id])}}">{!! QrCode::size(60)->generate($customer->customer_name); !!}</a></td>--}}
-                                {{--<td>{!! base64_encode(QrCode::format('png')->generate($customer->customer_name))!!} </td>--}}
-                                {{--<td><img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(60)->generate($customer->customer_name))!!} "></td>--}}
-
-                                <td> {!! QrCode::generate('public/ntg/'.$customer->id.'.png') !!}</td>
-
                                 <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->customer_name}}</a></td>
                                 <td>{{$customer->nrc}}</td>
                                 <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>

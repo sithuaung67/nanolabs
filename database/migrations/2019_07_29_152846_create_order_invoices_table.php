@@ -18,12 +18,13 @@ class CreateOrderInvoicesTable extends Migration
             $table->string('sale_user_name')->default(null);
             $table->string('voucher_number')->default(null);
             $table->string('order_date')->default(null);
-            $table->string('qty')->default(null);
-            $table->string('point_eight')->default(null);
+            $table->string('qty')->default(0);
+            $table->string('point_eight')->default(0);
+            $table->string('total_point')->default(0);
             $table->string('kyat')->default(null);
             $table->string('pal')->default(null);
             $table->string('yae')->default(null);
-            $table->string('gram')->default(null);
+            $table->string('gram')->default(0);
             $table->string('cupon_code')->default(null);
             $table->string('customer_id')->default(null);
             $table->string('ring')->default(null);

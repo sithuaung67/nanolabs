@@ -16,7 +16,8 @@ class CreateNotificationOncesTable extends Migration
         Schema::create('notification__onces', function (Blueprint $table) {
             $table->increments('id');
             $table->string('customer_id')->default(null);
-            $table->string('noti_one')->default(null);
+            $table->string('title')->default(null);
+            $table->string('description')->default(null);
             $table->timestamps();
         });
     }

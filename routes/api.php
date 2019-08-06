@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('/customer/ranks',[
+    'uses'=>'ApiController@getRank'
+]);
 Route::get('/login',[
     'uses'=>'AuthController@getLogin',
     'as'=>'login'
@@ -100,6 +102,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getCustomerInvoiceInfo',
             'as'=>'get.customerInvoiceInfo'
         ]);
+        Route::get('/customerOrderInfo',[
+            'uses'=>'AdminController@getCustomerOrderInfo',
+            'as'=>'get.customerOrderInfo'
+        ]);
         Route::get('/customers',[
             'uses'=>'AdminController@getCustomer',
             'as'=>'customers'
@@ -107,6 +113,10 @@ Route::group(['middleware'=>'auth'], function (){
         Route::get('/customers/InvoiceHistory',[
             'uses'=>'AdminController@getCustomerInvoiceHistory',
             'as'=>'customers.invoice.history'
+        ]);
+        Route::get('/customers/OrderHistory',[
+            'uses'=>'AdminController@getCustomerOrderHistory',
+            'as'=>'customers.order.history'
         ]);
         Route::get('/customer/new',[
             'uses'=>'AdminController@getNewCustomer',
@@ -159,9 +169,17 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getSaleInvoiceInfo',
             'as'=>'get.saleInvoiceInfo'
         ]);
+        Route::get('/saleOrderInfo',[
+            'uses'=>'AdminController@getSaleOrderInfo',
+            'as'=>'get.saleOrderInfo'
+        ]);
         Route::get('/sales/InvoiceHistory',[
             'uses'=>'AdminController@getSaleInvoiceHistory',
             'as'=>'sales.invoice.history'
+        ]);
+        Route::get('/sales/OrderHistory',[
+            'uses'=>'AdminController@getSaleOrderHistory',
+            'as'=>'sales.order.history'
         ]);
         Route::get('/search/sale',[
             'uses'=>'AdminController@getSearchSale',
@@ -229,9 +247,11 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateOrder',
             'as'=>'order.update'
         ]);
-        Route::get('ranks',[
-            'uses'=>'AdminController@getRank',
-            'as'=>'ranks'
+
+        //Report
+        Route::get('report',[
+            'uses'=>'AdminController@getReport',
+            'as'=>'reports'
         ]);
 
         //For Notification
@@ -264,6 +284,4 @@ Route::group(['middleware'=>'auth'], function (){
 
 
 });
-
-
 

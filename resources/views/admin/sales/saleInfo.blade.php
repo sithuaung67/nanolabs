@@ -49,7 +49,6 @@
 
                 <div class="text-center">
                     {!! QrCode::size(200)->generate($sale); !!}
-
                 </div>
                 <br>
                 <table class="table table-hover" style="background: floralwhite">

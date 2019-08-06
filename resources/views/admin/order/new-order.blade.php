@@ -21,6 +21,59 @@
                 <li class="active">New Order</li>
             </ol>
         </section>
+    <?php
+    $sql = DB::select('select * from order_invoices');
+    $length=count($sql);
+    $j=0;
+    $sum=0;
+    $name=0;
+    $customer_name="";
+    $aa=DB::select("DELETE FROM `scores`");
+    for($i=1;$i<=$length;$i++){
+        $sql1 = DB::select('select * from order_invoices where customer_id = ?', [$i] );
+        foreach ($sql1 as $result){
+            $sum+=$result->qty;
+
+            $name=$result->customer_id;
+        }
+        $cus=DB::select('select * from customers');
+        foreach ($cus as $cu){
+            if($cu->id==$name){
+                $customer_name= $cu->id;
+                $sql2=DB::select("INSERT INTO `scores`(`score`,`name`) VALUES ($sum,$customer_name)");
+                $name=0;
+                $sum =0;
+                $customer_name="";
+            }
+        }
+    }
+    ?>
+    <?php
+    $sql = DB::select('select * from order_invoices');
+    $length=count($sql);
+    $j=0;
+    $sum=0;
+    $name=0;
+    $sale_name="";
+    $aa=DB::select("DELETE FROM `reports`");
+    for($i=1;$i<=$length;$i++){
+        $sql1 = DB::select('select * from order_invoices where sale_user_name = ?', [$i] );
+        foreach ($sql1 as $result){
+            $sum+=$result->qty;
+            $name=$result->sale_user_name;
+        }
+        $cus=DB::select('select * from sales');
+        foreach ($cus as $cu){
+            if($cu->id==$name){
+                $sale_name= $cu->id;
+                $sql2=DB::select("INSERT INTO `reports`(`point`,`sale_name`) VALUES ($sum,$sale_name)");
+                $name=0;
+                $sum =0;
+                $sale_name="";
+            }
+        }
+    }
+    ?>
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 150%;">
@@ -31,102 +84,6 @@
             </div>
             <div class="col-md-6 col-md-offset-3">
                 <form enctype="multipart/form-data" method="post" action="{{route('post.order.new')}}">
-                    {{--<div class="form-group has-feedback @if($errors->has('customer_name')) has-error @endif">--}}
-                        {{--<label for="customer_name" class="control-label">Customer Name</label>--}}
-                        {{--<select name="customer_name" id="customer_name" class="form-control">--}}
-                            {{--<option value="">Select Customer Name</option>--}}
-                            {{--@foreach($customer as $cus)--}}
-                                {{--<option value="{{$cus->id}}">{{$cus->customer_name}}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                        {{--<span class="glyphicon glyphicon-user form-control-feedback"></span>--}}
-                        {{--@if($errors->has('customer_name')) <span class="help-block">{{$errors->first('customer_name')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('sale_name')) has-error @endif">--}}
-                        {{--<label for="sale_name" class="control-label">Sale Name</label>--}}
-                        {{--<select name="sale_name" id="sale_name" class="form-control">--}}
-                            {{--<option value="">Select Sale Name</option>--}}
-                            {{--@foreach($sale as $cus)--}}
-                                {{--<option value="{{$cus->id}}">{{$cus->sale_name}}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                        {{--<span class="glyphicon glyphicon-user form-control-feedback"></span>--}}
-                        {{--@if($errors->has('sale_name')) <span class="help-block">{{$errors->first('sale_name')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('shop')) has-error @endif">--}}
-                        {{--<label for="shop" class="control-label"> Shop </label>--}}
-                        {{--<input type="text" name="shop" id="shop" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-shopping-cart form-control-feedback"></span>--}}
-                        {{--@if($errors->has('shop')) <span class="help-block">{{$errors->first('shop')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('date')) has-error @endif">--}}
-                        {{--<label for="date" class="control-label"> Date </label>--}}
-                        {{--<input type="date" name="date" id="date" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-calendar form-control-feedback"></span>--}}
-                        {{--@if($errors->has('date')) <span class="help-block">{{$errors->first('date')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('order_number')) has-error @endif">--}}
-                        {{--<label for="order_number" class="control-label">Order Number</label>--}}
-                        {{--<input type="text" name="order_number" id="order_number" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-credit-card form-control-feedback"></span>--}}
-                        {{--@if($errors->has('order_number')) <span class="help-block">{{$errors->first('order_number')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('quantity')) has-error @endif">--}}
-                        {{--<label for="quantity" class="control-label">Quantity</label>--}}
-                        {{--<input type="number" name="quantity" id="quantity" class="form-control prc">--}}
-                        {{--<span class="glyphicon glyphicon-credit-card form-control-feedback"></span>--}}
-                        {{--@if($errors->has('quantity')) <span class="help-block">{{$errors->first('quantity')}}</span> @endif--}}
-                    {{--</div>--}}
-
-                    {{--<div class="form-group has-feedback @if($errors->has('select_point')) has-error @endif">--}}
-                        {{--<label for="select_point" class="control-label">Select Point</label>--}}
-                        {{--<select name="select_point" id="select_point" class="form-control prc">--}}
-                            {{--<option value="0">Select Point</option>--}}
-                            {{--<option value="1">Normal</option>--}}
-                            {{--<option value="0.8">0.8</option>--}}
-                        {{--</select>--}}
-                        {{--@if($errors->has('select_point')) <span class="help-block">{{$errors->first('select_point')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('point')) has-error @endif">--}}
-                        {{--<label for="point" class="control-label">Point</label>--}}
-                        {{--<input type="number" name="point" id="point" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
-                        {{--@if($errors->has('point')) <span class="help-block">{{$errors->first('point')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('kyat')) has-error @endif">--}}
-                        {{--<label for="kyat" class="control-label">Kyat</label>--}}
-                        {{--<input type="text" name="kyat" id="kyat" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
-                        {{--@if($errors->has('kyat')) <span class="help-block">{{$errors->first('kyat')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('pae')) has-error @endif">--}}
-                        {{--<label for="pae" class="control-label">Pae</label>--}}
-                        {{--<input type="number" name="pae" id="pae" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
-                        {{--@if($errors->has('pae')) <span class="help-block">{{$errors->first('pae')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('yway')) has-error @endif">--}}
-                        {{--<label for="yway" class="control-label">Yway</label>--}}
-                        {{--<input type="number" name="yway" id="yway" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
-                        {{--@if($errors->has('yway')) <span class="help-block">{{$errors->first('yway')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('gram')) has-error @endif">--}}
-                        {{--<label for="gram" class="control-label">Gram</label>--}}
-                        {{--<input type="text" name="gram" id="gram" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
-                        {{--@if($errors->has('gram')) <span class="help-block">{{$errors->first('gram')}}</span> @endif--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group has-feedback @if($errors->has('coupon')) has-error @endif">--}}
-                        {{--<label for="coupon" class="control-label">Coupon</label>--}}
-                        {{--<input type="text" name="coupon" id="coupon" class="form-control">--}}
-                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
-                        {{--@if($errors->has('coupon')) <span class="help-block">{{$errors->first('coupon')}}</span> @endif--}}
-                    {{--</div>--}}
-
-                    {{--<div class="form-group">--}}
-                        {{--<button type="submit" style="background: #1e282c;color: white;" class="btn btn-lg">Create</button>--}}
-                    {{--</div>--}}
                     <div class="col-md-12">
                         <div class="form-group has-feedback @if($errors->has('voucher_number')) has-error @endif">
                             <label for="voucher_number" class="control-label">voucher_number</label>

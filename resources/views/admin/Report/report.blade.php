@@ -21,103 +21,125 @@
                 <li class="active">Customer Rnaking</li>
             </ol>
         </section>
-
-        <table class="table table-hover table-bordered" style="margin-top: 50px;background: #5bc0de;" border="1">
-            <thead>
-            <tr style="background: #1e282c;color: white">
-                <th class="col-md-2">Rank</th>
-                <th class="col-md-4">Name</th>
-                <th class="col-md-4">Point</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $sql = DB::select('select * from sale_invoices');
-            $length=count($sql);
-            $j=0;
-            $sum=0;
-            $name=0;
-            $customer_name="";
-            for($i=1;$i<=$length;$i++){
-                echo '<tr>';
-                $sql1 = DB::select('select * from sale_invoices where customer_id = ? ', [$i] );
-                foreach ($sql1 as $result){
-                    $sum+=$result->qty;
-                    $name=$result->customer_id;
-
-                }
-                $cus=DB::select('select * from customers');
-                foreach ($cus as $cu){
-                    if($cu->id==$name){
-                        $customer_name= $cu->customer_name;
-                        if($customer_name!="null"){
-                            $j++==$j;
-                            echo "<td>$j</td>";
-                            echo "<td>$customer_name</td>";
-                            echo "<td>$sum</td>";
-                            $name=0;
-                            $sum =0;
-                            $customer_name="";
-                        }
-                    }
-                }
-                echo '</tr>';
+        <?php
+        $sql = DB::select('select * from order_invoices');
+        $length=count($sql);
+        $j=0;
+        $sum=0;
+        $name=0;
+        $sale_name="";
+        $aa=DB::select("DELETE FROM `reports`");
+        for($i=1;$i<=$length;$i++){
+            $sql1 = DB::select('select * from order_invoices where sale_user_name = ?', [$i] );
+            foreach ($sql1 as $result){
+                $sum+=$result->qty;
+                $name=$result->sale_user_name;
             }
-            ?>
-            </tbody>
-        </table>
-    <?php
-    $sql = DB::select('select * from sale_invoices');
-    $length=count($sql);
-    $j=0;
-    $sum=0;
-    $name=0;
-    $customer_name="";
-    for($i=1;$i<=$length;$i++){
-        $sql1 = DB::select('select * from sale_invoices where customer_id = ? ', [$i] );
-        foreach ($sql1 as $result){
-            $sum+=$result->qty;
-            $name=$result->customer_id;
-
+            $cus=DB::select('select * from sales');
+            foreach ($cus as $cu){
+                if($cu->id==$name){
+                    $sale_name= $cu->id;
+                    $sql2=DB::select("INSERT INTO `reports`(`point`,`sale_name`) VALUES ($sum,$sale_name)");
+                    $name=0;
+                    $sum =0;
+                    $sale_name="";
+                }
+            }
         }
-//        $cus=DB::select('select * from customers');
-//        foreach ($cus as $cu){
-//            if($cu->id==$name){
-//                $customer_name= $cu->customer_name;
-//                if($customer_name!="null"){
-//                    $j++==$j;
-////                    echo "<td>$j</td>";
-//
-//                    echo "<div class='form-group''>";
-//                    echo "<select class='pc0'>";
-//                    echo "<option value=''>Select Name</option>";
-//                    echo "<option value='$sum'>$customer_name</option>";
-//                    echo "</select>";
-//                    echo "</div>";
-////                    echo "<td>$sum</td>";
-//                    $name=0;
-//                    $sum =0;
-//                    $customer_name="";
-//                }
-//
-//            }
-//        }
-        }
-        $cusw=DB::select('select * from customers');
-                    echo "<div class='form-group'>";
-                    echo "<select class='pc0'>";
-                    echo "<option value=''>Select Name</option>";
-        foreach ($cusw as $item) {
-            echo "<option value='$sum'>$item->customer_name</option>";
-        }
-        echo "</select>";
-        echo "</div>";
-
-        echo "<input placeholder='text3' id='text1' type='text' class='form-control' style='margin-top: 10px;' '>";
-
         ?>
+        <section class="content">
+            <form>
+                <div class="col-md-12">
+                <div class="form-group col-md-2">
+                    <label for="first_name" class="control-label">Person1</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="first_name" class="control-label">Person2</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="first_name col-md-3" class="control-label">Person3</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="first_name" class="control-label">Person4</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-2" style="margin-top: 15px;">
+                    <input placeholder='Total Point' id='text1' type='text' class='form-control' style='margin-top: 10px;'>
+                </div>
+                 <div class="form-group col-md-2" style="margin-top: 20px;">
+                     <button id="SearchButton" type="submit" style="background: #1e282c;color: white;" class="btn btn-sm">Save</button>
+                 </div>
+                </div>
+            </form>
+            <form>
+                <div class="form-group">
+                    <label for="first_name" class="control-label">Person1</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="first_name" class="control-label">Person2</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group>
+                    <label for="first_name col-md-3" class="control-label">Person3</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="first_name" class="control-label">Person4</label>
+                    <select name="first_name" id="first_name" class="form-control pc0">
+                        <option value="">Select Sale Name</option>
+                        @foreach($sql6 as $cus)
+                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <input placeholder='Total Point' id='text1' type='text' class='form-control' style='margin-top: 10px;'>
+                </div>
+                 <div class="form-group" style="margin-top: 20px;">
+                     <button id="SearchButton" type="submit" style="background: #1e282c;color: white;" class="btn btn-sm">Save</button>
+                 </div>
+            </form>
 
-
+        </section>
     </div>
 @stop
 

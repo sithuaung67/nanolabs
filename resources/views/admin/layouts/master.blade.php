@@ -195,25 +195,6 @@
             box-shadow: 0 5px #666;
             transform: translateY(4px);
         }
-        #invoiceHistory {
-                    padding: 10px 25px;
-                    font-size: 13px;
-                    text-align: center;
-                    cursor: pointer;
-                    outline: none;
-                    color: #fff;
-                    background-color: #1e282c;
-                    border: none;
-                    border-radius: 30px;
-                    box-shadow: 0 4px #999;
-                }
-        #invoiceHistory:hover {background-color: #312e25}
-
-        #invoiceHistory:active {
-                    background-color: #1e282c;
-                    box-shadow: 0 5px #666;
-                    transform: translateY(4px);
-                }
         #CustomerQrcode {
                     padding: 10px 25px;
                     font-size: 13px;
@@ -295,6 +276,13 @@
                "bInfo": true
            });
            $("#dataTable1").dataTable({
+               "bFilter" : false,
+               "bPaginate": true,
+               "bInfo": true
+           });
+
+           $("#sum").dataTable({
+               order:[[2,"desc"]],
                "bFilter" : false,
                "bPaginate": true,
                "bInfo": true
@@ -529,7 +517,6 @@
             });
         });
     </script>
-    
 
 
     @yield('script')

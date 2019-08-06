@@ -111,7 +111,7 @@
                                         <?php $totals += $customer->point; ?>
                                             <tr>
                                                 <td>{{$total}}</td>
-                                                <td><a id="invoiceHistory" href="{{route('get.customerInvoiceInfo',['id'=>$customer->id])}}">{{$customer->voucher_number}}</a></td>
+                                                <td><a href="{{route('get.customerInvoiceInfo',['id'=>$customer->id])}}">{{$customer->voucher_number}}</a></td>
                                                 <td>{{$customers->customer_name}}</td>
                                                 <td>
                                                     @foreach($sale as $sal)

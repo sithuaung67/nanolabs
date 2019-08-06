@@ -63,7 +63,6 @@
                 <tr style="background: #1e282c ;color:#fff; font-weight: bold">
                     <td>ID</td>
                     <td>Account Name</td>
-                    <td>QrCode</td>
                     <td>Saler Name</td>
                     <td>Birthday</td>
                     <td>Phone</td>
@@ -79,7 +78,6 @@
                     <tr>
                         <td>{{$total}}</td>
                         <td>{{$customer->user_name}}</td>
-                        <td><a style="color: #1c00cf;" href="{{route('get.viewSaleQrcode',['id'=>$customer->id])}}">{!! QrCode::size(60)->generate($customer->user_name); !!}</a></td>
                         <td><a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->id])}}">{{$customer->sale_name}}</a></td>
                         <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>
                         <td>{{$customer->phone}}</td>

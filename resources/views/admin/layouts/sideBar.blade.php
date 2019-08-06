@@ -9,7 +9,7 @@
             <li><a href="{{route('invoices')}}"><i class="fa fa-list"></i> <span>Invoice</span></a></li>
             <li><a href="{{route('orders')}}"><i class="fa fa-list"></i> <span>Order</span></a></li>
             <li><a href="{{route('getNotification')}}"><i class="fa fa-info-circle"></i> <span>Notification</span></a></li>
-            <li><a href="{{route('ranks')}}"><i class="fa fa-random"></i> <span>Customer Ranking</span></a></li>
+            <li><a  href="{{route('ranks')}}"><i class="fa fa-random"></i> <span>Customer Ranking</span></a></li>
             {{--<li><a href="{{route('ranks')}}"><i class="fa fa-random"></i> <span>Sale Ranking</span></a></li>--}}
             <li><a href="{{route('reports')}}"><i class="fa fa-plus-circle"></i> <span>Report</span></a></li>
 
