@@ -24,43 +24,52 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="col-md-8">
-                <div class="panel">
-                    <div class="panel-heading" style="background: #1e282c;color: #fff0ff;"><h4>Notification</h4></div>
-                    <div class="panel-body">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <td>Id</td>
-                                <td>Account Name</td>
-                                <td>Customer Name</td>
-                                <td>Notification</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $total = 0; ?>
-                            @foreach($customers as $cus)
-                                <?php $total ++== $total; ?>
-                                <tr>
-                                    <td>{{$total}}</td>
-                                    <td>{{$cus->user_name}}</td>
-                                    <td>{{$cus->customer_name}}</td>
-                                    <td>{{$cus->notification}}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="row">
+            {{--<div class="col-md-8">--}}
+                {{--<div class="panel">--}}
+                    {{--<div class="panel-heading" style="background: #1e282c;color: #fff0ff;"><h4>Notification</h4></div>--}}
+                    {{--<div class="panel-body">--}}
+                        {{--<table class="table table-bordered" >--}}
+                            {{--<thead>--}}
+                            {{--<tr>--}}
+                                {{--<td>Id</td>--}}
+                                {{--<td>Account Name</td>--}}
+                                {{--<td>Customer Name</td>--}}
+                                {{--<td>Notification</td>--}}
+                            {{--</tr>--}}
+                            {{--</thead>--}}
+                            {{--<tbody>--}}
+                            {{--<?php $total = 0; ?>--}}
+                            {{--@foreach($customers as $cus)--}}
+                                {{--<?php $total ++== $total; ?>--}}
+                                {{--<tr>--}}
+                                    {{--<td>{{$total}}</td>--}}
+                                    {{--<td>{{$cus->user_name}}</td>--}}
+                                    {{--<td>{{$cus->customer_name}}</td>--}}
+                                    {{--<td>{{$cus->notification}}</td>--}}
+                                {{--</tr>--}}
+                            {{--@endforeach--}}
+                            {{--</tbody>--}}
+                        {{--</table>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            <div class="col-md-8 col-md-offset-2">
                 <div class="panel">
                     <div class="panel-heading" style="background: #1e282c;color: #fff0ff;"><h4>Notification</h4></div>
                     <div class="panel-body">
                         <form enctype="multipart/form-data" action="{{route('postNotification')}}" method="post">
                             <div class="form-group">
-                                <label for="about" class="control-label">About Notification</label>
-                                <textarea style="height: 150px;" class="form-control" name="about" id="about" placeholder="Yow write about notification"></textarea>
+                                <label for="noti_date" class="control-label">Date</label>
+                                <input type="date" class="form-control" name="noti_date" id="noti_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="title" class="control-label">About Notification Title</label>
+                                <input type="text" class="form-control" name="title" id="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="noti" class="control-label">Noti Group</label>
+                                <textarea placeholder="about noti" style="height: 150px;" class="form-control" name="noti" id="noti"></textarea>
                             </div>
                             <div class="form-group text-right">
                                 <button type="submit" class="btn" style="background: #1e282c;color: #fff0ff;">Save</button>
@@ -77,6 +86,7 @@
                     </div>
                 </div>
             @endif
+            </div>
         </section>
 
     </div>

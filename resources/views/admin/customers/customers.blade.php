@@ -70,7 +70,6 @@
                             <td>ID</td>
                             <td>Account Name</td>
                             <td>Customer Name</td>
-                            <td>NRC</td>
                             <td>Birthday</td>
                             <td>Phone</td>
                             <td>Shop</td>
@@ -87,7 +86,7 @@
                                 <td>{{$total}}</td>
                                 <td>{{$customer->user_name}}</td>
                                 <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->customer_name}}</a></td>
-                                <td>{{$customer->nrc}}</td>
+                                {{--<td><a style="color: #1c00cf;" href="{{route('get.viewCustomerQrcode',['id'=>$customer->id])}}">{!! QrCode::size(60)->generate($customer->customer_name); !!}</a></td>--}}
                                 <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>
                                 <td>{{$customer->phone}}</td>
                                 <td>{{$customer->shop}}</td>

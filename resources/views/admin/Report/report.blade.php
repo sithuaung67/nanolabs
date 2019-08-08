@@ -87,58 +87,70 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2" style="margin-top: 15px;">
-                    <input placeholder='Total Point' id='text1' type='text' class='form-control' style='margin-top: 10px;'>
+                    <input placeholder='Total Point' id='text4' type='text' class='form-control' style='margin-top: 10px;'>
                 </div>
                  <div class="form-group col-md-2" style="margin-top: 20px;">
                      <button id="SearchButton" type="submit" style="background: #1e282c;color: white;" class="btn btn-sm">Save</button>
                  </div>
                 </div>
             </form>
-            <form>
-                <div class="form-group">
-                    <label for="first_name" class="control-label">Person1</label>
-                    <select name="first_name" id="first_name" class="form-control pc0">
-                        <option value="">Select Sale Name</option>
-                        @foreach($sql6 as $cus)
-                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="first_name" class="control-label">Person2</label>
-                    <select name="first_name" id="first_name" class="form-control pc0">
-                        <option value="">Select Sale Name</option>
-                        @foreach($sql6 as $cus)
-                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group>
-                    <label for="first_name col-md-3" class="control-label">Person3</label>
-                    <select name="first_name" id="first_name" class="form-control pc0">
-                        <option value="">Select Sale Name</option>
-                        @foreach($sql6 as $cus)
-                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="first_name" class="control-label">Person4</label>
-                    <select name="first_name" id="first_name" class="form-control pc0">
-                        <option value="">Select Sale Name</option>
-                        @foreach($sql6 as $cus)
-                            <option value="{{$cus->point}}">{{$cus->sale_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group" style="margin-top: 15px;">
-                    <input placeholder='Total Point' id='text1' type='text' class='form-control' style='margin-top: 10px;'>
-                </div>
-                 <div class="form-group" style="margin-top: 20px;">
-                     <button id="SearchButton" type="submit" style="background: #1e282c;color: white;" class="btn btn-sm">Save</button>
-                 </div>
-            </form>
+            {{--<form>--}}
+                {{--<div class="col-md-12">--}}
+                    {{--<div class="form-group col-md-2">--}}
+                        {{--<label for="first_name" class="control-label">Person1</label>--}}
+                        {{--<select name="first_name" id="first_name" class="form-control pc9">--}}
+                            {{--<option value="">Select Sale Name</option>--}}
+                            {{--@foreach($sql6 as $cus)--}}
+                                {{--<option value="{{$cus->point}}">{{$cus->sale_name}}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group col-md-2">--}}
+                        {{--<label for="first_name" class="control-label">Person2</label>--}}
+                        {{--<select name="first_name" id="first_name" class="form-control pc1">--}}
+                            {{--<option value="">Select Sale Name</option>--}}
+                            {{--@foreach($sql6 as $cus)--}}
+                                {{--<option value="{{$cus->point}}">{{$cus->sale_name}}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group col-md-2">--}}
+                        {{--<label for="first_name col-md-3" class="control-label">Person3</label>--}}
+                        {{--<select name="first_name" id="first_name" class="form-control pc2">--}}
+                            {{--<option value="">Select Sale Name</option>--}}
+                            {{--@foreach($sql6 as $cus)--}}
+                                {{--<option value="{{$cus->point}}">{{$cus->sale_name}}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group col-md-2">--}}
+                        {{--<label for="first_name" class="control-label">Person4</label>--}}
+                        {{--<select name="first_name" id="first_name" class="form-control pc3">--}}
+                            {{--<option value="">Select Sale Name</option>--}}
+                            {{--@foreach($sql6 as $cus)--}}
+                                {{--<option value="{{$cus->point}}">{{$cus->sale_name}}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</div>--}}
 
+                    {{--<div class="form-group col-md-2" style="margin-top: 20px;">--}}
+                        {{--<button id="SearchButton" type="submit" style="background: #1e282c;color: white;" class="btn btn-sm">Save</button>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group col-md-12" style="margin-top: 15px;">--}}
+                        {{--<input placeholder='Total Point' id='text0' type='text' class='form-control' style='margin-top: 10px;'>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group col-md-12" style="margin-top: 15px;">--}}
+                        {{--<input placeholder='Total Point' id='text1' type='text' class='form-control' style='margin-top: 10px;'>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group col-md-12" style="margin-top: 15px;">--}}
+                        {{--<input placeholder='Total Point' id='text2' type='text' class='form-control' style='margin-top: 10px;'>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group col-md-12" style="margin-top: 15px;">--}}
+                        {{--<input placeholder='Total Point' id='text3' type='text' class='form-control' style='margin-top: 10px;'>--}}
+                    {{--</div>--}}
+
+                {{--</div>--}}
+            {{--</form>--}}
         </section>
     </div>
 @stop

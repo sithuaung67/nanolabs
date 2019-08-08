@@ -61,7 +61,13 @@
                                 @foreach ($sql6 as $value)
                                 <tr>
                                 <td class='id'>{{$value->rank}}</td>
-                                <td>{{$value->name}}</td>
+                                <td>
+                                @foreach($name as $na)
+                                    @if($na->id==$value->name)
+                                        {{$na->customer_name}}
+                                    @endif
+                                @endforeach
+                                </td>
                                 <td>{{$value->score}}</td>
                                 </tr>
                                 @endforeach

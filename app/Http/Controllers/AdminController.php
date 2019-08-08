@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Invoice;
+use App\Notification_Group;
+use App\Notification_Once;
 use App\Order;
 use App\OrderInvoice;
 use App\Rank;
@@ -362,6 +364,7 @@ class AdminController extends Controller
         $invoice->order_date=$request['order_date'];
         $invoice->qty=$request['qty'];
         $invoice->point_eight=$request['point_eight'];
+        $invoice->total_point=$request['total_point'];
         $invoice->kyat=$request['kyat'];
         $invoice->pal=$request['pal'];
         $invoice->yae=$request['yae'];
@@ -404,6 +407,7 @@ class AdminController extends Controller
         $order_date=$request['order_date'];
         $qty=$request['qty'];
         $point_eight=$request['point_eight'];
+        $total_point=$request['total_point'];
         $kyat=$request['kyat'];
         $pal=$request['pal'];
         $yae=$request['yae'];
@@ -441,6 +445,7 @@ class AdminController extends Controller
         $invoice->order_date=$order_date;
         $invoice->qty=$qty;
         $invoice->point_eight=$point_eight;
+        $invoice->total_point=$total_point;
         $invoice->kyat=$kyat;
         $invoice->pal=$pal;
         $invoice->yae=$yae;
@@ -741,13 +746,27 @@ class AdminController extends Controller
         $customers=Customer::all();
         return view('admin.Noti.notification')->with(['customers'=>$customers]);
     }
-    public function postNoti(Request $request){
-        $id=$request['id'];
-        $customer=Customer::where('id', $id)->first();
+    public function postNoti(Request $request)
+    {
+        $noti_group = new Notification_Group();
+        $noti_group->title = $request['title'];
+        $noti_group->noti_date = $request['noti_date'];
+        $noti_group->noti_group = $request['noti'];
+        $noti_group->save();
+        return redirect()->back()->with(['info' => 'You post notification successfully']);
+    }
 
-        $customer->notification=$request['about'];
-
-        $customer->save();
+     public function getNotiOne(){
+        $customer=Customer::all();
+        return view('admin.Noti.notification_one')->with(['customer'=>$customer]);
+    }
+    public function postNotiOne(Request $request){
+        $noti_group=new Notification_Once();
+        $noti_group->title=$request['title'];
+        $noti_group->noti_date=$request['noti_date'];
+        $noti_group->customer_id=$request['customer_id'];
+        $noti_group->noti_one=$request['noti'];
+        $noti_group->save();
         return redirect()->back()->with(['info'=>'You post notification successfully']);
     }
 }

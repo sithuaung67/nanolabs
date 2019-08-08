@@ -477,8 +477,28 @@
                     totalSum +=parseFloat(inputVal);
                 }
             });
-            $('#text1').val(totalSum);
+            $('#text4').val(totalSum);
         });
+        $('.form-group').on('input','.pa0',function () {
+            var totalSum=0;
+            $('.form-group .pa0').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum +=parseFloat(inputVal)/2;
+                }
+            });
+            $('#total_point').val(totalSum);
+        });
+        // $('.form-group').on('input','.pc0',function () {
+        //     var totalSum=0;
+        //     $('.form-group .pc0').each(function () {
+        //         var inputVal=$(this).val();
+        //         if($.isNumeric(inputVal)){
+        //             totalSum +=parseFloat(inputVal);
+        //         }
+        //     });
+        //     $('#text1').val(totalSum);
+        // });
     </script>
 
     <script>

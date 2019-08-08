@@ -265,6 +265,14 @@ Route::group(['middleware'=>'auth'], function (){
            'uses'=>'AdminController@postNoti',
            'as'=>'postNotification'
         ]);
+        Route::get('notificationOne',[
+           'uses'=>'AdminController@getNotiOne',
+           'as'=>'getNotificationOne'
+        ]);
+        Route::post('notificationOne',[
+           'uses'=>'AdminController@postNotiOne',
+           'as'=>'postNotificationOne'
+        ]);
 
 
         //Dashboard

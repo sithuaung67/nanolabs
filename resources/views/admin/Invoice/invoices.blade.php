@@ -52,7 +52,7 @@
                             </table>
                         </div>
                         <div class="col-md-3">
-                            <table id="TotalGam" class="table text-center" style="background: #1e282c;color: white;width: 100%;border-radius: 20px;">
+                            {{--<table id="TotalGam" class="table text-center" style="background: #1e282c;color: white;width: 100%;border-radius: 20px;">--}}
                             </table>
                         </div>
                     </div>

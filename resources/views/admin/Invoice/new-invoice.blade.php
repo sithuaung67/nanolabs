@@ -73,19 +73,27 @@
                         </div>
                     </div>
                     <div class="col-md-4">
+                        <div class="form-group has-feedback @if($errors->has('qty')) has-error @endif">
+                            <label for="qty" class="control-label">Quantity</label>
+                            <input type="text" name="qty" id="qty" class="form-control pa0">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                            @if($errors->has('qty')) <span class="help-block">{{$errors->first('qty')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('point_eight')) has-error @endif">
                             <label for="point_eight" class="control-label">point_eight</label>
-                            <input type="text" name="point_eight" id="point_eight" class="form-control">
+                            <input type="text" name="point_eight" id="point_eight" class="form-control pa0">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('point_eight')) <span class="help-block">{{$errors->first('point_eight')}}</span> @endif
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group has-feedback @if($errors->has('qty')) has-error @endif">
-                            <label for="qty" class="control-label">Quantity</label>
-                            <input type="text" name="qty" id="qty" class="form-control">
+                        <div class="form-group has-feedback @if($errors->has('total_point')) has-error @endif">
+                            <label for="total_point" class="control-label">Total Point</label>
+                            <input type="text" name="total_point" id="total_point" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
-                            @if($errors->has('qty')) <span class="help-block">{{$errors->first('qty')}}</span> @endif
+                            @if($errors->has('total_point')) <span class="help-block">{{$errors->first('total_point')}}</span> @endif
                         </div>
                     </div>
                     <div class="col-md-4">
