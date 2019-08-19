@@ -76,30 +76,6 @@
                                     <td>Yae</td>
                                     <td>Gram</td>
                                     <td>Coupon Code</td>
-                                    <td>Ring</td>
-                                    <td>Ring Number</td>
-                                    <td>Ring Point Eight</td>
-                                    <td>Ring Kyat</td>
-                                    <td>Ring Pal</td>
-                                    <td>Ring Yae</td>
-                                    <td>Bangles</td>
-                                    <td>Bangles Number</td>
-                                    <td>Bangles Point Eight</td>
-                                    <td>Bangles Kyat</td>
-                                    <td>Bangles Pal</td>
-                                    <td>Bangles Yae</td>
-                                    <td>Necklace</td>
-                                    <td>Necklace Number</td>
-                                    <td>Necklace Point Eight</td>
-                                    <td>Necklace Kyat</td>
-                                    <td>Necklace Pal</td>
-                                    <td>Necklace Yae</td>
-                                    <td>Earring</td>
-                                    <td>Earring Number</td>
-                                    <td>Earring Point Eight</td>
-                                    <td>Earring Kyat</td>
-                                    <td>Earring Pal</td>
-                                    <td>Earring Yae</td>
                                     <td>Order Date</td>
                                 </tr>
                                 </thead>
@@ -127,30 +103,6 @@
                                             <td>{{$customer->yae}}</td>
                                             <td class="gram">{{$customer->gram}}</td>
                                             <td>{{$customer->cupon_code}}</td>
-                                            <td>{{$customer->ring}}</td>
-                                            <td>{{$customer->ring_number}}</td>
-                                            <td>{{$customer->ring_point_eight}}</td>
-                                            <td>{{$customer->ring_kyat}}</td>
-                                            <td>{{$customer->ring_pal}}</td>
-                                            <td>{{$customer->ring_yae}}</td>
-                                            <td>{{$customer->bangles}}</td>
-                                            <td>{{$customer->bangles_number}}</td>
-                                            <td>{{$customer->bangles_point_eight}}</td>
-                                            <td>{{$customer->bangles_kyat}}</td>
-                                            <td>{{$customer->bangles_pal}}</td>
-                                            <td>{{$customer->bangles_yae}}</td>
-                                            <td>{{$customer->necklace}}</td>
-                                            <td>{{$customer->necklace_number}}</td>
-                                            <td>{{$customer->necklace_point_eight}}</td>
-                                            <td>{{$customer->necklace_kyat}}</td>
-                                            <td>{{$customer->necklace_pal}}</td>
-                                            <td>{{$customer->necklace_yae}}</td>
-                                            <td>{{$customer->earring}}</td>
-                                            <td>{{$customer->earring_number}}</td>
-                                            <td>{{$customer->earring_point_eight}}</td>
-                                            <td>{{$customer->earring_kyat}}</td>
-                                            <td>{{$customer->earring_pal}}</td>
-                                            <td>{{$customer->earring_yae}}</td>
                                             <td>{{date("d-M-Y", strtotime($customer->order_date))}}</td>
                                         </tr>
                                     @endif

@@ -37,20 +37,20 @@
                                 <option value="{{$sal->user_name}}"> {{$sal->user_name}}  </option>
                             @endforeach
                         </select>
-                        <select class="form-control" id="customer_name" name="customer_name" >
-                            <option value="">Customer Name</option>
-                            @foreach($customers as $sal)
-                                <option value="{{$sal->customer_name}}"> {{$sal->customer_name}}  </option>
-                            @endforeach
-                        </select>
+                        {{--<select class="form-control" id="customer_name" name="customer_name" >--}}
+                            {{--<option value="">Customer Name</option>--}}
+                            {{--@foreach($customers as $sal)--}}
+                                {{--<option value="{{$sal->name}}"> {{$sal->name}}  </option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
                         <select class="form-control" id="phone" name="phone" >
                             <option value="">Phone Number</option>
                             @foreach($customers as $sal)
-                                <option value="{{$sal->phone}}"> {{$sal->phone}}  </option>
+                                <option value="{{$sal->phone_number}}"> {{$sal->phone_number}}  </option>
                             @endforeach
                         </select>
-                        <input type="text" style="width: 100px;" placeholder="Town" id="town" name="town" class="form-control">
-                        <input type="text" style="width: 100px;" placeholder="Select Shop" id="shop" name="shop" class="form-control">
+                        <input type="text" style="width: 150px;" placeholder="Town" id="town" name="town" class="form-control">
+                        <input type="text" style="width: 150px;" placeholder=" Shop" id="shop" name="shop" class="form-control">
                         <select class="form-control" id="phone" name="phone" >
                             <option value="">NRC</option>
                             @foreach($customers as $sal)
@@ -75,23 +75,27 @@
                             <td>Shop</td>
                             <td>Address</td>
                             <td>Town</td>
+                            <td>QRCode</td>
+
                             <td>Member Since</td>
                             <td>Actions</td>
                         </tr>
                         </thead>
+
                         <?php $total = 0; ?>
-                    @foreach($customers as $customer)
-                            <?php $total ++== $total; ?>
+                                @foreach($customers as $customer)
+                                        <?php $total ++== $total; ?>
                             <tr>
                                 <td>{{$total}}</td>
                                 <td>{{$customer->user_name}}</td>
-                                <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->customer_name}}</a></td>
-                                {{--<td><a style="color: #1c00cf;" href="{{route('get.viewCustomerQrcode',['id'=>$customer->id])}}">{!! QrCode::size(60)->generate($customer->customer_name); !!}</a></td>--}}
-                                <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>
-                                <td>{{$customer->phone}}</td>
-                                <td>{{$customer->shop}}</td>
+                                <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->name}}</a></td>
+                                <td>{{date("d-M-Y", strtotime($customer->dob))}}</td>
+                                <td>{{$customer->phone_number}}</td>
+                                <td>{{$customer->shop_name}}</td>
                                 <td>{{$customer->address}}</td>
                                 <td>{{$customer->town}}</td>
+                                <td><a style="color: #1c00cf;" href="{{route('get.viewCustomerQrcode',['id'=>$customer->id])}}">{!! QrCode::size(60)->generate($customer->id); !!}</a></td>
+                                {{--</td>--}}
                                 <td>{{date("d-M-Y", strtotime($customer->created_at))}}</td>
                                 {{--<td>{{bcrypt($customer->password)}}</td>--}}
                                 <td class="btn btn-default ">
@@ -104,7 +108,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title" id="myModalLabel">Edit customer account info for <b>"{{$customer->full_name}}"</b></h4>
+                                                        <h4 class="modal-title" id="myModalLabel">Edit customer account info for <b>""</b></h4>
                                                     </div>
                                                     <div class="modal-body text-left">
                                                         <input type="hidden" name="id" value="{{$customer->id}}">
@@ -116,25 +120,25 @@
                                                         </div>
                                                         <div class="form-group has-feedback @if($errors->has('full_name')) has-error @endif">
                                                             <label for="full_name" class="control-label">Customer Name</label>
-                                                            <input value="{{$customer->customer_name}}" type="text" name="full_name" id="full_name" class="form-control">
+                                                            <input value="{{$customer->name}}" type="text" name="full_name" id="full_name" class="form-control">
                                                             <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                             @if($errors->has('full_name')) <span class="help-block">{{$errors->first('full_name')}}</span> @endif
                                                         </div>
                                                         <div class="form-group has-feedback @if($errors->has('birthday')) has-error @endif">
                                                             <label for="birthday" class="control-label">Date Of Birth</label>
-                                                            <input value="{{$customer->birthday}}" type="date" name="birthday" id="birthday" class="form-control">
+                                                            <input value="{{$customer->dob}}" type="date" name="birthday" id="birthday" class="form-control">
                                                             <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                             @if($errors->has('birthday')) <span class="help-block">{{$errors->first('birthday')}}</span> @endif
                                                         </div>
                                                         <div class="form-group has-feedback @if($errors->has('phone')) has-error @endif">
                                                             <label for="phone" class="control-label">Phone</label>
-                                                            <input value="{{$customer->phone}}" type="text" name="phone" id="phone" class="form-control">
+                                                            <input value="{{$customer->phone_number}}" type="text" name="phone" id="phone" class="form-control">
                                                             <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                             @if($errors->has('phone')) <span class="help-block">{{$errors->first('phone')}}</span> @endif
                                                         </div>
                                                         <div class="form-group has-feedback @if($errors->has('shop')) has-error @endif">
                                                             <label for="shop" class="control-label">Shop</label>
-                                                            <input value="{{$customer->shop}}" type="text" name="shop" id="shop" class="form-control">
+                                                            <input value="{{$customer->shop_name}}" type="text" name="shop" id="shop" class="form-control">
                                                             <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                             @if($errors->has('shop')) <span class="help-block">{{$errors->first('shop')}}</span> @endif
                                                         </div>
@@ -151,10 +155,16 @@
                                                             <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                             @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
                                                         </div>
+                                                        <div class="form-group has-feedback @if($errors->has('nrc')) has-error @endif">
+                                                            <label for="nrc" class="control-label">nrc</label>
+                                                            <input value="{{$customer->nrc}}" type="text" name="nrc" id="nrc" class="form-control">
+                                                            <span class="glyphicon glyphicon-book form-control-feedback"></span>
+                                                            @if($errors->has('nrc')) <span class="help-block">{{$errors->first('nrc')}}</span> @endif
+                                                        </div>
 
                                                         <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">
                                                             <label for="password" class="control-label">Password</label>
-                                                            <input  type="password" name="password" id="password" class="form-control">
+                                                            <input  type="password" value="{{$customer->password}}" name="password" id="password" class="form-control">
                                                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                                             @if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif
                                                         </div>
@@ -163,43 +173,11 @@
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-primary">Confirm</button>
                                                     </div>
-
                                                 </div>
                                                 @csrf
                                             </form>
                                         </div>
                                     </div>
-
-                                    <a href="#" data-toggle="modal" data-target="#i{{$customer->id}}" class="btn btn-primary btn-xs"><i class="fa fa-info-circle"></i></a>
-
-                                    <!-- Edit Modal -->
-                                    <div class="modal fade" id="i{{$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                        <div class="modal-dialog" role="document">
-                                            <form method="post" action="{{route('postNotification')}}">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title" id="myModalLabel">Post Notification customer</h4>
-                                                    </div>
-                                                    <div class="modal-body text-left">
-                                                        <input type="hidden" name="id" value="{{$customer->id}}">
-                                                        <div class="form-group has-feedback @if($errors->has('about')) has-error @endif">
-                                                            <label for="about" class="control-label">Notification</label>
-                                                            <input value="{{$customer->about}}" type="text" name="about" id="about" class="form-control">
-                                                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                                            @if($errors->has('about')) <span class="help-block">{{$errors->first('about')}}</span> @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Confirm</button>
-                                                    </div>
-                                                </div>
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </div>
-
 
 
                                     <a href="#" data-toggle="modal" data-target="#d{{$customer->id}}" class="text-danger btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
@@ -214,7 +192,7 @@
                                                     </div>
                                                     <div class="modal-body text-danger">
                                                         <input type="hidden" name="id" value="{{$customer->id}}">
-                                                        Are you sure want to delete this customer account name of <b>"{{$customer->customer_name}}"</b>
+                                                        Are you sure want to delete this customer account name of <b>"{{$customer->name}}"</b>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

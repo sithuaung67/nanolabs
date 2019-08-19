@@ -52,8 +52,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4" id="QrcodeCustomer">
-                        {{--{!! QrCode::size(280)->generate($customer->user_name); !!}--}}
-                        <img src="public:ntg/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate('My First QR code'))!!} ">
+                        {!! QrCode::size(280)->generate($customer->name); !!}
                     </div>
                 </div>
 

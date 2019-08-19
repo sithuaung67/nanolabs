@@ -67,7 +67,8 @@
                     <td>Birthday</td>
                     <td>Phone</td>
                     <td>Address</td>
-                    <td>Town</td>
+                    {{--<td>Town</td>--}}
+                    {{--<td>Qrcode</td>--}}
                     <td>Member Since</td>
                     <td>Actions</td>
                 </tr>
@@ -78,11 +79,12 @@
                     <tr>
                         <td>{{$total}}</td>
                         <td>{{$customer->user_name}}</td>
-                        <td><a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->id])}}">{{$customer->sale_name}}</a></td>
-                        <td>{{date("d-M-Y", strtotime($customer->birthday))}}</td>
-                        <td>{{$customer->phone}}</td>
+                        <td><a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->id])}}">{{$customer->name}}</a></td>
+                        <td>{{date("d-M-Y", strtotime($customer->dob))}}</td>
+                        <td>{{$customer->phone_number}}</td>
                         <td>{{$customer->address}}</td>
-                        <td>{{$customer->town}}</td>
+                        {{--<td>{{$customer->town}}</td>--}}
+                        {{--<td><a style="color: #1c00cf;" href="{{route('get.viewSaleQrcode',['id'=>$customer->id])}}">{!! QrCode::size(60)->generate($customer->id); !!}</a></td>--}}
                         <td>{{date("d-M-Y", strtotime($customer->created_at))}}</td>
                         {{--<td>{{bcrypt($customer->password)}}</td>--}}
                         <td class="btn btn-default ">
@@ -135,19 +137,19 @@
                                                     <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                     @if($errors->has('address')) <span class="help-block">{{$errors->first('address')}}</span> @endif
                                                 </div>
-                                                <div class="form-group has-feedback @if($errors->has('town')) has-error @endif">
-                                                    <label for="town" class="control-label">Town</label>
-                                                    <input value="{{$customer->town}}" type="text" name="town" id="town" class="form-control">
-                                                    <span class="glyphicon glyphicon-book form-control-feedback"></span>
-                                                    @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
-                                                </div>
+                                                {{--<div class="form-group has-feedback @if($errors->has('town')) has-error @endif">--}}
+                                                    {{--<label for="town" class="control-label">Town</label>--}}
+                                                    {{--<input value="{{$customer->town}}" type="text" name="town" id="town" class="form-control">--}}
+                                                    {{--<span class="glyphicon glyphicon-book form-control-feedback"></span>--}}
+                                                    {{--@if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif--}}
+                                                {{--</div>--}}
 
-                                                <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">
-                                                    <label for="password" class="control-label">Password</label>
-                                                    <input  type="password" name="password" id="password" class="form-control">
-                                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                                    @if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif
-                                                </div>
+                                                {{--<div class="form-group has-feedback @if($errors->has('password')) has-error @endif">--}}
+                                                    {{--<label for="password" class="control-label">Password</label>--}}
+                                                    {{--<input  type="password" name="password" id="password" class="form-control">--}}
+                                                    {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
+                                                    {{--@if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif--}}
+                                                {{--</div>--}}
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -288,6 +288,14 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getCustomerQrcode',
             'as'=>'get.viewCustomerQrcode'
         ]);
+        Route::get('/products/{id}/edit',[
+            'uses'=>'AdminController@getEdit',
+            'as'=>'get.edit'
+        ]);
+        Route::get('/customer/image/{customer_name}',[
+            'uses'=>'AdminController@getProductImage',
+            'as'=>'product.image'
+        ]);
 
     });
 

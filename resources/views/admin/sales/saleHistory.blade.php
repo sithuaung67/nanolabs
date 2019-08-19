@@ -71,35 +71,30 @@
                                     <td>Sale Name</td>
                                     <td>Quantity</td>
                                     <td>Point Eight</td>
+                                    <td>Gram</td>
                                     <td>Kyat</td>
                                     <td>Pae</td>
                                     <td>Yae</td>
-                                    <td>Gram</td>
+                                    <td>Total Kyat</td>
+                                    <td>Total Pae</td>
+                                    <td>Total Yae</td>
+                                    <td>previous_remain_kyat</td>
+                                    <td>previous_remain_pal</td>
+                                    <td>previous_remain_yae</td>
+                                    <td>buy_debit_kyat</td>
+                                    <td>buy_debit_pal</td>
+                                    <td>buy_debit_yae</td>
+                                    <td>payment_kyat</td>
+                                    <td>payment_pal</td>
+                                    <td>payment_yae</td>
+                                    <td>now_remain_kyat</td>
+                                    <td>now_remain_pal</td>
+                                    <td>now_remain_yae</td>
+                                    <td>total_ayot_kyat</td>
+                                    <td>total_ayot_pal</td>
+                                    <td>total_ayot_yae</td>
+                                    <td>Cupon Code</td>
                                     <td>Coupon Code</td>
-                                    <td>Ring</td>
-                                    <td>Ring Number</td>
-                                    <td>Ring Point Eight</td>
-                                    <td>Ring Kyat</td>
-                                    <td>Ring Pal</td>
-                                    <td>Ring Yae</td>
-                                    <td>Bangles</td>
-                                    <td>Bangles Number</td>
-                                    <td>Bangles Point Eight</td>
-                                    <td>Bangles Kyat</td>
-                                    <td>Bangles Pal</td>
-                                    <td>Bangles Yae</td>
-                                    <td>Necklace</td>
-                                    <td>Necklace Number</td>
-                                    <td>Necklace Point Eight</td>
-                                    <td>Necklace Kyat</td>
-                                    <td>Necklace Pal</td>
-                                    <td>Necklace Yae</td>
-                                    <td>Earring</td>
-                                    <td>Earring Number</td>
-                                    <td>Earring Point Eight</td>
-                                    <td>Earring Kyat</td>
-                                    <td>Earring Pal</td>
-                                    <td>Earring Yae</td>
                                     <td>Order Date</td>
                                 </tr>
                                 </thead>
@@ -137,43 +132,37 @@
                                                 <td>
                                                     @foreach($customers as $cust)
                                                         @if($cust->id==$customer->customer_id)
-                                                            {{$cust->customer_name}}
+                                                            {{$cust->user_name}}
                                                         @endif
                                                     @endforeach
                                                 </td>
                                                 <td>{{$sale->sale_name}}</td>
                                                 <td class="quantity">{{$customer->qty}}</td>
                                                 <td class="point">{{$customer->point_eight}}</td>
+                                                <td class="gram">{{$customer->gram}}</td>
                                                 <td>{{$customer->kyat}}</td>
                                                 <td>{{$customer->pal}}</td>
                                                 <td>{{$customer->yae}}</td>
-                                                <td class="gram">{{$customer->gram}}</td>
-                                                <td>{{$customer->cupon_code}}</td>
-                                                <td>{{$customer->ring}}</td>
-                                                <td>{{$customer->ring_number}}</td>
-                                                <td>{{$customer->ring_point_eight}}</td>
-                                                <td>{{$customer->ring_kyat}}</td>
-                                                <td>{{$customer->ring_pal}}</td>
-                                                <td>{{$customer->ring_yae}}</td>
-                                                <td>{{$customer->bangles}}</td>
-                                                <td>{{$customer->bangles_number}}</td>
-                                                <td>{{$customer->bangles_point_eight}}</td>
-                                                <td>{{$customer->bangles_kyat}}</td>
-                                                <td>{{$customer->bangles_pal}}</td>
-                                                <td>{{$customer->bangles_yae}}</td>
-                                                <td>{{$customer->necklace}}</td>
-                                                <td>{{$customer->necklace_number}}</td>
-                                                <td>{{$customer->necklace_point_eight}}</td>
-                                                <td>{{$customer->necklace_kyat}}</td>
-                                                <td>{{$customer->necklace_pal}}</td>
-                                                <td>{{$customer->necklace_yae}}</td>
-                                                <td>{{$customer->earring}}</td>
-                                                <td>{{$customer->earring_number}}</td>
-                                                <td>{{$customer->earring_point_eight}}</td>
-                                                <td>{{$customer->earring_kyat}}</td>
-                                                <td>{{$customer->earring_pal}}</td>
-                                                <td>{{$customer->earring_yae}}</td>
-                                                <td>{{date("d-M-Y", strtotime($customer->order_date))}}</td>
+                                                <td>{{$customer->total_kyat}}</td>
+                                                <td>{{$customer->total_pal}}</td>
+                                                <td>{{$customer->total_yae}}</td>
+                                                <td>{{$customer->previous_remain_kyat}}</td>
+                                                <td>{{$customer->previous_remain_pal}}</td>
+                                                <td>{{$customer->previous_remain_yae}}</td>
+                                                <td>{{$customer->buy_debit_kyat}}</td>
+                                                <td>{{$customer->buy_debit_pal}}</td>
+                                                <td>{{$customer->buy_debit_yae}}</td>
+                                                <td>{{$customer->payment_kyat}}</td>
+                                                <td>{{$customer->payment_pal}}</td>
+                                                <td>{{$customer->payment_yae}}</td>
+                                                <td>{{$customer->now_remain_kyat}}</td>
+                                                <td>{{$customer->now_remain_pal}}</td>
+                                                <td>{{$customer->now_remain_yae}}</td>
+                                                <td>{{$customer->total_ayot_kyat}}</td>
+                                                <td class="kyat">{{$customer->total_ayot_pal}}</td>
+                                                <td class="pal">{{$customer->total_ayot_yae}}</td>
+                                                <td class="yae">{{$customer->cupon_code}}</td>
+                                                <td>{{date("d-M-Y", strtotime($customer->sale_date))}}</td>
                                             </tr>
                                     @endif
                                 @endforeach

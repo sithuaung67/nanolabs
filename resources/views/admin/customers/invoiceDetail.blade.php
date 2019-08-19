@@ -56,7 +56,7 @@
                                         <td>
                                             @foreach($customer as $cus)
                                                 @if($cus->id==$invoice->customer_id)
-                                                    {{$cus->customer_name}}
+                                                    {{$cus->name}}
                                                 @endif
                                             @endforeach
                                         </td>
@@ -66,7 +66,7 @@
                                         <td>
                                             @foreach($sale as $sal)
                                                 @if($sal->id==$invoice->sale_user_name)
-                                                    {{$sal->sale_name}}
+                                                    {{$sal->name}}
                                                 @endif
                                             @endforeach
                                         </td>
@@ -100,104 +100,8 @@
                                         <td>{{$invoice->cupon_code}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Ring</td>
-                                        <td>{{$invoice->ring}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ring Number</td>
-                                        <td>{{$invoice->ring_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ring Point Eight</td>
-                                        <td>{{$invoice->ring_point_eight}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ring Kyat</td>
-                                        <td>{{$invoice->ring_kyat}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ring Pal</td>
-                                        <td>{{$invoice->ring_pal}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ring Yae</td>
-                                        <td>{{$invoice->ring_yae}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bangles</td>
-                                        <td>{{$invoice->bangles}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bangles Number</td>
-                                        <td>{{$invoice->bangles_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bangles Point Eight</td>
-                                        <td>{{$invoice->bangles_point_eight}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bangles Kyat</td>
-                                        <td>{{$invoice->bangles_kyat}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bangles Pal</td>
-                                        <td>{{$invoice->bangles_pal}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bangles Yae</td>
-                                        <td>{{$invoice->bangles_yae}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Necklace</td>
-                                        <td>{{$invoice->necklace}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Necklace Number</td>
-                                        <td>{{$invoice->necklace_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Necklace Point Eight</td>
-                                        <td>{{$invoice->necklace_point_eight}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Necklace Kyat</td>
-                                        <td>{{$invoice->necklace_kyat}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Necklace Pal</td>
-                                        <td>{{$invoice->necklace_pal}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Necklace Yae</td>
-                                        <td>{{$invoice->necklace_yae}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Earring</td>
-                                        <td>{{$invoice->earring}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Earring Number</td>
-                                        <td>{{$invoice->earring_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Earring Point Eight</td>
-                                        <td>{{$invoice->earring_point_eight}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Earring Kyat</td>
-                                        <td>{{$invoice->earring_kyat}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Earring Pal</td>
-                                        <td>{{$invoice->earring_pal}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Earring Yae</td>
-                                        <td>{{$invoice->earring_yae}}</td>
-                                    </tr>
-                                    <tr>
                                         <td>Sale Date</td>
-                                        <td>{{date("d-M-Y", strtotime($invoice->order_date))}}</td>
+                                        <td>{{date("d-M-Y", strtotime($invoice->sale_date))}}</td>
                                     </tr>
                                 </table>
                                 <div class="text-right">

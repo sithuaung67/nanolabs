@@ -64,7 +64,7 @@
                                 <td>
                                 @foreach($name as $na)
                                     @if($na->id==$value->name)
-                                        {{$na->customer_name}}
+                                        {{$na->user_name}}
                                     @endif
                                 @endforeach
                                 </td>
@@ -72,7 +72,7 @@
                                 </tr>
                                 @endforeach
                                     <?php
-                                    $sql = DB::select('select * from order_invoices');
+                                    $sql = DB::select('select * from sale_invoices');
                                     $length=count($sql);
                                     $j=0;
                                     $sum=0;
@@ -80,7 +80,7 @@
                                     $customer_name="";
                                     $aa=DB::select("DELETE FROM `scores`");
                                     for($i=1;$i<=$length;$i++){
-                                    $sql1 = DB::select('select * from order_invoices where customer_id = ?', [$i] );
+                                    $sql1 = DB::select('select * from sale_invoices where customer_id = ?', [$i] );
                                     foreach ($sql1 as $result){
                                     $sum+=$result->qty;
 

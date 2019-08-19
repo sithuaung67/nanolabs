@@ -63,25 +63,25 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">Saler Name</td>
-                        <td style="color: #1c00cf">{{$sale->sale_name}}</td>
+                        <td style="color: #1c00cf">{{$sale->name}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Date Of Birthday</td>
-                        <td style="color: #1c00cf">{{date("d-M-Y", strtotime($sale->birthday))}}</td>
+                        <td style="color: #1c00cf">{{date("d-M-Y", strtotime($sale->dob))}}</td>
 
                     </tr>
                     <tr>
                         <td class="col-md-4">Phone</td>
-                        <td style="color: #1c00cf">{{$sale->phone}}</td>
+                        <td style="color: #1c00cf">{{$sale->phone_number}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Address</td>
                         <td style="color: #1c00cf">{{$sale->address}}</td>
                     </tr>
-                    <tr>
-                        <td class="col-md-4">Township</td>
-                        <td style="color: #1c00cf">{{$sale->town}}</td>
-                    </tr>
+                    {{--<tr>--}}
+                        {{--<td class="col-md-4">Township</td>--}}
+                        {{--<td style="color: #1c00cf">{{$sale->town}}</td>--}}
+                    {{--</tr>--}}
                     </tbody>
                 </table>
 

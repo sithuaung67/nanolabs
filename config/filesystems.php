@@ -55,6 +55,10 @@ return [
             'driver' => 'local',
             'root' => public_path('ntg'),
         ],
+        'upload' => [
+            'driver' => 'local',
+            'root' => storage_path('ntg'),
+        ],
 
 
         'public' => [

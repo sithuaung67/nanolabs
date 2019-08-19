@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-6 text-right">
                         <a id="gobutton" href="{{route('customers.invoice.history',['id'=>$customers->id])}}" class="btn">Customer Invoice <i class="fa fa-forward"></i></a>
-                        <a id="gobutton" href="{{route('customers.order.history',['id'=>$customers->id])}}"  class="btn">Customer Order <i class="fa fa-forward"></i></a>
+                        {{--<a id="gobutton" href="{{route('customers.order.history',['id'=>$customers->id])}}"  class="btn">Customer Order <i class="fa fa-forward"></i></a>--}}
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">Customer Name</td>
-                        <td style="color: #1c00cf">{{$customers->customer_name}}</td>
+                        <td style="color: #1c00cf">{{$customers->name}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">NRC</td>
@@ -73,16 +73,16 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">Date Of Birthday</td>
-                        <td style="color: #1c00cf">{{date("d-M-Y", strtotime($customers->birthday))}}</td>
+                        <td style="color: #1c00cf">{{date("d-M-Y", strtotime($customers->dob))}}</td>
 
                     </tr>
                     <tr>
                         <td class="col-md-4">Phone</td>
-                        <td style="color: #1c00cf">{{$customers->phone}}</td>
+                        <td style="color: #1c00cf">{{$customers->phone_number}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Shop Name</td>
-                        <td style="color: #1c00cf">{{$customers->shop}}</td>
+                        <td style="color: #1c00cf">{{$customers->shop_name}}</td>
                     </tr>
                     <tr>
                         <td class="col-md-4">Address</td>

@@ -352,6 +352,18 @@
         $('#SaleQrcode').on('click',function(){
             printData2();
         });
+        function printData6()
+        {
+            var divToPrint=document.getElementById("PrintHello");
+            newWin= window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            // newWin.close();
+        }
+
+        $('#reportPrint').on('click',function(){
+            printData6();
+        });
         function printData1()
         {
             var divToPrint=document.getElementById("dataTableInvoicePrint");
@@ -394,6 +406,9 @@
         var sum1 = 0;
         var sum2 = 0;
         var sum3 = 0;
+        var kyat = 0;
+        var pal= 0;
+        var yae = 0;
         for(var i = 0; i < tds.length; i ++) {
             if(tds[i].className == 'point') {
                 sum2 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
@@ -404,9 +419,73 @@
             if(tds[i].className == 'gram') {
                 sum3 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
             }
+            if(tds[i].className == 'kyat') {
+                $kyat =kyat +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'pal') {
+                $pal=pal +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'yae') {
+                $yae=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // if($yae < 8){
+                //     $yae1=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // }
+                // if($yae > 8){
+                //     // $yaemins=$yae/8;
+                //     // $yaemin=$yae%8;
+                //     // $yae1=$yaemin;
+                //     // $pal+=$yaemins;
+                //     $yae1="kdfdd";
+                // }
+            }
 
         }
-        document.getElementById('dataTable1').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td><b>' + sum1 + '<b></td>  <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        document.getElementById('dataTable1').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td><b>' + sum1 + '<b></td>  <td><b>' + sum2+ '</b></td><td><b>' + sum3+ '<b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>' + $kyat + '<b></td> <td><b>' + $pal+ '</b></td><td><b>' + $yae+ '</b></td><td></td><td></td><td></td> </tr> ';
+        document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point</b><br><b>' + sum2 + '<b> </td> </tr>';
+        document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
+        document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
+        document.getElementById('TotalGam').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
+    </script>
+    <script language="javascript" type="text/javascript">
+        var tds = document.getElementById('dataTable2').getElementsByTagName('td');
+        var sum1 = 0;
+        var sum2 = 0;
+        var sum3 = 0;
+        var kyat = 0;
+        var pal= 0;
+        var yae = 0;
+        for(var i = 0; i < tds.length; i ++) {
+            if(tds[i].className == 'point') {
+                sum2 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'quantity') {
+                sum1 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'gram') {
+                sum3 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'kyat') {
+                $kyat =kyat +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'pal') {
+                $pal=pal +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'yae') {
+                $yae=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // if($yae < 8){
+                //     $yae1=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // }
+                // if($yae > 8){
+                //     // $yaemins=$yae/8;
+                //     // $yaemin=$yae%8;
+                //     // $yae1=$yaemin;
+                //     // $pal+=$yaemins;
+                //     $yae1="kdfdd";
+                // }
+            }
+
+        }
+        document.getElementById('dataTable2').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td><b>' + sum1 + '<b></td>  <td><b>' + sum2+ '</b></td><td><b>' + sum3+ '<b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>' + $kyat + '<b></td> <td><b>' + $pal+ '</b></td><td><b>' + $yae+ '</b></td><td></td><td></td><td></td> </tr> ';
         document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point</b><br><b>' + sum2 + '<b> </td> </tr>';
         document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
         document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
@@ -417,6 +496,9 @@
         var sum1 = 0;
         var sum2 = 0;
         var sum3 = 0;
+        var kyat = 0;
+        var pal= 0;
+        var yae = 0;
         for(var i = 0; i < tds.length; i ++) {
             if(tds[i].className == 'point_eight') {
                 sum2 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
@@ -427,9 +509,30 @@
             if(tds[i].className == 'gram') {
                 sum3 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
             }
+            if(tds[i].className == 'kyat') {
+                $kyat =kyat +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'pal') {
+                $pal=pal +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'yae') {
+                $yae=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // if($yae < 8){
+                //     $yae1=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // }
+                // if($yae > 8){
+                //     // $yaemins=$yae/8;
+                //     // $yaemin=$yae%8;
+                //     // $yae1=$yaemin;
+                //     // $pal+=$yaemins;
+                //     $yae1="kdfdd";
+                // }
+            }
 
         }
-        document.getElementById('dataTable').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        //document.getElementById('dataTable').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        document.getElementById('dataTable').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td><td><b>' + sum1 + '<b></td>  <td><b>' + sum2+ '</b></td><td><b>' + sum3+ '<b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>' + $kyat + '<b></td> <td><b>' + $pal+ '</b></td><td><b>' + $yae+ '</b></td><td></td><td></td><td></td> </tr> ';
+
         document.getElementById('TotalPointEight').innerHTML += '<tr><td><b>Total Point Eight</b><br><b>' + sum2 + '<b> </td> </tr>';
         document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
         document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
@@ -440,6 +543,9 @@
         var sum1 = 0;
         var sum2 = 0;
         var sum3 = 0;
+        var kyat = 0;
+        var pal = 0;
+        var yae = 0;
         for(var i = 0; i < tds.length; i ++) {
             if(tds[i].className == 'point_eight') {
                 sum2 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
@@ -450,13 +556,36 @@
             if(tds[i].className == 'gram') {
                 sum3 += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
             }
+            if(tds[i].className == 'kyat') {
+                $kyat =kyat +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'pal') {
+                $pal=pal +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+            }
+            if(tds[i].className == 'yae') {
+                $yae=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // if($yae < 8){
+                //     $yae1=yae +=isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                // }
+                // if($yae > 8){
+                //     // $yaemins=$yae/8;
+                //     // $yaemin=$yae%8;
+                //     // $yae1=$yaemin;
+                //     // $pal+=$yaemins;
+                //     $yae1="kdfdd";
+                // }
+            }
 
         }
-        document.getElementById('dataTableInvoice').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td><b>' + sum2+ '</b></td><td></td><td></td><td></td><td><b>' + sum3+ '</b></td> </tr> ';
+        document.getElementById('dataTableInvoice').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td><td><b>' + sum2 + '<b></td><td><b>' + sum3 + '<b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>' + $kyat + '<b></td> <td><b>' + $pal+ '</b></td><td><b>' + $yae+ '</b></td> </tr> ';
         document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point Eight</b><br><b>' + sum2 + '<b> </td> </tr>';
         document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
         document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
-        document.getElementById('TotalGam').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
+        // document.getElementById('dataTableInvoice').innerHTML += '<tr> <td><b>Total</b></td><td></td><td></td><td></td> <td><b>' + sum1 + '<b></td> <td><b>' + sum2+ '</b></td><td><b>' + sum3+ '</b></td> </tr> ';
+        // document.getElementById('TotalPoint').innerHTML += '<tr><td><b>Total Point Eight</b><br><b>' + sum2 + '<b> </td> </tr>';
+        // document.getElementById('TotalQuantity').innerHTML += '<tr><td><b>Total Quantity</b><br><b>' + sum1 + '<b> </td> </tr>';
+        // document.getElementById('TotalGram').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
+       // document.getElementById('TotalGam').innerHTML += '<tr><td><b>Total Gram</b><br><b>' + sum3 + '<b> </td> </tr>';
     </script>
     <script>
         $('.form-group').on('input','.prc',function () {
@@ -469,6 +598,7 @@
             });
             $('#point').val(totalSum);
         });
+
         $('.form-group').on('input','.pc0',function () {
             var totalSum=0;
             $('.form-group .pc0').each(function () {
@@ -479,26 +609,432 @@
             });
             $('#text4').val(totalSum);
         });
-        $('.form-group').on('input','.pa0',function () {
-            var totalSum=0;
-            $('.form-group .pa0').each(function () {
-                var inputVal=$(this).val();
-                if($.isNumeric(inputVal)){
-                    totalSum +=parseFloat(inputVal)/2;
+
+        $('.form-group').on('input','.pc1',function () {
+            $kyat=0;
+            $pal=0;
+            $yae=0;
+            $inputVal=0;
+            $number=16.6;
+            $('.form-group .pc1').each(function () {
+                $inputVal=$(this).val();
+                if($.isNumeric($inputVal)){
+                    $kyat =parseInt($inputVal/$number);
+                    $pal =parseFloat((($inputVal/$number)-$kyat)*16);
+                    $pal1=parseInt($pal);
+                    $yae=$pal-$pal1;
+                    $yae1=$yae*8;
+                    $form=parseFloat($yae1).toFixed(2);
+                    // $pal2 =parseInt((((($inputVal%$number)/$number)*16)/$number)*8);
                 }
             });
-            $('#total_point').val(totalSum);
+            $('#kyat').val($kyat);
+            $('#pal').val($pal1);
+            $('#yae').val($form);
         });
-        // $('.form-group').on('input','.pc0',function () {
-        //     var totalSum=0;
-        //     $('.form-group .pc0').each(function () {
-        //         var inputVal=$(this).val();
-        //         if($.isNumeric(inputVal)){
-        //             totalSum +=parseFloat(inputVal);
-        //         }
-        //     });
-        //     $('#text1').val(totalSum);
-        // });
+
+        $(document).ready(function () {
+                $('.form-group').on('input', '.previous_remain_kyat', function () {
+                    //var previous_remain_kyat=$kyat;
+                    var previous_remain_kyat = $('#total_kyat').val();
+                    $('.form-group .previous_remain_kyat').each(function () {
+                        var inputVal = $(this).val();
+                        if ($.isNumeric(inputVal)) {
+                            $payment_kyat = parseInt(previous_remain_kyat) + parseInt(inputVal);
+                        }
+                    });
+                    $('#buy_debit_kyat').val($payment_kyat);
+                });
+            $('.form-group').on('input','.previous_remain_pal',function () {
+                var previous_remain_pal=$('#total_pal').val();
+                $('.form-group .previous_remain_pal').each(function () {
+                    var inputVal=$(this).val();
+                    if($.isNumeric(inputVal)){
+                        $payment_pal=parseInt(previous_remain_pal) +parseInt(inputVal);
+                    }
+                    if ($payment_pal < 16){
+                        $('#buy_debit_pal').val($payment_pal);
+                        $('#buy_debit_kyat').val($payment_kyat);
+                    }
+                    else if($payment_pal >= 16){
+                        $pal_plus=$payment_pal/16;
+                        $aa=$payment_pal%16;
+                        $('#buy_debit_pal').val($aa);
+                        $('#buy_debit_kyat').val($payment_kyat+$pal_plus);
+                    }
+
+                });
+
+            });
+
+            $('.form-group').on('input','.previous_remain_yae',function () {
+                var previous_remain_yae=parseFloat($('#total_yae').val());
+                $('.form-group .previous_remain_yae').each(function () {
+                    var inputVal1 = $(this).val();
+                    if ($.isNumeric(inputVal1)) {
+                        $payment_y = previous_remain_yae + parseFloat(inputVal1);
+                        $payment_yae = parseFloat($payment_y).toFixed(2);
+                    }
+                    if($payment_yae < 8 ){
+                        $('#buy_debit_yae').val($payment_yae);
+                        $('#buy_debit_pal').val($payment_pal);
+                    }
+                    else if($payment_yae >= 8){
+                        $yae_plus=parseInt($payment_yae/8);
+                        $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
+                        $('#buy_debit_pal').val(parseInt($payment_pal+$yae_plus));
+                    }
+                    if ( ($('#buy_debit_pal').val()) >=16){
+                        $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
+                        $payment_pal+=$payment_yae/8;
+                        $pal_plus=$payment_pal/16;
+                        $palremain=parseInt($payment_pal%16);
+                        $('#buy_debit_pal').val($palremain);
+                        $('#buy_debit_kyat').val(parseInt($payment_kyat+$pal_plus));
+
+                    }
+                });
+            });
+
+        });
+                    // if ( ($('#buy_debit_yae').val()) >=16){
+                    //     $('#buy_debit_yae').val($payment_yae%8);
+                    //     $payment_pal+=$payment_yae/8;
+                    //     $pal_plus=$payment_pal/16;
+                    //     $palremain=parseInt($payment_pal%16);
+                    //     $('#buy_debit_pal').val($palremain);
+                    //     $('#buy_debit_kyat').val($payment_kyat+$pal_plus);
+                    //
+                    // }
+
+
+
+            // $('.form-group').on('input','.pc21',function () {
+            //     var previous_remain_pal=$pal1;
+            //     $('.form-group .pc21').each(function () {
+            //         var inputVal=$(this).val();
+            //         if($.isNumeric(inputVal)<16){
+            //             $payment_pal=previous_remain_pal +=parseInt(inputVal);
+            //             $('#bye_debit_pal').val($payment_pal);
+            //         }
+            //         if($payment_pal >= 16){
+            //             $resultPal=0;
+            //            // $PlusKyat=$payment_pal / 8;
+            //             $resultPal=$payment_pal % 16;
+            //            // $totalPalss = $payment_kyat;
+            //             //$resultPal11=$totalPalss+$PlusPal;
+            //
+            //             $('#bye_debit_pal').val($resultPal);
+            //             $('#bye_debit_kyat').val($payment_kyat+1);
+            //
+            //         }
+            //     });
+            //
+            // });
+            // $('.form-group').on('input','.pc21',function () {
+            //     var previous_remain_pal=$pal1;
+            //     $('.form-group .pc21').each(function () {
+            //         var inputVal=$(this).val();
+            //         if($.isNumeric(inputVal)){
+            //             $payment_pal=previous_remain_pal +=parseInt(inputVal);
+            //         }
+            //         if($payment_pal<16){
+            //             $palunder16=$('#buy_debit_pal').val($payment_pal);
+            //             $kyatunder16=$('#buy_debit_kyat').val($payment_kyat);
+            //
+            //         }
+            //          if($payment_pal >= 16){
+            //             $resultPal=0;
+            //             $PlusKyat=$payment_pal / 16;
+            //             $resultPal=$payment_pal % 16;
+            //             $totalkyat=parseInt($payment_kyat+$PlusKyat);
+            //
+            //
+            //             $palovergrater=$('#buy_debit_pal').val($resultPal);
+            //             $kyatovergrater=$('#buy_debit_kyat').val($totalkyat);
+            //         }
+            //         // if($payment_yae < 8){
+            //         //     $('#buy_debit_yae').val($payment_yae);
+            //         // }
+            //         // else if($payment_yae >= 8){
+            //         //     $resultYae=0;
+            //         //     $PlusPal=$payment_yae / 8;
+            //         //     $resultYae=$payment_yae % 8;
+            //         //     $totalpal=parseInt($payment_pal+$PlusPal);
+            //         //
+            //         //     $('#buy_debit_yae').val($resultYae);
+            //         //     $('#buy_debit_pal').val($totalpal);
+            //         //
+            //         // }
+            //     });
+            //
+            // });
+
+
+            // $('.form-group').on('input','.previous_remain_yae',function () {
+            //     var previous_remain_yae=parseFloat($('#total_yae').val());
+            //     $('.form-group .previous_remain_yae').each(function () {
+            //         var inputVal1 = $(this).val();
+            //         if ($.isNumeric(inputVal1)) {
+            //             $payment_y=previous_remain_yae + parseFloat(inputVal1);
+            //             $payment_yae = parseFloat($payment_y).toFixed(2);
+            //
+            //             $('#buy_debit_yae').val($payment_yae);
+            //
+            //
+            //         }
+
+
+            //         if($payment_yae < 8){
+            //             $yaeunder8=$('#buy_debit_yae').val($payment_yae);
+            //             $palunder8=$('#buy_debit_pal').val($payment_pal);
+            //             $('#buy_debit_kyat').val($payment_kyat);
+            //             if($payment_pal >=16){
+            //                 $('#buy_debit_pal').val($payment_pal % 16);
+            //                 $('#buy_debit_kyat').val($payment_kyat+1);
+            //
+            //             }
+            //         }
+            //         if($payment_yae >= 8){
+            //             $resultYae=0;
+            //             $PlusPal=$payment_yae / 8;
+            //             $resultYae=parseFloat($payment_yae % 8).toFixed(2);
+            //             $totalpal=parseInt($payment_pal+$PlusPal);
+            //
+            //             if($payment_pal>=16 && $payment_yae >=8){
+            //
+            //                 $yae167=$('#buy_debit_yae').val($resultYae);
+            //                 $pal167=$('#buy_debit_pal').val($resultPal+1);
+            //                 //$('#buy_debit_kyat').val($payment_kyat+1);
+            //
+            //             }
+            //             if($payment_pal<16 && $payment_yae < 8){
+            //                 $yae165=$('#buy_debit_yae').val($resultYae);
+            //                 $pal165=$('#buy_debit_pal').val($totalpal);
+            //
+            //             }
+            //             if($payment_pal<16 && $payment_yae >= 8){
+            //                 $yae164=$('#buy_debit_yae').val($resultYae);
+            //                 $pal164=$('#buy_debit_pal').val($totalpal);
+            //                 if($totalpal === 16){
+            //                     $kyatequal16=$('#buy_debit_kyat').val($payment_kyat+1);
+            //                     $palequal16=$('#buy_debit_pal').val($totalpal % 16);
+            //                 }
+            //
+            //             }
+            //         }
+            //
+
+        $(document).ready(function () {
+            $('.form-group').on('input','.pc23',function () {
+                $totalSumkyat=$('#buy_debit_kyat').val();
+                $('.form-group .pc23').each(function () {
+                    var inputVal=$(this).val();
+                    if($.isNumeric(inputVal)){
+                        $totalSumkyat -=parseInt(inputVal);
+                    }
+                });
+                $('#now_remain_kyat').val($totalSumkyat);
+            });
+             $('.form-group').on('input','.pc24',function () {
+                $totalSumpal=$('#buy_debit_pal').val();
+                $('.form-group .pc24').each(function () {
+                    var inputVal=$(this).val();
+                    if($.isNumeric(inputVal)){
+                        if(inputVal < $totalSumpal) {
+                            $totalSumpal -= parseInt(inputVal);
+                            $('#now_remain_pal').val($totalSumpal);
+                        }
+                    }
+                    if(inputVal === $totalSumpal){
+                        $('#now_remain_pal').val(0);
+                    }
+                    // if (inputVal > $totalSumpal && $totalSumpal !==0){
+                     if (inputVal > $totalSumpal){
+                        //$('#now_remain_pal').val($totalSumpal-1);
+                        $('#now_remain_kyat').val($totalSumkyat-1);
+                        $inputpal=parseInt($('#buy_debit_pal').val())+16;
+                        $totalSumPal1=parseInt($inputpal-inputVal);
+                        $('#now_remain_pal').val($totalSumPal1);
+                        if($totalSumpal === 0 && inputVal > $totalSumyae ){
+                            $('#now_remain_kyat').val($totalSumkyat-1);
+                            $('#now_remain_pal').val($totalSumpal+15);
+                            $inputyae=parseInt($('#buy_debit_yae').val())+8;
+                            $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
+                            $('#now_remain_yae').val($totalSumYae);
+                        }
+
+                        // $gettotalkyat=parseInt($('#buy_debit_kyat').val())-1;
+                        // $totalSumpal=$totalSumpal+16;
+                        // if(parseInt($('#payment_yae').val()) > parseInt($('#buy_debit_yae').val())){
+                        //     $('#now_remain_pal').val("gekdkjd");
+                        // }
+                    }
+                    // else if($('#now_remain_pal').val(0)){
+                    //     $('#now_remain_pal').val(0);
+                    //
+                    // }
+                });
+            });
+             $('.form-group').on('input','.pc25',function () {
+                $totalSumyae=$('#buy_debit_yae').val();
+                $('.form-group .pc25').each(function () {
+                    var inputVal=$(this).val();
+                    if($.isNumeric(inputVal)){
+
+                        if (inputVal < $totalSumyae ) {
+                            //$('#now_remain_pal').val($totalSumpal2);
+                            $totalSumyae -=parseFloat(inputVal).toFixed(2);
+                            // $r=parseFloat($aa).toFixed(2);
+                            $('#now_remain_yae').val(parseFloat($totalSumyae).toFixed(2));
+                        }
+                        else if (inputVal > $totalSumyae){
+                            $('#now_remain_pal').val($totalSumpal-1);
+                            $('#now_remain_kyat').val($totalSumkyat);
+                            $inputyae=parseInt($('#buy_debit_yae').val())+8;
+                            $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
+                            $('#now_remain_yae').val($totalSumYae);
+                            if($totalSumpal ===0 && inputVal > $totalSumyae ){
+                                $('#now_remain_kyat').val($totalSumkyat-1);
+                                $('#now_remain_pal').val($totalSumpal+15);
+                                $inputyae=parseInt($('#buy_debit_yae').val())+8;
+                                $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
+                                $('#now_remain_yae').val($totalSumYae);
+                            }
+                        }
+                         if( inputVal > $totalSumpal && inputVal > $totalSumyae){
+                            $('#now_remain_pal').val($totalSumPal1-1);
+                            $('#now_remain_kyat').val($totalSumkyat-1);
+                            $inputyae=parseInt($('#buy_debit_yae').val())+8;
+                            $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
+                            $('#now_remain_yae').val($totalSumYae);
+                            if($totalSumpal ===0 && inputVal > $totalSumyae ){
+                                $('#now_remain_kyat').val($totalSumkyat-1);
+                                $('#now_remain_pal').val($totalSumpal+15);
+                                $inputyae=parseInt($('#buy_debit_yae').val())+8;
+                                $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
+                                $('#now_remain_yae').val($totalSumYae);
+                            }
+                        }
+                        //  if( inputVal < $totalSumpal && inputVal > $totalSumyae){
+                        //     //$('#now_remain_pal').val($totalSumpal-1);
+                        //     //('#now_remain_kyat').val($totalSumkyat-1);
+                        //     $inputyae=parseInt($('#buy_debit_yae').val())+8;
+                        //     $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
+                        //     $('#now_remain_yae').val($totalSumYae);
+                        //     // if($totalSumpal ===0 && inputVal > $totalSumyae ){
+                        //     //     $('#now_remain_kyat').val($totalSumkyat-1);
+                        //     //     $('#now_remain_pal').val($totalSumpal+15);
+                        //     //     $inputyae=parseInt($('#buy_debit_yae').val())+8;
+                        //     //     $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
+                        //     //     $('#now_remain_yae').val($totalSumYae);
+                        //     // }
+                        // }
+                        else if(inputVal === $totalSumyae){
+                            $('#now_remain_yae').val(0);
+
+                        }
+
+                    }
+                });
+            });
+
+
+        });
+
+
+        $('.form-group').on('input','#first_name',function () {
+            var totalSum=0;
+            $('.form-group #first_name').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum +=parseFloat(inputVal);
+                }
+            });
+            $('#showpoint').val(totalSum);
+        });
+        $('.form-group').on('input','.pc10',function () {
+            var totalSum=0;
+            $('.form-group .pc10').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum =parseFloat(inputVal);
+                }
+            });
+            $('#text10').val(totalSum);
+        });
+        $('.form-group').on('input','.pc11',function () {
+            var totalSum=0;
+            $('.form-group .pc11').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum =parseFloat(inputVal);
+                }
+            });
+            $('#text11').val(totalSum);
+        });
+        $('.form-group').on('input','.pc12',function () {
+            var totalSum=0;
+            $('.form-group .pc12').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum =parseFloat(inputVal);
+                }
+            });
+            $('#text12').val(totalSum);
+        });
+       $('.form-group').on('input','.pc15',function () {
+            var totalSum=0;
+            $('.form-group .pc15').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum =parseFloat(inputVal);
+                }
+            });
+            $('#text15').val(totalSum);
+        });
+
+        $('.form-group').on('input','.pc14',function () {
+            var totalSum=0;
+            $('.form-group .pc14').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    totalSum =parseFloat(inputVal);
+                }
+            });
+            $('#text14').val(totalSum);
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+                $('.form-group').on('input','.ex1',function () {
+                    $kyat=0;
+                    $pal=0;
+                    $yae=0;
+                    $inputVal=0;
+                    $number=16.6;
+                    $('.form-group .ex1').each(function () {
+                        $inputVal=$(this).val();
+                        if($.isNumeric($inputVal)){
+                            $kyat =parseInt($inputVal/$number);
+                            $pal =parseFloat((($inputVal/$number)-$kyat)*16);
+                            $pal1=parseInt($pal);
+                            $yae=$pal-$pal1;
+                            $yae1=$yae*8;
+                            $form=parseFloat($yae1).toFixed(2);
+
+                            // $pal2 =parseInt((((($inputVal%$number)/$number)*16)/$number)*8);
+
+                        }
+                    });
+                    $('#kyat').val($kyat);
+                    $('#pal').val($pal1);
+                    $('#yae').val($form);
+
+
+                });
+        });
     </script>
 
     <script>

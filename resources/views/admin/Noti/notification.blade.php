@@ -25,35 +25,6 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-            {{--<div class="col-md-8">--}}
-                {{--<div class="panel">--}}
-                    {{--<div class="panel-heading" style="background: #1e282c;color: #fff0ff;"><h4>Notification</h4></div>--}}
-                    {{--<div class="panel-body">--}}
-                        {{--<table class="table table-bordered" >--}}
-                            {{--<thead>--}}
-                            {{--<tr>--}}
-                                {{--<td>Id</td>--}}
-                                {{--<td>Account Name</td>--}}
-                                {{--<td>Customer Name</td>--}}
-                                {{--<td>Notification</td>--}}
-                            {{--</tr>--}}
-                            {{--</thead>--}}
-                            {{--<tbody>--}}
-                            {{--<?php $total = 0; ?>--}}
-                            {{--@foreach($customers as $cus)--}}
-                                {{--<?php $total ++== $total; ?>--}}
-                                {{--<tr>--}}
-                                    {{--<td>{{$total}}</td>--}}
-                                    {{--<td>{{$cus->user_name}}</td>--}}
-                                    {{--<td>{{$cus->customer_name}}</td>--}}
-                                    {{--<td>{{$cus->notification}}</td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
-                            {{--</tbody>--}}
-                        {{--</table>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel">
                     <div class="panel-heading" style="background: #1e282c;color: #fff0ff;"><h4>Notification</h4></div>

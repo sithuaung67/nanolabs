@@ -37,7 +37,7 @@
                         @if($errors->has('name')) <span class="help-block">{{$errors->first('name')}}</span> @endif
                     </div>
                     <div class="form-group has-feedback @if($errors->has('full_name')) has-error @endif">
-                        <label for="full_name" class="control-label">Sale Name</label>
+                        <label for="    full_name" class="control-label">Sale Name</label>
                         <input type="text" name="full_name" id="full_name" class="form-control">
                         <span class="glyphicon glyphicon-book form-control-feedback"></span>
                         @if($errors->has('full_name')) <span class="help-block">{{$errors->first('full_name')}}</span> @endif
@@ -60,13 +60,19 @@
                         <span class="glyphicon glyphicon-book form-control-feedback"></span>
                         @if($errors->has('address')) <span class="help-block">{{$errors->first('address')}}</span> @endif
                     </div>
+                    {{--<div class="form-group has-feedback @if($errors->has('password')) has-error @endif">--}}
+                        {{--<label for="password" class="control-label">Password</label>--}}
+                        {{--<input  type="password" name="password" id="password" class="form-control">--}}
+                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
+                        {{--@if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif--}}
+                    {{--</div>--}}
 
-                    <div class="form-group has-feedback @if($errors->has('town')) has-error @endif">
-                        <label for="town" class="control-label">Town</label>
-                        <input type="text" name="town" id="town" class="form-control">
-                        <span class="glyphicon glyphicon-book form-control-feedback"></span>
-                        @if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif
-                    </div>
+                    {{--<div class="form-group has-feedback @if($errors->has('town')) has-error @endif">--}}
+                        {{--<label for="town" class="control-label">Town</label>--}}
+                        {{--<input type="text" name="town" id="town" class="form-control">--}}
+                        {{--<span class="glyphicon glyphicon-book form-control-feedback"></span>--}}
+                        {{--@if($errors->has('town')) <span class="help-block">{{$errors->first('town')}}</span> @endif--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg">Create</button>
                     </div>
