@@ -119,3 +119,20 @@
 @section('script')
 
 @stop
+
+
+
+{{--else if($inputValPal === $totalayotpal){--}}
+{{--$testing=parseInt($('#now_total_ayot_pal').val()+15);--}}
+{{--$('#now_total_ayot_pal').val($testing);--}}
+{{--$totalayotyae1=parseFloat($totalayotyae)+8;--}}
+{{--$totalayotyae2=parseFloat($totalayotyae1-$inputValYae).toFixed(2);--}}
+{{--$('#now_total_ayot_yae').val($totalayotyae2);--}}
+{{--}--}}
+
+
+
+
+
+
+

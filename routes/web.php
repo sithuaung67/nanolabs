@@ -185,7 +185,8 @@ Route::group(['middleware'=>'auth'], function (){
         ]);
 
 
-        //invoice
+        //Invoice
+
         Route::get('invoice',[
            'uses'=>'AdminController@getInvoice',
            'as'=>'invoices'

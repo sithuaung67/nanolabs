@@ -609,14 +609,75 @@
             });
             $('#text4').val(totalSum);
         });
+        $('.form-group').on('input','.return_quantity',function () {
+            $normal=$('#normal').val();
+            $('.form-group .return_quantity').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    $now_remain_normal=parseInt($normal-inputVal);
+                    $('#now_remain_quantity').val($now_remain_normal);
 
-        $('.form-group').on('input','.pc1',function () {
+                }
+            });
+        });
+        $('.form-group').on('input','.return_pointeight',function () {
+            $pointEight=$('#point_eight').val();
+            $('.form-group .return_pointeight').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    $now_remain_pointeight=parseInt($pointEight-inputVal);
+                    $('#now_remain_pointeight').val($now_remain_pointeight);
+
+                }
+            });
+        });
+        $('.form-group').on('input','.return_gram',function () {
+            $gram=$('#gram').val();
+            $now_remain_gram=$('#now_remain_gram').val();
+            $('.form-group .return_gram').each(function () {
+                var inputVal=$(this).val();
+                if($.isNumeric(inputVal)){
+                    $now_remain_gram=parseFloat($gram-inputVal).toFixed(2);
+                    $now_remain_gram=parseFloat($now_remain_gram).toFixed(2);
+                    $('#now_remain_gram').val($now_remain_gram);
+                }
+            });
+        });
+
+            $('.form-group').on('input','.pc1',function () {
             $kyat=0;
             $pal=0;
             $yae=0;
             $inputVal=0;
             $number=16.6;
             $('.form-group .pc1').each(function () {
+
+                $inputVal=$(this).val();
+                if($.isNumeric($inputVal)){
+                    $kyat =parseInt($inputVal/$number);
+                    $pal =parseFloat((($inputVal/$number)-$kyat)*16);
+                    $pal1=parseInt($pal);
+                    $yae=$pal-$pal1;
+                    $yae1=$yae*8;
+                    $form=parseFloat($yae1).toFixed(2);
+                    // $pal2 =parseInt((((($inputVal%$number)/$number)*16)/$number)*8);
+                    //
+
+
+                }
+            });
+            $('#kyat').val($kyat);
+            $('#pal').val($pal1);
+            $('#yae').val($form);
+        });
+        // $('.form-group').on('input','.now_remain_gram',function () {
+        $("#now_remain_gram_btn").click(function(){
+            $kyat=0;
+            $pal=0;
+            $yae=0;
+            $inputVal=0;
+            $number=16.6;
+            $('.form-group .now_remain_gram').each(function () {
                 $inputVal=$(this).val();
                 if($.isNumeric($inputVal)){
                     $kyat =parseInt($inputVal/$number);
@@ -628,12 +689,96 @@
                     // $pal2 =parseInt((((($inputVal%$number)/$number)*16)/$number)*8);
                 }
             });
-            $('#kyat').val($kyat);
-            $('#pal').val($pal1);
-            $('#yae').val($form);
+            $('#sub_return_kyat').val($kyat);
+            $('#sub_return_pal').val($pal1);
+            $('#sub_return_yae').val($form);
         });
 
-        $(document).ready(function () {
+
+        // $(document).ready(function () {
+        //         $('.form-group').on('input', '.previous_remain_kyat', function () {
+        //             //var previous_remain_kyat=$kyat;
+        //             var previous_remain_kyat = $('#total_kyat').val();
+        //             $('.form-group .previous_remain_kyat').each(function () {
+        //                 var inputVal = $(this).val();
+        //                 if ($.isNumeric(inputVal)) {
+        //                     $payment_kyat = parseInt(previous_remain_kyat) + parseInt(inputVal);
+        //                 }
+        //             });
+        //             $('#buy_debit_kyat').val($payment_kyat);
+        //         });
+        //     $('.form-group').on('input','.previous_remain_pal',function () {
+        //         var previous_remain_pal=$('#total_pal').val();
+        //         $('.form-group .previous_remain_pal').each(function () {
+        //             var inputVal=$(this).val();
+        //             if($.isNumeric(inputVal)){
+        //                 $payment_pal=parseInt(previous_remain_pal) +parseInt(inputVal);
+        //             }
+        //             if ($payment_pal < 16){
+        //                 $('#buy_debit_pal').val($payment_pal);
+        //                 $('#buy_debit_kyat').val($payment_kyat);
+        //             }
+        //             else if($payment_pal >= 16){
+        //                 $pal_plus=parseInt($payment_pal/16);
+        //                 $aa=$payment_pal%16;
+        //                 $('#buy_debit_pal').val($aa);
+        //                 $('#buy_debit_kyat').val($payment_kyat+$pal_plus);
+        //             }
+        //
+        //
+        //         });
+        //
+        //     });
+        //
+        //     $('.form-group').on('input','.previous_remain_yae',function () {
+        //         var previous_remain_yae=parseFloat($('#total_yae').val());
+        //         $('.form-group .previous_remain_yae').each(function () {
+        //             var inputVal1 = $(this).val();
+        //             if ($.isNumeric(inputVal1)) {
+        //                 $payment_y = previous_remain_yae + parseFloat(inputVal1);
+        //                 $payment_yae = parseFloat($payment_y).toFixed(2);
+        //             }
+        //             if($payment_yae < 8 ){
+        //                 if(($('#buy_debit_pal').val()) < 16){
+        //
+        //                     $('#buy_debit_yae').val($payment_yae);
+        //                     $('#buy_debit_pal').val($payment_pal);
+        //                 }
+        //                 // if(($('#buy_debit_pal').val()) < 16){
+        //                 //     // $pal_plus=parseInt($payment_pal/16);
+        //                 //     // $payment_pal1=$payment_pal%16;
+        //                 //     // $('#buy_debit_yae').val(parseFloat($payment_yae).toFixed(2));
+        //                 //     // $('#buy_debit_pal').val(parseInt($payment_pal1+$pal_plus));
+        //                 // }
+        //                 else if(($('#buy_debit_pal').val()) > 16){
+        //                     $payment_pal2=$payment_pal%16;
+        //                     $('#buy_debit_yae').val(parseFloat($payment_yae).toFixed(2));
+        //                     $('#buy_debit_pal').val(parseInt($payment_pal2));
+        //                 }
+        //
+        //                 }
+        //             // else if($payment_yae >= 8){
+        //             //
+        //             //     if(($('#buy_debit_pal').val()) < 16){
+        //             //         $yae_plus=parseInt($payment_yae/8);
+        //             //         $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
+        //             //         $('#buy_debit_pal').val(parseInt($payment_pal+$yae_plus));
+        //             //     }
+        //             // }
+        //             // else if ( ($('#buy_debit_pal').val()) >=16){
+        //             //     $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
+        //             //     $payment_pal+=$payment_yae/8;
+        //             //     $pal_plus=$payment_pal/16;
+        //             //     $palremain=parseInt($payment_pal%16);
+        //             //     $('#buy_debit_pal').val($palremain);
+        //             //     $('#buy_debit_kyat').val(parseInt($payment_kyat+$pal_plus));
+        //             //
+        //             // }
+        //         });
+        //     });
+
+
+            $(document).ready(function () {
                 $('.form-group').on('input', '.previous_remain_kyat', function () {
                     //var previous_remain_kyat=$kyat;
                     var previous_remain_kyat = $('#total_kyat').val();
@@ -645,302 +790,52 @@
                     });
                     $('#buy_debit_kyat').val($payment_kyat);
                 });
-            $('.form-group').on('input','.previous_remain_pal',function () {
-                var previous_remain_pal=$('#total_pal').val();
-                $('.form-group .previous_remain_pal').each(function () {
-                    var inputVal=$(this).val();
-                    if($.isNumeric(inputVal)){
-                        $payment_pal=parseInt(previous_remain_pal) +parseInt(inputVal);
-                    }
-                    if ($payment_pal < 16){
-                        $('#buy_debit_pal').val($payment_pal);
-                        $('#buy_debit_kyat').val($payment_kyat);
-                    }
-                    else if($payment_pal >= 16){
-                        $pal_plus=$payment_pal/16;
-                        $aa=$payment_pal%16;
-                        $('#buy_debit_pal').val($aa);
-                        $('#buy_debit_kyat').val($payment_kyat+$pal_plus);
-                    }
-
+                $('.form-group').on('input','.previous_remain_pal',function () {
+                    var previous_remain_pal=$('#total_pal').val();
+                    $('.form-group .previous_remain_pal').each(function () {
+                        var inputVal=$(this).val();
+                        if($.isNumeric(inputVal)){
+                            $payment_pal=parseInt(previous_remain_pal) +parseInt(inputVal);
+                        }
+                        if ($payment_pal < 16){
+                            $('#buy_debit_pal').val($payment_pal);
+                            $('#buy_debit_kyat').val($payment_kyat);
+                        }
+                        else if($payment_pal >= 16){
+                            $pal_plus=$payment_pal/16;
+                            $aa=$payment_pal%16;
+                            $('#buy_debit_pal').val($aa);
+                            $('#buy_debit_kyat').val($payment_kyat+$pal_plus);
+                        }
+                    });
                 });
-
-            });
-
-            $('.form-group').on('input','.previous_remain_yae',function () {
-                var previous_remain_yae=parseFloat($('#total_yae').val());
-                $('.form-group .previous_remain_yae').each(function () {
-                    var inputVal1 = $(this).val();
-                    if ($.isNumeric(inputVal1)) {
-                        $payment_y = previous_remain_yae + parseFloat(inputVal1);
-                        $payment_yae = parseFloat($payment_y).toFixed(2);
-                    }
-                    if($payment_yae < 8 ){
-                        $('#buy_debit_yae').val($payment_yae);
-                        $('#buy_debit_pal').val($payment_pal);
-                    }
-                    else if($payment_yae >= 8){
-                        $yae_plus=parseInt($payment_yae/8);
-                        $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
-                        $('#buy_debit_pal').val(parseInt($payment_pal+$yae_plus));
-                    }
-                    if ( ($('#buy_debit_pal').val()) >=16){
-                        $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
-                        $payment_pal+=$payment_yae/8;
-                        $pal_plus=$payment_pal/16;
-                        $palremain=parseInt($payment_pal%16);
-                        $('#buy_debit_pal').val($palremain);
-                        $('#buy_debit_kyat').val(parseInt($payment_kyat+$pal_plus));
-
-                    }
+                $('.form-group').on('input','.previous_remain_yae',function () {
+                    var previous_remain_yae=parseFloat($('#total_yae').val());
+                    $('.form-group .previous_remain_yae').each(function () {
+                        var inputVal1 = $(this).val();
+                        if ($.isNumeric(inputVal1)) {
+                            $payment_y = previous_remain_yae + parseFloat(inputVal1);
+                            $payment_yae = parseFloat($payment_y).toFixed(2);
+                        }
+                        if($payment_yae < 8 ){
+                            $('#buy_debit_yae').val($payment_yae);
+                            $('#buy_debit_pal').val($payment_pal);
+                        }
+                        else if($payment_yae >= 8){
+                            $yae_plus=parseInt($payment_yae/8);
+                            $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
+                            $('#buy_debit_pal').val(parseInt($payment_pal+$yae_plus));
+                        }
+                        if ( ($('#buy_debit_pal').val()) >=16){
+                            $('#buy_debit_yae').val(parseFloat($payment_yae%8).toFixed(2));
+                            $payment_pal+=$payment_yae/8;
+                            $pal_plus=$payment_pal/16;
+                            $palremain=parseInt($payment_pal%16);
+                            $('#buy_debit_pal').val($palremain);
+                            $('#buy_debit_kyat').val(parseInt($payment_kyat+$pal_plus));
+                        }
+                    });
                 });
-            });
-
-        });
-                    // if ( ($('#buy_debit_yae').val()) >=16){
-                    //     $('#buy_debit_yae').val($payment_yae%8);
-                    //     $payment_pal+=$payment_yae/8;
-                    //     $pal_plus=$payment_pal/16;
-                    //     $palremain=parseInt($payment_pal%16);
-                    //     $('#buy_debit_pal').val($palremain);
-                    //     $('#buy_debit_kyat').val($payment_kyat+$pal_plus);
-                    //
-                    // }
-
-
-
-            // $('.form-group').on('input','.pc21',function () {
-            //     var previous_remain_pal=$pal1;
-            //     $('.form-group .pc21').each(function () {
-            //         var inputVal=$(this).val();
-            //         if($.isNumeric(inputVal)<16){
-            //             $payment_pal=previous_remain_pal +=parseInt(inputVal);
-            //             $('#bye_debit_pal').val($payment_pal);
-            //         }
-            //         if($payment_pal >= 16){
-            //             $resultPal=0;
-            //            // $PlusKyat=$payment_pal / 8;
-            //             $resultPal=$payment_pal % 16;
-            //            // $totalPalss = $payment_kyat;
-            //             //$resultPal11=$totalPalss+$PlusPal;
-            //
-            //             $('#bye_debit_pal').val($resultPal);
-            //             $('#bye_debit_kyat').val($payment_kyat+1);
-            //
-            //         }
-            //     });
-            //
-            // });
-            // $('.form-group').on('input','.pc21',function () {
-            //     var previous_remain_pal=$pal1;
-            //     $('.form-group .pc21').each(function () {
-            //         var inputVal=$(this).val();
-            //         if($.isNumeric(inputVal)){
-            //             $payment_pal=previous_remain_pal +=parseInt(inputVal);
-            //         }
-            //         if($payment_pal<16){
-            //             $palunder16=$('#buy_debit_pal').val($payment_pal);
-            //             $kyatunder16=$('#buy_debit_kyat').val($payment_kyat);
-            //
-            //         }
-            //          if($payment_pal >= 16){
-            //             $resultPal=0;
-            //             $PlusKyat=$payment_pal / 16;
-            //             $resultPal=$payment_pal % 16;
-            //             $totalkyat=parseInt($payment_kyat+$PlusKyat);
-            //
-            //
-            //             $palovergrater=$('#buy_debit_pal').val($resultPal);
-            //             $kyatovergrater=$('#buy_debit_kyat').val($totalkyat);
-            //         }
-            //         // if($payment_yae < 8){
-            //         //     $('#buy_debit_yae').val($payment_yae);
-            //         // }
-            //         // else if($payment_yae >= 8){
-            //         //     $resultYae=0;
-            //         //     $PlusPal=$payment_yae / 8;
-            //         //     $resultYae=$payment_yae % 8;
-            //         //     $totalpal=parseInt($payment_pal+$PlusPal);
-            //         //
-            //         //     $('#buy_debit_yae').val($resultYae);
-            //         //     $('#buy_debit_pal').val($totalpal);
-            //         //
-            //         // }
-            //     });
-            //
-            // });
-
-
-            // $('.form-group').on('input','.previous_remain_yae',function () {
-            //     var previous_remain_yae=parseFloat($('#total_yae').val());
-            //     $('.form-group .previous_remain_yae').each(function () {
-            //         var inputVal1 = $(this).val();
-            //         if ($.isNumeric(inputVal1)) {
-            //             $payment_y=previous_remain_yae + parseFloat(inputVal1);
-            //             $payment_yae = parseFloat($payment_y).toFixed(2);
-            //
-            //             $('#buy_debit_yae').val($payment_yae);
-            //
-            //
-            //         }
-
-
-            //         if($payment_yae < 8){
-            //             $yaeunder8=$('#buy_debit_yae').val($payment_yae);
-            //             $palunder8=$('#buy_debit_pal').val($payment_pal);
-            //             $('#buy_debit_kyat').val($payment_kyat);
-            //             if($payment_pal >=16){
-            //                 $('#buy_debit_pal').val($payment_pal % 16);
-            //                 $('#buy_debit_kyat').val($payment_kyat+1);
-            //
-            //             }
-            //         }
-            //         if($payment_yae >= 8){
-            //             $resultYae=0;
-            //             $PlusPal=$payment_yae / 8;
-            //             $resultYae=parseFloat($payment_yae % 8).toFixed(2);
-            //             $totalpal=parseInt($payment_pal+$PlusPal);
-            //
-            //             if($payment_pal>=16 && $payment_yae >=8){
-            //
-            //                 $yae167=$('#buy_debit_yae').val($resultYae);
-            //                 $pal167=$('#buy_debit_pal').val($resultPal+1);
-            //                 //$('#buy_debit_kyat').val($payment_kyat+1);
-            //
-            //             }
-            //             if($payment_pal<16 && $payment_yae < 8){
-            //                 $yae165=$('#buy_debit_yae').val($resultYae);
-            //                 $pal165=$('#buy_debit_pal').val($totalpal);
-            //
-            //             }
-            //             if($payment_pal<16 && $payment_yae >= 8){
-            //                 $yae164=$('#buy_debit_yae').val($resultYae);
-            //                 $pal164=$('#buy_debit_pal').val($totalpal);
-            //                 if($totalpal === 16){
-            //                     $kyatequal16=$('#buy_debit_kyat').val($payment_kyat+1);
-            //                     $palequal16=$('#buy_debit_pal').val($totalpal % 16);
-            //                 }
-            //
-            //             }
-            //         }
-            //
-
-        $(document).ready(function () {
-            $('.form-group').on('input','.pc23',function () {
-                $totalSumkyat=$('#buy_debit_kyat').val();
-                $('.form-group .pc23').each(function () {
-                    var inputVal=$(this).val();
-                    if($.isNumeric(inputVal)){
-                        $totalSumkyat -=parseInt(inputVal);
-                    }
-                });
-                $('#now_remain_kyat').val($totalSumkyat);
-            });
-             $('.form-group').on('input','.pc24',function () {
-                $totalSumpal=$('#buy_debit_pal').val();
-                $('.form-group .pc24').each(function () {
-                    var inputVal=$(this).val();
-                    if($.isNumeric(inputVal)){
-                        if(inputVal < $totalSumpal) {
-                            $totalSumpal -= parseInt(inputVal);
-                            $('#now_remain_pal').val($totalSumpal);
-                        }
-                    }
-                    if(inputVal === $totalSumpal){
-                        $('#now_remain_pal').val(0);
-                    }
-                    // if (inputVal > $totalSumpal && $totalSumpal !==0){
-                     if (inputVal > $totalSumpal){
-                        //$('#now_remain_pal').val($totalSumpal-1);
-                        $('#now_remain_kyat').val($totalSumkyat-1);
-                        $inputpal=parseInt($('#buy_debit_pal').val())+16;
-                        $totalSumPal1=parseInt($inputpal-inputVal);
-                        $('#now_remain_pal').val($totalSumPal1);
-                        if($totalSumpal === 0 && inputVal > $totalSumyae ){
-                            $('#now_remain_kyat').val($totalSumkyat-1);
-                            $('#now_remain_pal').val($totalSumpal+15);
-                            $inputyae=parseInt($('#buy_debit_yae').val())+8;
-                            $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
-                            $('#now_remain_yae').val($totalSumYae);
-                        }
-
-                        // $gettotalkyat=parseInt($('#buy_debit_kyat').val())-1;
-                        // $totalSumpal=$totalSumpal+16;
-                        // if(parseInt($('#payment_yae').val()) > parseInt($('#buy_debit_yae').val())){
-                        //     $('#now_remain_pal').val("gekdkjd");
-                        // }
-                    }
-                    // else if($('#now_remain_pal').val(0)){
-                    //     $('#now_remain_pal').val(0);
-                    //
-                    // }
-                });
-            });
-             $('.form-group').on('input','.pc25',function () {
-                $totalSumyae=$('#buy_debit_yae').val();
-                $('.form-group .pc25').each(function () {
-                    var inputVal=$(this).val();
-                    if($.isNumeric(inputVal)){
-
-                        if (inputVal < $totalSumyae ) {
-                            //$('#now_remain_pal').val($totalSumpal2);
-                            $totalSumyae -=parseFloat(inputVal).toFixed(2);
-                            // $r=parseFloat($aa).toFixed(2);
-                            $('#now_remain_yae').val(parseFloat($totalSumyae).toFixed(2));
-                        }
-                        else if (inputVal > $totalSumyae){
-                            $('#now_remain_pal').val($totalSumpal-1);
-                            $('#now_remain_kyat').val($totalSumkyat);
-                            $inputyae=parseInt($('#buy_debit_yae').val())+8;
-                            $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
-                            $('#now_remain_yae').val($totalSumYae);
-                            if($totalSumpal ===0 && inputVal > $totalSumyae ){
-                                $('#now_remain_kyat').val($totalSumkyat-1);
-                                $('#now_remain_pal').val($totalSumpal+15);
-                                $inputyae=parseInt($('#buy_debit_yae').val())+8;
-                                $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
-                                $('#now_remain_yae').val($totalSumYae);
-                            }
-                        }
-                         if( inputVal > $totalSumpal && inputVal > $totalSumyae){
-                            $('#now_remain_pal').val($totalSumPal1-1);
-                            $('#now_remain_kyat').val($totalSumkyat-1);
-                            $inputyae=parseInt($('#buy_debit_yae').val())+8;
-                            $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
-                            $('#now_remain_yae').val($totalSumYae);
-                            if($totalSumpal ===0 && inputVal > $totalSumyae ){
-                                $('#now_remain_kyat').val($totalSumkyat-1);
-                                $('#now_remain_pal').val($totalSumpal+15);
-                                $inputyae=parseInt($('#buy_debit_yae').val())+8;
-                                $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
-                                $('#now_remain_yae').val($totalSumYae);
-                            }
-                        }
-                        //  if( inputVal < $totalSumpal && inputVal > $totalSumyae){
-                        //     //$('#now_remain_pal').val($totalSumpal-1);
-                        //     //('#now_remain_kyat').val($totalSumkyat-1);
-                        //     $inputyae=parseInt($('#buy_debit_yae').val())+8;
-                        //     $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
-                        //     $('#now_remain_yae').val($totalSumYae);
-                        //     // if($totalSumpal ===0 && inputVal > $totalSumyae ){
-                        //     //     $('#now_remain_kyat').val($totalSumkyat-1);
-                        //     //     $('#now_remain_pal').val($totalSumpal+15);
-                        //     //     $inputyae=parseInt($('#buy_debit_yae').val())+8;
-                        //     //     $totalSumYae=parseFloat($inputyae-inputVal).toFixed(2);
-                        //     //     $('#now_remain_yae').val($totalSumYae);
-                        //     // }
-                        // }
-                        else if(inputVal === $totalSumyae){
-                            $('#now_remain_yae').val(0);
-
-                        }
-
-                    }
-                });
-            });
-
-
-        });
 
 
         $('.form-group').on('input','#first_name',function () {
@@ -1004,38 +899,332 @@
             });
             $('#text14').val(totalSum);
         });
+            });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $remainkyat=0;
+            $remainpal=0;
+            $remainyae=0.0;
+
+            $('.form-group').on('input', '.pc23', function () {
+                    $totalAmountKyat = parseInt($('#buy_debit_kyat').val());
+                $('.form-group .pc23').each(function () {
+                        $paykyat = $(this).val();
+                    if ($.isNumeric($paykyat)) {
+                        if ($paykyat <= $totalAmountKyat) {
+                            $remainkyat = $totalAmountKyat - $paykyat;
+                            $('#now_remain_kyat').val($remainkyat);
+                        }
+
+                    }
+                });
+            });
+            $('.form-group').on('input','.pc24',function () {
+                $totalAmountPal=parseInt($('#buy_debit_pal').val());
+                $nowremainkyat=parseInt($('#now_remain_kyat').val());
+                $apal=parseInt($('#payment_pal').val());
+
+                $('.form-group .pc24').each(function () {
+                    $paypal=$(this).val();
+                    if($.isNumeric($paypal)){
+                        if($paypal <= $totalAmountPal){
+                            $totalAmountPal -=$paypal;
+                            $('#now_remain_pal').val($totalAmountPal);
+                            $('#now_remain_kyat').val($remainkyat);
+
+                        }
+                        // else if($paypal <= $totalAmountPal){
+                        //     $nowremainkyat=$nowremainkyat-1;
+                        //     $('#now_remain_kyat').val($nowremainkyat);
+                        //     $totalAmountPal=$totalAmountPal+16;
+                        //     $remainpal=$totalAmountPal-$paypal;
+                        //     $('#now_remain_pal').val($remainpal);
+                        //
+                        // }
+                        else if($paypal > $totalAmountPal){
+                            $nowremainkyat=$nowremainkyat-1;
+                            $('#now_remain_kyat').val($nowremainkyat);
+                            $totalAmountPal=$totalAmountPal+16;
+                            $remainpal=$totalAmountPal-$paypal;
+                            $('#now_remain_pal').val($remainpal);
+
+                        }
+                        else if($totalAmountPal===$apal){
+                            $('#now_remain_kyat').val($remainkyat);
+
+                        }
+
+                    }
+                });
+            });
+            $('.form-group').on('input','.pc25',function () {
+                $nowremainkyat=parseInt($('#now_remain_kyat').val());
+                $totalAmountYae=parseFloat($('#buy_debit_yae').val());
+                $nowremainpal=parseInt($('#now_remain_pal').val());
+                $aat=parseInt($('#payment_pal').val());
+                $aar=parseInt($('#buy_debit_pal').val());
+                $('.form-group .pc25').each(function () {
+                    $payyae=$(this).val();
+                    if($.isNumeric($payyae)){
+                        if($payyae <= $totalAmountYae){
+                            if($nowremainpal > 0) {
+                                // $('#now_remain_kyat').val($remainkyat);
+
+                                if($aat < $aar){
+                                    $('#now_remain_kyat').val($remainkyat);
+                                    // $totalAmountYae -=$payyae;
+                                    // $('#now_remain_yae').val($totalAmountYae);
+                                    $aay=$aar-$aat;
+                                    $('#now_remain_pal').val($aay);
+
+                                    $totalAmountYae -=$payyae;
+                                    $('#now_remain_yae').val($totalAmountYae);
+
+                                }
+                                if($aat > $aar){
+                                    $remainkyat=parseInt($('#now_remain_kyat').val());
+                                    $('#now_remain_kyat').val($remainkyat);
+                                    $aar=$aar+16;
+                                    $aay=$aar-$aat;
+                                    $('#now_remain_pal').val($aay);
+                                     $totalAmountYae -=$payyae;
+                                    $('#now_remain_yae').val($totalAmountYae);
+
+                                }
+                                else if ($aat === $aar){
+                                    $akyat=parseInt($('#payment_kyat').val());
+                                    $aKyat=parseInt($('#buy_debit_kyat').val());
+                                    $nowkyat=$aKyat-$akyat;
+                                    $('#now_remain_kyat').val($nowkyat);
+
+                                    $now=$aar-$aat;
+                                    $('#now_remain_pal').val($now);
+                                    $totalAmountYae -=$payyae;
+                                    $('#now_remain_yae').val($totalAmountYae);
+
+                                }
+
+                                // $payPal=$('#payment_pal').val();
+                                // $TotalPal=$('#buy_debit_pal').val();
+                                // $remainPalTotal=$TotalPal-$payPal;
+
+                            }
+                            // else if ($nowremainpal === 0){
+                            else if ($aat === $aar){
+                                $akyat=parseInt($('#payment_kyat').val());
+                                $aKyat=parseInt($('#buy_debit_kyat').val());
+                                $nowkyat=$aKyat-$akyat;
+                                $('#now_remain_kyat').val($nowkyat);
+
+                                $now=$aar-$aat;
+                                $('#now_remain_pal').val($now);
+                                $totalAmountYae -=$payyae;
+                                $('#now_remain_yae').val($totalAmountYae);
+
+                            }
+
+
+                        }
+                        else if($payyae > $totalAmountYae){
+                            if($nowremainpal > 0 ){
+                                $nowremainpal=$nowremainpal-1;
+                                $('#now_remain_pal').val($nowremainpal);
+                                $totalAmountYae=parseFloat(($totalAmountYae+8)).toFixed(2);
+                                $remainyae=parseFloat($totalAmountYae-$payyae);
+                                $('#now_remain_yae').val($remainyae);
+                            }
+                             // else if ($nowremainpal === 0){
+                             else if ($aat  === $aar){
+                                $nowremainkyat=$nowremainkyat-1;
+                                 $('#now_remain_kyat').val($nowremainkyat);
+
+                                $nowremainpal1=$nowremainpal+15;
+                                // $nowpal=$nowremainpal1%16;
+                                // $remainderpal=$nowremainpal/16;
+                                // $nowpal1=$nowpal-$remainderpal;
+                                $('#now_remain_pal').val($nowremainpal1);
+                                $totalAmountYae=parseFloat(($totalAmountYae+8)).toFixed(2);
+                                $remainyae=parseFloat($totalAmountYae-$payyae);
+                                $('#now_remain_yae').val($remainyae);
+
+                            }
+                        }
+                    }
+                });
+            });
+        });
 
     </script>
     <script>
         $(document).ready(function () {
-                $('.form-group').on('input','.ex1',function () {
-                    $kyat=0;
-                    $pal=0;
-                    $yae=0;
-                    $inputVal=0;
-                    $number=16.6;
-                    $('.form-group .ex1').each(function () {
-                        $inputVal=$(this).val();
-                        if($.isNumeric($inputVal)){
-                            $kyat =parseInt($inputVal/$number);
-                            $pal =parseFloat((($inputVal/$number)-$kyat)*16);
-                            $pal1=parseInt($pal);
-                            $yae=$pal-$pal1;
-                            $yae1=$yae*8;
-                            $form=parseFloat($yae1).toFixed(2);
+            $('#now_total_ayot_btn').click(function () {
+                $totalayotkyat=$('#total_ayot_kyat').val();
+                $totalayotkyat=parseInt($totalayotkyat);
+                $('.form-group .return_ayot_kyat').each(function () {
+                    $inputVal=$(this).val();
+                    if($.isNumeric($inputVal)){
+                        $nowtotalayotkyat=$totalayotkyat-$inputVal;
+                        $('#now_total_ayot_kyat').val($nowtotalayotkyat);
+                    }
+                });
+                $totalayotpa=$('#total_ayot_pal').val();
+                $totalayotpal=parseInt($totalayotpa);
+                $('.form-group .return_ayot_pal').each(function () {
+                    $inputValPal=$(this).val();
+                    if($.isNumeric($inputValPal)){
+                        if ($inputValPal < $totalayotpal) {
+                            $nowtotalayotpal = $totalayotpal - $inputValPal;
+                            $('#now_total_ayot_pal').val($nowtotalayotpal);
+                        }
+                        else if($inputValPal > $totalayotpal){
+                            $test1=parseInt($('#now_total_ayot_kyat').val()-1);
+                            $('#now_total_ayot_kyat').val($test1);
+                            $totalayotpal1=parseInt($totalayotpal)+16;
+                            $totalayotpal2=parseInt($totalayotpal1-$inputValPal);
+                            $('#now_total_ayot_pal').val($totalayotpal2);
+                        }
+                        else if($inputValPal==$totalayotpal){
+                            $totalayotpal3=parseInt($totalayotpal);
+                            $totalayotpal4=parseInt($totalayotpal3-$inputValPal);
 
-                            // $pal2 =parseInt((((($inputVal%$number)/$number)*16)/$number)*8);
+                            $('#now_total_ayot_pal').val($totalayotpal4);
 
                         }
-                    });
-                    $('#kyat').val($kyat);
-                    $('#pal').val($pal1);
-                    $('#yae').val($form);
-
-
+                    }
                 });
+                $totalayotyae=parseFloat($('#total_ayot_yae').val()).toFixed(2);
+                $totalayotyae=parseFloat($totalayotyae);
+                $totalayotpal12=parseInt($('#now_total_ayot_pal').val());
+                $('.form-group .return_ayot_yae').each(function () {
+                    $inputValYae=$(this).val();
+                    if($.isNumeric($inputValYae)){
+                       if($inputValYae <= $totalayotyae){
+                           $nowtotalayotyae=parseFloat($totalayotyae-$inputValYae).toFixed(2);
+                           $('#now_total_ayot_yae').val($nowtotalayotyae);
+                       }
+                       else if($inputValYae > $totalayotyae){
+                           // $test=parseInt($('#now_total_ayot_pal').val()-1);
+                           // $('#now_total_ayot_pal').val($test);
+                           if ($inputValPal < $totalayotpal) {
+                               $test=parseInt($nowtotalayotpal-1);
+                               $('#now_total_ayot_pal').val($test);
+                           }
+                           else if($inputValPal > $totalayotpal){
+                               $test5=parseInt($totalayotpal2-1);
+                               $('#now_total_ayot_pal').val($test5);
+                           }
+                           else if($inputValPal == $totalayotpal){
+                               $test2=parseInt($('#now_total_ayot_kyat').val()-1);
+                               $('#now_total_ayot_kyat').val($test2);
+                               $totalayotpal4=parseInt($totalayotpal4+16);
+                               $('#now_total_ayot_pal').val($totalayotpal4-1);
+                           }
+
+                           $totalayotyae1=parseFloat($totalayotyae)+8;
+                           $totalayotyae2=parseFloat($totalayotyae1-$inputValYae).toFixed(2);
+                           $('#now_total_ayot_yae').val($totalayotyae2);
+
+                       }
+
+                    }
+                });
+            });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#customer_id').click(function () {
+                $('.form-group .previous_remain_kyat').each(function () {
+                    $('#previous_remain_kyat').val("$totalayotyae2");
+                });
+            });
+        });
+
+    </script>
+    {{--<script>--}}
+        {{--$(document).ready(function () {--}}
+            {{--$('.form-group').on('input','.customer',function () {--}}
+                {{--var mysql = require('mysql');--}}
+
+                {{--var con = mysql.createConnection({--}}
+                    {{--host: "localhost",--}}
+                    {{--user: "root",--}}
+                    {{--password: "root",--}}
+                    {{--database: "MtdDatabase"--}}
+                {{--});--}}
+
+                {{--//con.connect(function(err) {--}}
+                    {{--// if (err) throw err;--}}
+                    {{--//Select all customers and return the result object:--}}
+                        {{--// function (err, result, fields) {--}}
+                        {{--// if (err) throw err;--}}
+                        {{--// console.log(result);--}}
+                    {{--/});--}}
+                {{--// });--}}
+
+
+
+                {{--$customer_id=$('#customer_id').val();--}}
+                {{--$('.form-group .customer').each(function () {--}}
+                    {{--$inputName=$(this).val();--}}
+                    {{--//$sql=DB::select("select * from customers where id=5");--}}
+                    {{--$aakd=con.query("SELECT * FROM customers WHERE id=5");--}}
+
+                    {{--$sql="select 'id' from customers";--}}
+                    {{--if($inputName===$customer_id){--}}
+
+                         {{--$('#previous_remain_kyat').val($aakd);--}}
+                    {{--}--}}
+                    {{--else {--}}
+                        {{--$('#previous_remain_kyat').val("error");--}}
+                    {{--}--}}
+
+                {{--});--}}
+
+            {{--});--}}
+
+        {{--});--}}
+
+
+    {{--</script>--}}
+
+
+
+
+    {{--<script>--}}
+        {{--$(document).ready(function () {--}}
+                {{--$('.form-group').on('input','.ex1',function () {--}}
+                    {{--$kyat=0;--}}
+                    {{--$pal=0;--}}
+                    {{--$yae=0;--}}
+                    {{--$inputVal=0;--}}
+                    {{--$number=16.6;--}}
+                    {{--$('.form-group .ex1').each(function () {--}}
+                        {{--$inputVal=$(this).val();--}}
+                        {{--if($.isNumeric($inputVal)){--}}
+                            {{--$kyat =parseInt($inputVal/$number);--}}
+                            {{--$pal =parseFloat((($inputVal/$number)-$kyat)*16);--}}
+                            {{--$pal1=parseInt($pal);--}}
+                            {{--$yae=$pal-$pal1;--}}
+                            {{--$yae1=$yae*8;--}}
+                            {{--$form=parseFloat($yae1).toFixed(2);--}}
+
+                            {{--// $pal2 =parseInt((((($inputVal%$number)/$number)*16)/$number)*8);--}}
+
+                        {{--}--}}
+                    {{--});--}}
+                    {{--$('#kyat').val($kyat);--}}
+                    {{--$('#pal').val($pal1);--}}
+                    {{--$('#yae').val($form);--}}
+
+
+                {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
 
     <script>
         $(document).ready(function(){

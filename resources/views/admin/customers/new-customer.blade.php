@@ -81,12 +81,12 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         @if($errors->has('nrc')) <span class="help-block">{{$errors->first('nrc')}}</span> @endif
                     </div>
-                    <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">
-                        <label for="password" class="control-label">Password</label>
-                        <input type="password" name="password" id="password" class="form-control">
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        @if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif
-                    </div>
+                    {{--<div class="form-group has-feedback @if($errors->has('password')) has-error @endif">--}}
+                        {{--<label for="password" class="control-label">Password</label>--}}
+                        {{--<input type="password" name="password" id="password" class="form-control">--}}
+                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
+                        {{--@if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg">Create</button>
                     </div>

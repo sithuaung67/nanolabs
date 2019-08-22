@@ -148,14 +148,14 @@ class AdminController extends Controller
     }
     public function postNewCustomer(Request $request){
         $this->validate($request,[
-//            'name'=>'required',
+            'name'=>'required',
             'full_name'=>'required',
-//            'birthday'=>'required',
-//            'phone'=>'required',
-//            'shop'=>'required',
-//            'address'=>'required',
-//            'town'=>'required',
-//            'nrc'=>'required',
+            'birthday'=>'required',
+            'phone'=>'required',
+            'shop'=>'required',
+            'address'=>'required',
+            'town'=>'required',
+            'nrc'=>'required',
         ]);
 
 
@@ -176,7 +176,7 @@ class AdminController extends Controller
         $customer->address=$request['address'];
         $customer->town=$request['town'];
         $customer->nrc=$request['nrc'];
-        $customer->password=$request['password'];
+//        $customer->password=$request['password'];
         $customer->path=$img_name;
         $customer->save();
 
@@ -372,8 +372,11 @@ class AdminController extends Controller
     }
     public function getNewInvoice(){
         $sale=Sale::all();
+//        $customer_id=DB::select("select * from customers where id");
+//       dd($customer_id);
         $customer=Customer::all();
-        return view ('admin.Invoice.new-invoice')->with(['customer'=>$customer])->with(['sale'=>$sale]);
+        return view ('admin.Invoice.new-invoice')->with(['customer'=>$customer,'sale'=>$sale]);
+
     }
 
     public function postNewInvoice(Request $request)
@@ -425,11 +428,14 @@ class AdminController extends Controller
         $invoice->note=$request['note'];
         $invoice->cupon_code=$request['cupon_code'];
         $customerId=$invoice->customer_id=$request['customer_id'];
-        $invoice->Save();
+        //$sql=Customer::whereId('user_name',$user_name)->get();
 
+
+        $invoice->Save();
         $sqlUpdate = DB::select("UPDATE `customers` SET `debit_kyat`=$nowRemainKyat,`debit_pal`=$nowRemainPal,`debit_yae`=$nowRemainYae,`sale_name`=$sale_name,`sale_date`=$sale_date,`voucher_number`=$RemainVoucher_number WHERE id='$customerId'");
 
         return redirect()->back()->with('info','The new user account have been created.')->with(['sqlUpdate'=>$sqlUpdate]);
+//
     }
     public function getEdit(){
         $customers=Customer::all();
@@ -490,6 +496,8 @@ class AdminController extends Controller
             ->get();
         return view('admin.Invoice.invoices')->with(['invoice'=>$invoice,'invoice_number'=>$invoice_number,'customers'=>$customers,'sale'=>$sale]);
     }
+
+//
 
 
 

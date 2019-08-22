@@ -79,17 +79,21 @@
                                         <td>Point Eight</td>
                                         <td>{{$invoice->point_eight}}</td>
                                     </tr>
+                                    {{--<tr>--}}
+                                        {{--<td>Kyat</td>--}}
+                                        {{--<td>{{$invoice->kyat}}</td>--}}
+                                    {{--</tr>--}}
+                                    {{--<tr>--}}
+                                        {{--<td>Pal</td>--}}
+                                        {{--<td>{{$invoice->pal}}</td>--}}
+                                    {{--</tr>--}}
+                                    {{--<tr>--}}
+                                        {{--<td>Yway</td>--}}
+                                        {{--<td>{{$invoice->yae}}</td>--}}
+                                    {{--</tr>--}}
                                     <tr>
-                                        <td>Kyat</td>
-                                        <td>{{$invoice->kyat}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Pal</td>
-                                        <td>{{$invoice->pal}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Yway</td>
-                                        <td>{{$invoice->yae}}</td>
+                                        <td style="font-size: 15px;">ရွှေချိန်</td>
+                                        <td style="font-size: 15px">{{$invoice->kyat}} ကျပ် - {{$invoice->pal}} ပဲ - {{$invoice->yae}} ရွေး</td>
                                     </tr>
                                     <tr>
                                         <td>Gram</td>

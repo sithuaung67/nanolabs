@@ -176,28 +176,32 @@
                                       <td>ID</td>
                                       <td>Customer Name</td>
                                       <td>Sale Name</td>
+                                      <td>Town</td>
                                       <td>Voucher Number</td>
                                       <td>Normal</td>
                                       <td>Point Eight</td>
                                       <td>Gram</td>
-                                      <td>Kyat</td>
-                                      <td>Pae</td>
-                                      <td>Yae</td>
-                                      <td>previous_remain_kyat</td>
-                                      <td>previous_remain_pal</td>
-                                      <td>previous_remain_yae</td>
-                                      <td>buy_debit_kyat</td>
-                                      <td>buy_debit_pal</td>
-                                      <td>buy_debit_yae</td>
-                                      <td>payment_kyat</td>
-                                      <td>payment_pal</td>
-                                      <td>payment_yae</td>
-                                      <td>now_remain_kyat</td>
-                                      <td>now_remain_pal</td>
-                                      <td>now_remain_yae</td>
-                                      <td>total_ayot_kyat</td>
-                                      <td>total_ayot_pal</td>
-                                      <td>total_ayot_yae</td>
+                                      <td style="font-size: 17px;">ကျပ်</td>
+                                      <td style="font-size: 17px;">ပဲ</td>
+                                      <td style="font-size: 17px;">ရွေး</td>
+                                      <td style="font-size: 17px;text-align: center">ယခင်ကျန် ကျပ်</td>
+                                      <td style="font-size: 17px;text-align: center">ယခင်ကျန် ပဲ</td>
+                                      <td style="font-size: 17px;text-align: center">ယခင်ကျန် ရွေး</td>
+                                      <td style="font-size: 17px;text-align: center">စုစုပေါင်းရွှေချိန် ကျပ်</td>
+                                      <td style="font-size: 17px;text-align: center">စုစုပေါင်းရွှေချိန် ပဲ</td>
+                                      <td style="font-size: 17px;text-align: center">စုစုပေါင်းရွှေချိန် ရွေး</td>
+                                      <td style="font-size: 17px;text-align: center">ယခုပေးချေမည့်ရွှေချိန် ကျပ်</td>
+                                      <td style="font-size: 17px;text-align: center">ယခုပေးချေမည့်ရွှေချိန် ပဲ</td>
+                                      <td style="font-size: 17px;text-align: center">ယခုပေးချေမည့်ရွှေချိန် ရွေး</td>
+                                      <td style="font-size: 17px;text-align: center">လက်ကျန်အကြွေး ကျပ်</td>
+                                      <td style="font-size: 17px;text-align: center">လက်ကျန်အကြွေး ပဲ</td>
+                                      <td style="font-size: 17px;text-align: center">လက်ကျန်အကြွေး ရွေး</td>
+                                      <td style="font-size: 17px;">အလျော့ကျပ်</td>
+                                      <td style="font-size: 17px;">အလျော့ပဲ</td>
+                                      <td style="font-size: 17px;">အလျော့ရွေး</td>
+                                      <td>Name</td>
+                                      <td>Date</td>
+                                      <td>Note</td>
                                       <td>Cupon Code</td>
                                       <td>Sale Date</td>
                                       <td>Actions</td>
@@ -227,6 +231,15 @@
                                                   @endforeach
                                               </a>
                                           </td>
+                                          <td>
+                                              <a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->sale_user_name])}}">
+                                                  @foreach($customers as $sal)
+                                                      @if($sal->id==$customer->customer_id)
+                                                          {{$sal->town}}
+                                                      @endif
+                                                  @endforeach
+                                              </a>
+                                          </td>
                                           <td>{{$customer->voucher_number}}</td>
                                           <td class="quantity">{{$customer->qty}}</td>
                                           <td class="point_eight">{{$customer->point_eight}}</td>
@@ -249,6 +262,17 @@
                                           <td class="kyat">{{$customer->total_ayot_kyat}}</td>
                                           <td class="pal">{{$customer->total_ayot_pal}}</td>
                                           <td class="yae">{{$customer->total_ayot_yae}}</td>
+                                          <td>
+                                              <a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->sale_user_name])}}">
+                                                  @foreach($sale as $sal)
+                                                      @if($sal->id==$customer->sale_user_name)
+                                                          {{$sal->name}}
+                                                      @endif
+                                                  @endforeach
+                                              </a>
+                                          </td>
+                                          <td>{{$customer->updated_at}}</td>
+                                          <td>{{$customer->note}}</td>
                                           <td>{{$customer->cupon_code}}</td>
                                           <td>{{date("d-M-Y", strtotime($customer->sale_date))}}</td>
                                           <td class="btn btn-default ">
