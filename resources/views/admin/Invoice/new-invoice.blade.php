@@ -260,7 +260,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('previous_remain_kyat')) has-error @endif">
                             <label for="previous_remain_kyat" class="control-label">ကျပ်</label>
-                            <input type="text" name="previous_remain_kyat" id="previous_remain_kyat" class="form-control previous_remain_kyat">
+                            <input placeholder="0" type="text" name="previous_remain_kyat" id="previous_remain_kyat" class="form-control previous_remain_kyat">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('previous_remain_kyat')) <span class="help-block">{{$errors->first('previous_remain_kyat')}}</span> @endif
                         </div>

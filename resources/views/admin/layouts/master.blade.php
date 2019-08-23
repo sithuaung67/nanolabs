@@ -903,162 +903,162 @@
 
     </script>
 
-    <script>
-        $(document).ready(function () {
+    {{--<script>--}}
+        {{--$(document).ready(function () {--}}
 
-            $remainkyat=0;
-            $remainpal=0;
-            $remainyae=0.0;
+            {{--$remainkyat=0;--}}
+            {{--$remainpal=0;--}}
+            {{--$remainyae=0.0;--}}
 
-            $('.form-group').on('input', '.pc23', function () {
-                    $totalAmountKyat = parseInt($('#buy_debit_kyat').val());
-                $('.form-group .pc23').each(function () {
-                        $paykyat = $(this).val();
-                    if ($.isNumeric($paykyat)) {
-                        if ($paykyat <= $totalAmountKyat) {
-                            $remainkyat = $totalAmountKyat - $paykyat;
-                            $('#now_remain_kyat').val($remainkyat);
-                        }
+            {{--$('.form-group').on('input', '.pc23', function () {--}}
+                    {{--$totalAmountKyat = parseInt($('#buy_debit_kyat').val());--}}
+                {{--$('.form-group .pc23').each(function () {--}}
+                        {{--$paykyat = $(this).val();--}}
+                    {{--if ($.isNumeric($paykyat)) {--}}
+                        {{--if ($paykyat <= $totalAmountKyat) {--}}
+                            {{--$remainkyat = $totalAmountKyat - $paykyat;--}}
+                            {{--$('#now_remain_kyat').val($remainkyat);--}}
+                        {{--}--}}
 
-                    }
-                });
-            });
-            $('.form-group').on('input','.pc24',function () {
-                $totalAmountPal=parseInt($('#buy_debit_pal').val());
-                $nowremainkyat=parseInt($('#now_remain_kyat').val());
-                $apal=parseInt($('#payment_pal').val());
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
+            {{--$('.form-group').on('input','.pc24',function () {--}}
+                {{--$totalAmountPal=parseInt($('#buy_debit_pal').val());--}}
+                {{--$nowremainkyat=parseInt($('#now_remain_kyat').val());--}}
+                {{--$apal=parseInt($('#payment_pal').val());--}}
 
-                $('.form-group .pc24').each(function () {
-                    $paypal=$(this).val();
-                    if($.isNumeric($paypal)){
-                        if($paypal <= $totalAmountPal){
-                            $totalAmountPal -=$paypal;
-                            $('#now_remain_pal').val($totalAmountPal);
-                            $('#now_remain_kyat').val($remainkyat);
+                {{--$('.form-group .pc24').each(function () {--}}
+                    {{--$paypal=$(this).val();--}}
+                    {{--if($.isNumeric($paypal)){--}}
+                        {{--if($paypal <= $totalAmountPal){--}}
+                            {{--$totalAmountPal -=$paypal;--}}
+                            {{--$('#now_remain_pal').val($totalAmountPal);--}}
+                            {{--$('#now_remain_kyat').val($remainkyat);--}}
 
-                        }
-                        // else if($paypal <= $totalAmountPal){
-                        //     $nowremainkyat=$nowremainkyat-1;
-                        //     $('#now_remain_kyat').val($nowremainkyat);
-                        //     $totalAmountPal=$totalAmountPal+16;
-                        //     $remainpal=$totalAmountPal-$paypal;
-                        //     $('#now_remain_pal').val($remainpal);
-                        //
-                        // }
-                        else if($paypal > $totalAmountPal){
-                            $nowremainkyat=$nowremainkyat-1;
-                            $('#now_remain_kyat').val($nowremainkyat);
-                            $totalAmountPal=$totalAmountPal+16;
-                            $remainpal=$totalAmountPal-$paypal;
-                            $('#now_remain_pal').val($remainpal);
+                        {{--}--}}
+                        {{--// else if($paypal <= $totalAmountPal){--}}
+                        {{--//     $nowremainkyat=$nowremainkyat-1;--}}
+                        {{--//     $('#now_remain_kyat').val($nowremainkyat);--}}
+                        {{--//     $totalAmountPal=$totalAmountPal+16;--}}
+                        {{--//     $remainpal=$totalAmountPal-$paypal;--}}
+                        {{--//     $('#now_remain_pal').val($remainpal);--}}
+                        {{--//--}}
+                        {{--// }--}}
+                        {{--else if($paypal > $totalAmountPal){--}}
+                            {{--$nowremainkyat=$nowremainkyat-1;--}}
+                            {{--$('#now_remain_kyat').val($nowremainkyat);--}}
+                            {{--$totalAmountPal=$totalAmountPal+16;--}}
+                            {{--$remainpal=$totalAmountPal-$paypal;--}}
+                            {{--$('#now_remain_pal').val($remainpal);--}}
 
-                        }
-                        else if($totalAmountPal===$apal){
-                            $('#now_remain_kyat').val($remainkyat);
+                        {{--}--}}
+                        {{--else if($totalAmountPal===$apal){--}}
+                            {{--$('#now_remain_kyat').val($remainkyat);--}}
 
-                        }
+                        {{--}--}}
 
-                    }
-                });
-            });
-            $('.form-group').on('input','.pc25',function () {
-                $nowremainkyat=parseInt($('#now_remain_kyat').val());
-                $totalAmountYae=parseFloat($('#buy_debit_yae').val());
-                $nowremainpal=parseInt($('#now_remain_pal').val());
-                $aat=parseInt($('#payment_pal').val());
-                $aar=parseInt($('#buy_debit_pal').val());
-                $('.form-group .pc25').each(function () {
-                    $payyae=$(this).val();
-                    if($.isNumeric($payyae)){
-                        if($payyae <= $totalAmountYae){
-                            if($nowremainpal > 0) {
-                                // $('#now_remain_kyat').val($remainkyat);
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
+            {{--$('.form-group').on('input','.pc25',function () {--}}
+                {{--$nowremainkyat=parseInt($('#now_remain_kyat').val());--}}
+                {{--$totalAmountYae=parseFloat($('#buy_debit_yae').val());--}}
+                {{--$nowremainpal=parseInt($('#now_remain_pal').val());--}}
+                {{--$aat=parseInt($('#payment_pal').val());--}}
+                {{--$aar=parseInt($('#buy_debit_pal').val());--}}
+                {{--$('.form-group .pc25').each(function () {--}}
+                    {{--$payyae=$(this).val();--}}
+                    {{--if($.isNumeric($payyae)){--}}
+                        {{--if($payyae <= $totalAmountYae){--}}
+                            {{--if($nowremainpal > 0) {--}}
+                                {{--// $('#now_remain_kyat').val($remainkyat);--}}
 
-                                if($aat < $aar){
-                                    $('#now_remain_kyat').val($remainkyat);
-                                    // $totalAmountYae -=$payyae;
-                                    // $('#now_remain_yae').val($totalAmountYae);
-                                    $aay=$aar-$aat;
-                                    $('#now_remain_pal').val($aay);
+                                {{--if($aat < $aar){--}}
+                                    {{--$('#now_remain_kyat').val($remainkyat);--}}
+                                    {{--// $totalAmountYae -=$payyae;--}}
+                                    {{--// $('#now_remain_yae').val($totalAmountYae);--}}
+                                    {{--$aay=$aar-$aat;--}}
+                                    {{--$('#now_remain_pal').val($aay);--}}
 
-                                    $totalAmountYae -=$payyae;
-                                    $('#now_remain_yae').val($totalAmountYae);
+                                    {{--$totalAmountYae -=$payyae;--}}
+                                    {{--$('#now_remain_yae').val($totalAmountYae);--}}
 
-                                }
-                                if($aat > $aar){
-                                    $remainkyat=parseInt($('#now_remain_kyat').val());
-                                    $('#now_remain_kyat').val($remainkyat);
-                                    $aar=$aar+16;
-                                    $aay=$aar-$aat;
-                                    $('#now_remain_pal').val($aay);
-                                     $totalAmountYae -=$payyae;
-                                    $('#now_remain_yae').val($totalAmountYae);
+                                {{--}--}}
+                                {{--if($aat > $aar){--}}
+                                    {{--$remainkyat=parseInt($('#now_remain_kyat').val());--}}
+                                    {{--$('#now_remain_kyat').val($remainkyat);--}}
+                                    {{--$aar=$aar+16;--}}
+                                    {{--$aay=$aar-$aat;--}}
+                                    {{--$('#now_remain_pal').val($aay);--}}
+                                     {{--$totalAmountYae -=$payyae;--}}
+                                    {{--$('#now_remain_yae').val($totalAmountYae);--}}
 
-                                }
-                                else if ($aat === $aar){
-                                    $akyat=parseInt($('#payment_kyat').val());
-                                    $aKyat=parseInt($('#buy_debit_kyat').val());
-                                    $nowkyat=$aKyat-$akyat;
-                                    $('#now_remain_kyat').val($nowkyat);
+                                {{--}--}}
+                                {{--else if ($aat === $aar){--}}
+                                    {{--$akyat=parseInt($('#payment_kyat').val());--}}
+                                    {{--$aKyat=parseInt($('#buy_debit_kyat').val());--}}
+                                    {{--$nowkyat=$aKyat-$akyat;--}}
+                                    {{--$('#now_remain_kyat').val($nowkyat);--}}
 
-                                    $now=$aar-$aat;
-                                    $('#now_remain_pal').val($now);
-                                    $totalAmountYae -=$payyae;
-                                    $('#now_remain_yae').val($totalAmountYae);
+                                    {{--$now=$aar-$aat;--}}
+                                    {{--$('#now_remain_pal').val($now);--}}
+                                    {{--$totalAmountYae -=$payyae;--}}
+                                    {{--$('#now_remain_yae').val($totalAmountYae);--}}
 
-                                }
+                                {{--}--}}
 
-                                // $payPal=$('#payment_pal').val();
-                                // $TotalPal=$('#buy_debit_pal').val();
-                                // $remainPalTotal=$TotalPal-$payPal;
+                                {{--// $payPal=$('#payment_pal').val();--}}
+                                {{--// $TotalPal=$('#buy_debit_pal').val();--}}
+                                {{--// $remainPalTotal=$TotalPal-$payPal;--}}
 
-                            }
-                            // else if ($nowremainpal === 0){
-                            else if ($aat === $aar){
-                                $akyat=parseInt($('#payment_kyat').val());
-                                $aKyat=parseInt($('#buy_debit_kyat').val());
-                                $nowkyat=$aKyat-$akyat;
-                                $('#now_remain_kyat').val($nowkyat);
+                            {{--}--}}
+                            {{--// else if ($nowremainpal === 0){--}}
+                            {{--else if ($aat === $aar){--}}
+                                {{--$akyat=parseInt($('#payment_kyat').val());--}}
+                                {{--$aKyat=parseInt($('#buy_debit_kyat').val());--}}
+                                {{--$nowkyat=$aKyat-$akyat;--}}
+                                {{--$('#now_remain_kyat').val($nowkyat);--}}
 
-                                $now=$aar-$aat;
-                                $('#now_remain_pal').val($now);
-                                $totalAmountYae -=$payyae;
-                                $('#now_remain_yae').val($totalAmountYae);
+                                {{--$now=$aar-$aat;--}}
+                                {{--$('#now_remain_pal').val($now);--}}
+                                {{--$totalAmountYae -=$payyae;--}}
+                                {{--$('#now_remain_yae').val($totalAmountYae);--}}
 
-                            }
+                            {{--}--}}
 
 
-                        }
-                        else if($payyae > $totalAmountYae){
-                            if($nowremainpal > 0 ){
-                                $nowremainpal=$nowremainpal-1;
-                                $('#now_remain_pal').val($nowremainpal);
-                                $totalAmountYae=parseFloat(($totalAmountYae+8)).toFixed(2);
-                                $remainyae=parseFloat($totalAmountYae-$payyae);
-                                $('#now_remain_yae').val($remainyae);
-                            }
-                             // else if ($nowremainpal === 0){
-                             else if ($aat  === $aar){
-                                $nowremainkyat=$nowremainkyat-1;
-                                 $('#now_remain_kyat').val($nowremainkyat);
+                        {{--}--}}
+                        {{--else if($payyae > $totalAmountYae){--}}
+                            {{--if($nowremainpal > 0 ){--}}
+                                {{--$nowremainpal=$nowremainpal-1;--}}
+                                {{--$('#now_remain_pal').val($nowremainpal);--}}
+                                {{--$totalAmountYae=parseFloat(($totalAmountYae+8)).toFixed(2);--}}
+                                {{--$remainyae=parseFloat($totalAmountYae-$payyae);--}}
+                                {{--$('#now_remain_yae').val($remainyae);--}}
+                            {{--}--}}
+                             {{--// else if ($nowremainpal === 0){--}}
+                             {{--else if ($aat  === $aar){--}}
+                                {{--$nowremainkyat=$nowremainkyat-1;--}}
+                                 {{--$('#now_remain_kyat').val($nowremainkyat);--}}
 
-                                $nowremainpal1=$nowremainpal+15;
-                                // $nowpal=$nowremainpal1%16;
-                                // $remainderpal=$nowremainpal/16;
-                                // $nowpal1=$nowpal-$remainderpal;
-                                $('#now_remain_pal').val($nowremainpal1);
-                                $totalAmountYae=parseFloat(($totalAmountYae+8)).toFixed(2);
-                                $remainyae=parseFloat($totalAmountYae-$payyae);
-                                $('#now_remain_yae').val($remainyae);
+                                {{--$nowremainpal1=$nowremainpal+15;--}}
+                                {{--// $nowpal=$nowremainpal1%16;--}}
+                                {{--// $remainderpal=$nowremainpal/16;--}}
+                                {{--// $nowpal1=$nowpal-$remainderpal;--}}
+                                {{--$('#now_remain_pal').val($nowremainpal1);--}}
+                                {{--$totalAmountYae=parseFloat(($totalAmountYae+8)).toFixed(2);--}}
+                                {{--$remainyae=parseFloat($totalAmountYae-$payyae);--}}
+                                {{--$('#now_remain_yae').val($remainyae);--}}
 
-                            }
-                        }
-                    }
-                });
-            });
-        });
+                            {{--}--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
+        {{--});--}}
 
-    </script>
+    {{--</script>--}}
     <script>
         $(document).ready(function () {
             $('#now_total_ayot_btn').click(function () {
@@ -1137,14 +1137,91 @@
     </script>
     <script>
         $(document).ready(function () {
-            $('#customer_id').click(function () {
-                $('.form-group .previous_remain_kyat').each(function () {
-                    $('#previous_remain_kyat').val("$totalayotyae2");
+            $('#payment_btn').click(function () {
+                $buy_debit_kyat_one=$('#buy_debit_kyat').val();
+                $buy_debit_kyat=parseInt($buy_debit_kyat_one);
+                $('.form-group .pc23').each(function () {
+                    $inputVal=$(this).val();
+                    if($.isNumeric($inputVal)){
+                        $buy_debit_kyat=$buy_debit_kyat-$inputVal;
+                        $('#now_remain_kyat').val($buy_debit_kyat);
+                    }
+                });
+                $buy_debit_pal_one=$('#buy_debit_pal').val();
+                $buy_debit_pal=parseInt($buy_debit_pal_one);
+                $('.form-group .pc24').each(function () {
+                    $inputValPal=$(this).val();
+                    if($.isNumeric($inputValPal)){
+                        if ($inputValPal < $buy_debit_pal) {
+                            $buy_debit_pal_total = $buy_debit_pal-$inputValPal;
+                            $('#now_remain_pal').val($buy_debit_pal_total);
+                        }
+                        else if($inputValPal > $buy_debit_pal){
+                            $test1=parseInt($('#now_remain_kyat').val()-1);
+                            $('#now_remain_kyat').val($test1);
+                            $buy_debit_pal1=parseInt($buy_debit_pal)+16;
+                            $buy_debit_pal2=parseInt($buy_debit_pal1-$inputValPal);
+                            $('#now_remain_pal').val($buy_debit_pal2);
+                        }
+                        else if($inputValPal==$buy_debit_pal){
+                            $buy_debit_pal3=parseInt($buy_debit_pal);
+                            $buy_debit_pal4=parseInt($buy_debit_pal3-$inputValPal);
+
+                            $('#now_remain_pal').val($buy_debit_pal4);
+
+                        }
+                    }
+                });
+                $buy_debit_yae6=parseFloat($('#buy_debit_yae').val()).toFixed(2);
+                $buy_debit_yae=parseFloat($buy_debit_yae6);
+                $now_remain_pal12=parseInt($('#now_remain_pal').val());
+                $('.form-group .pc25').each(function () {
+                    $inputValYae=$(this).val();
+                    if($.isNumeric($inputValYae)){
+                       if($inputValYae <= $buy_debit_yae){
+                           $buy_debit_yae=parseFloat($buy_debit_yae-$inputValYae).toFixed(2);
+                           $('#now_remain_yae').val($buy_debit_yae);
+                       }
+                       else if($inputValYae > $buy_debit_yae){
+                           // $test=parseInt($('#now_remain_pal').val()-1);
+                           // $('#now_remain_pal').val($test);
+                           if ($inputValPal < $buy_debit_pal) {
+                               $test=parseInt($buy_debit_pal_total-1);
+                               $('#now_remain_pal').val($test);
+                           }
+                           else if($inputValPal > $buy_debit_pal){
+                               $test5=parseInt($buy_debit_pal2-1);
+                               $('#now_remain_pal').val($test5);
+                           }
+                           else if($inputValPal == $buy_debit_pal){
+                               $test2=parseInt($('#now_remain_kyat').val()-1);
+                               $('#now_remain_kyat').val($test2);
+                               $buy_debit_pal4=parseInt($buy_debit_pal4+16);
+                               $('#now_remain_pal').val($buy_debit_pal4-1);
+                           }
+
+                           $buy_debit_yae1=parseFloat($buy_debit_yae)+8;
+                           $buy_debit_yae2=parseFloat($buy_debit_yae1-$inputValYae).toFixed(2);
+                           $('#now_remain_yae').val($buy_debit_yae2);
+
+                       }
+
+                    }
                 });
             });
         });
-
     </script>
+    {{--<script>--}}
+        {{--$(document).ready(function () {--}}
+            {{--$('#customer_id').click(function () {--}}
+                {{--$('.form-group .previous_remain_kyat').each(function () {--}}
+                    {{--<? $hell0=DB::select("select * from customers");?>--}}
+                    {{--$('#previous_remain_kyat').val($hell0);--}}
+                {{--});--}}
+            {{--});--}}
+        {{--});--}}
+
+    {{--</script>--}}
     {{--<script>--}}
         {{--$(document).ready(function () {--}}
             {{--$('.form-group').on('input','.customer',function () {--}}
