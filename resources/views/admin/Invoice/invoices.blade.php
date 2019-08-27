@@ -65,12 +65,17 @@
             $j=0;
             $sum=0;
             $name=0;
+            $aa=0;
             $customer_name="";
             $aa=DB::select("DELETE FROM `scores`");
             for($i=1;$i<=$length;$i++){
                 $sql1 = DB::select('select * from sale_invoices where customer_id = ?', [$i] );
                 foreach ($sql1 as $result){
-                    $sum+=$result->qty;
+                    (int)$sum+=$result->qty;
+                    //echo "fisrt 1".$result->qty.'<br>';
+//                    $sum=$sum+(int)$aa;
+                   // echo $sum;
+
 
                     $name=$result->customer_id;
                 }
@@ -97,7 +102,9 @@
             for($i=1;$i<=$length;$i++){
                 $sql1 = DB::select('select * from sale_invoices where sale_user_name = ?', [$i] );
                 foreach ($sql1 as $result){
-                    $sum+=$result->qty;
+                    (int)$sum+=$result->qty;
+//                    $sum+=$result->qty;
+//                    $sum=$sum+$aa;
                     $name=$result->sale_user_name;
                 }
                 $cus=DB::select('select * from sales');
@@ -129,8 +136,8 @@
                                 <option value="{{$cats->sale_user_name}}">
                                     {{--{{$cats->sale_user_name}}--}}
                                     @foreach($sale as $cust)
-                                        @if($cust->id==$cats->sale_user_name)
-                                            {{$cust->name}}
+                                        @if($cust->user_name==$cats->sale_user_name)
+                                            {{$cust->user_name}}
                                         @endif
                                     @endforeach
                                 </option>
@@ -223,22 +230,22 @@
                                               </a>
                                           </td>
                                           <td>
-                                              <a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->sale_user_name])}}">
+                                              <a style="color: #1c00cf;" href="{{route('get.saleInfo',['name'=>$customer->sale_user_name])}}">
                                                   @foreach($sale as $sal)
-                                                      @if($sal->id==$customer->sale_user_name)
-                                                          {{$sal->name}}
+                                                      @if($sal->user_name==$customer->sale_user_name)
+                                                          {{$sal->user_name}}
                                                       @endif
                                                   @endforeach
                                               </a>
                                           </td>
                                           <td>
-                                              <a style="color: #1c00cf;" href="{{route('get.saleInfo',['id'=>$customer->sale_user_name])}}">
+                                              {{--<a style="color: #1c00cf;" href="{{route('get.saleInfo',['name'=>$customer->sale_user_name])}}">--}}
                                                   @foreach($customers as $sal)
                                                       @if($sal->id==$customer->customer_id)
                                                           {{$sal->town}}
                                                       @endif
                                                   @endforeach
-                                              </a>
+                                              {{--</a>--}}
                                           </td>
                                           <td>{{$customer->voucher_number}}</td>
                                           <td class="quantity">{{$customer->qty}}</td>

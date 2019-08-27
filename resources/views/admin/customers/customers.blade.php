@@ -87,8 +87,8 @@
                                         <?php $total ++== $total; ?>
                             <tr>
                                 <td>{{$total}}</td>
-                                <td>{{$customer->user_name}}</td>
                                 <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->name}}</a></td>
+                                <td>{{$customer->user_name}}</td>
                                 <td>{{date("d-M-Y", strtotime($customer->dob))}}</td>
                                 <td>{{$customer->phone_number}}</td>
                                 <td>{{$customer->shop_name}}</td>

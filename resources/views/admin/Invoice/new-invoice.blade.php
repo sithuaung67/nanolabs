@@ -44,7 +44,7 @@
                             <select name="sale_user_name" id="sale_user_name" class="form-control">
                                 <option value="">Select Sale Name</option>
                                 @foreach($sale as $cus)
-                                    <option value="{{$cus->id}}">{{$cus->name}}</option>
+                                    <option value="{{$cus->name}}">{{$cus->name}}</option>
                                 @endforeach
                             </select>
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -238,6 +238,7 @@
                     <div class="col-md-12">
                         <div class="form-group has-feedback @if($errors->has('customer_id')) has-error @endif">
                             <label for="customer_id" class="control-label">Customer Name</label>
+                            <form id="myForm" action="userInfo.php" method="post">
                             <select name="customer_id"  id="customer_id" class="form-control customer">
                                 <option value="">Select Customer Name</option>
                                 @foreach($customer as $cus)
@@ -245,6 +246,7 @@
                                 @endforeach
 
                             </select>
+                            </form>
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                             @if($errors->has('customer_id')) <span class="help-block">{{$errors->first('customer_id')}}</span> @endif
                         </div>
@@ -314,6 +316,62 @@
                             <input placeholder="0" disabled onkeyup="enterNumber()" type="text" name="buy_debit_yae" id="buy_debit_yae" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('buy_debit_yae')) <span class="help-block">{{$errors->first('buy_debit_yae')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="before_debit" class="control-label" style="font-size: 20px">ပြန်ပေးရွှေချိန် + အလျော့ (100%)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback @if($errors->has('return_gold_kyat')) has-error @endif">
+                            <label for="return_gold_kyat" class="control-label">ကျပ်</label>
+                            <input placeholder="0" value="0"  maxlength="10" type="text" name="return_gold_kyat" id="return_gold_kyat" class="form-control return_gold_kyat">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                            @if($errors->has('return_gold_kyat')) <span class="help-block">{{$errors->first('return_gold_kyat')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback @if($errors->has('return_gold_pal')) has-error @endif">
+                            <label for="return_gold_pal" class="control-label">ပဲ</label>
+                            <input placeholder="0" value="0" type="text" name="return_gold_pal" id="return_gold_pal" class="form-control return_gold_pal">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                            @if($errors->has('return_gold_pal')) <span class="help-block">{{$errors->first('return_gold_pal')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback @if($errors->has('return_gold_yae')) has-error @endif">
+                            <label for="return_gold_yae" class="control-label">ရွေး</label>
+                            <input placeholder="0" value="0"  type="text" name="return_gold_yae" id="return_gold_yae" class="form-control return_gold_yae">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                            @if($errors->has('return_gold_yae')) <span class="help-block">{{$errors->first('return_gold_yae')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <a id="return_gold_btn" class="btn btn-block bg-primary">Calculate</a>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback @if($errors->has('net_pay_kyat')) has-error @endif">
+                            <label for="net_pay_kyat" class="control-label">ကျပ်</label>
+                            <input placeholder="0"  maxlength="10" type="text" name="net_pay_kyat" id="net_pay_kyat" class="form-control">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                            @if($errors->has('net_pay_kyat')) <span class="help-block">{{$errors->first('net_pay_kyat')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback @if($errors->has('net_pay_pal')) has-error @endif">
+                            <label for="net_pay_pal" class="control-label">ပဲ</label>
+                            <input placeholder="0" maxlength="2" type="text" name="net_pay_pal" id="net_pay_pal" class="form-control">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                            @if($errors->has('net_pay_pal')) <span class="help-block">{{$errors->first('net_pay_pal')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback @if($errors->has('net_pay_yae')) has-error @endif">
+                            <label for="net_pay_yae" class="control-label">ရွေး</label>
+                            <input placeholder="0"  type="text" name="net_pay_yae" id="net_pay_yae" class="form-control ">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                            @if($errors->has('net_pay_yae')) <span class="help-block">{{$errors->first('net_pay_yae')}}</span> @endif
                         </div>
                     </div>
                     <div class="col-md-12">

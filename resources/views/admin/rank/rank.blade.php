@@ -82,7 +82,7 @@
                                     for($i=1;$i<=$length;$i++){
                                     $sql1 = DB::select('select * from sale_invoices where customer_id = ?', [$i] );
                                     foreach ($sql1 as $result){
-                                    $sum+=$result->qty;
+                                    (int)$sum+=$result->qty;
 
                                     $name=$result->customer_id;
                                     }

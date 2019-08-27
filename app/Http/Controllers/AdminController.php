@@ -304,8 +304,8 @@ class AdminController extends Controller
         return redirect()->back()->with('info','The selected user account have been updated.');
     }
     public function getSaleInfo(Request $request){
-        $id=$request['id'];
-        $sale=Sale::where('id', $id)->first();
+        $id=$request['name'];
+        $sale=Sale::where('name', $id)->first();
         return view ('admin.sales.saleInfo')->with(['sale'=>$sale]);
     }
     public function getSaleInvoiceHistory(Request $request){

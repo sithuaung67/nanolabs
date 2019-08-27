@@ -40,7 +40,7 @@
             }
             $cus=DB::select('select * from sales');
             foreach ($cus as $cu){
-                if($cu->id==$name){
+                if($cu->name==$name){
                     $sale_name= $cu->id;
                     $sql2=DB::select("INSERT INTO `reports`(`point`,`sale_name`) VALUES ($sum,$sale_name)");
                     $name=0;
@@ -63,7 +63,7 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-6">
                                 <select name="first_name" id="first_name" class="form-control pc10">
-                                    <option value="">Select Sale Name</option>
+                                    <option value="0">Select Sale Name</option>
                                     @foreach($sql6 as $cus)
                                         <option value="{{$cus->point}}">
                                             {{--{{$cus->sale_name}}--}}

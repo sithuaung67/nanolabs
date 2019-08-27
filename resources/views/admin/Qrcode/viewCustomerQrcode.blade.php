@@ -51,7 +51,28 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-md-offset-4" id="QrcodeCustomer">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="col-md-6">
+                            <h4>ID</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>{{$customer->id}}</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Name</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>{{$customer->name}}</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Town</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>{{$customer->town}}</h4>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-md-offset-4" style="margin-top: 10px;" id="QrcodeCustomer">
                         {!! QrCode::size(280)->generate($customer->name); !!}
                     </div>
                 </div>

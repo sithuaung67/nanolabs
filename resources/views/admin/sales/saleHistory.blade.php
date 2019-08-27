@@ -100,7 +100,7 @@
                                 </thead>
                                 <?php $total = 0; ?>
                                 @foreach($invoice as $customer)
-                                    @if($sale->id==$customer->sale_user_name)
+                                    @if($sale->user_name==$customer->sale_user_name)
                                         <?php $total ++== $total; ?>
 
                                         {{--<tr>--}}

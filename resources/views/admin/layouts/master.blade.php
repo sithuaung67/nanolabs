@@ -1135,69 +1135,145 @@
             });
         });
     </script>
+    {{--<script>--}}
+        {{--$(document).ready(function () {--}}
+            {{--$('#payment_btn').click(function () {--}}
+                {{--$buy_debit_kyat_one=$('#buy_debit_kyat').val();--}}
+                {{--$buy_debit_kyat=parseInt($buy_debit_kyat_one);--}}
+                {{--$('.form-group .pc23').each(function () {--}}
+                    {{--$inputVal=$(this).val();--}}
+                    {{--if($.isNumeric($inputVal)){--}}
+                        {{--$buy_debit_kyat=$buy_debit_kyat-$inputVal;--}}
+                        {{--$('#now_remain_kyat').val($buy_debit_kyat);--}}
+                    {{--}--}}
+                {{--});--}}
+                {{--$buy_debit_pal_one=$('#buy_debit_pal').val();--}}
+                {{--$buy_debit_pal=parseInt($buy_debit_pal_one);--}}
+                {{--$('.form-group .pc24').each(function () {--}}
+                    {{--$inputValPal=$(this).val();--}}
+                    {{--if($.isNumeric($inputValPal)){--}}
+                        {{--if ($inputValPal < $buy_debit_pal) {--}}
+                            {{--$buy_debit_pal_total = $buy_debit_pal-$inputValPal;--}}
+                            {{--$('#now_remain_pal').val($buy_debit_pal_total);--}}
+                        {{--}--}}
+                        {{--else if($inputValPal > $buy_debit_pal){--}}
+                            {{--$test1=parseInt($('#now_remain_kyat').val()-1);--}}
+                            {{--$('#now_remain_kyat').val($test1);--}}
+                            {{--$buy_debit_pal1=parseInt($buy_debit_pal)+16;--}}
+                            {{--$buy_debit_pal2=parseInt($buy_debit_pal1-$inputValPal);--}}
+                            {{--$('#now_remain_pal').val($buy_debit_pal2);--}}
+                        {{--}--}}
+                        {{--else if($inputValPal==$buy_debit_pal){--}}
+                            {{--$buy_debit_pal3=parseInt($buy_debit_pal);--}}
+                            {{--$buy_debit_pal4=parseInt($buy_debit_pal3-$inputValPal);--}}
+
+                            {{--$('#now_remain_pal').val($buy_debit_pal4);--}}
+
+                        {{--}--}}
+                    {{--}--}}
+                {{--});--}}
+                {{--$buy_debit_yae6=parseFloat($('#buy_debit_yae').val()).toFixed(2);--}}
+                {{--$buy_debit_yae=parseFloat($buy_debit_yae6);--}}
+                {{--$now_remain_pal12=parseInt($('#now_remain_pal').val());--}}
+                {{--$('.form-group .pc25').each(function () {--}}
+                    {{--$inputValYae=$(this).val();--}}
+                    {{--if($.isNumeric($inputValYae)){--}}
+                       {{--if($inputValYae <= $buy_debit_yae){--}}
+                           {{--$buy_debit_yae=parseFloat($buy_debit_yae-$inputValYae).toFixed(2);--}}
+                           {{--$('#now_remain_yae').val($buy_debit_yae);--}}
+                       {{--}--}}
+                       {{--else if($inputValYae > $buy_debit_yae){--}}
+                           {{--// $test=parseInt($('#now_remain_pal').val()-1);--}}
+                           {{--// $('#now_remain_pal').val($test);--}}
+                           {{--if ($inputValPal < $buy_debit_pal) {--}}
+                               {{--$test=parseInt($buy_debit_pal_total-1);--}}
+                               {{--$('#now_remain_pal').val($test);--}}
+                           {{--}--}}
+                           {{--else if($inputValPal > $buy_debit_pal){--}}
+                               {{--$test5=parseInt($buy_debit_pal2-1);--}}
+                               {{--$('#now_remain_pal').val($test5);--}}
+                           {{--}--}}
+                           {{--else if($inputValPal == $buy_debit_pal){--}}
+                               {{--$test2=parseInt($('#now_remain_kyat').val()-1);--}}
+                               {{--$('#now_remain_kyat').val($test2);--}}
+                               {{--$buy_debit_pal4=parseInt($buy_debit_pal4+16);--}}
+                               {{--$('#now_remain_pal').val($buy_debit_pal4-1);--}}
+                           {{--}--}}
+
+                           {{--$buy_debit_yae1=parseFloat($buy_debit_yae)+8;--}}
+                           {{--$buy_debit_yae2=parseFloat($buy_debit_yae1-$inputValYae).toFixed(2);--}}
+                           {{--$('#now_remain_yae').val($buy_debit_yae2);--}}
+
+                       {{--}--}}
+
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
     <script>
         $(document).ready(function () {
-            $('#payment_btn').click(function () {
+            $('#return_gold_btn').click(function () {
                 $buy_debit_kyat_one=$('#buy_debit_kyat').val();
                 $buy_debit_kyat=parseInt($buy_debit_kyat_one);
-                $('.form-group .pc23').each(function () {
+                $('.form-group .return_gold_kyat').each(function () {
                     $inputVal=$(this).val();
                     if($.isNumeric($inputVal)){
                         $buy_debit_kyat=$buy_debit_kyat-$inputVal;
-                        $('#now_remain_kyat').val($buy_debit_kyat);
+                        $('#net_pay_kyat').val($buy_debit_kyat);
                     }
                 });
                 $buy_debit_pal_one=$('#buy_debit_pal').val();
                 $buy_debit_pal=parseInt($buy_debit_pal_one);
-                $('.form-group .pc24').each(function () {
+                $('.form-group .return_gold_pal').each(function () {
                     $inputValPal=$(this).val();
                     if($.isNumeric($inputValPal)){
                         if ($inputValPal < $buy_debit_pal) {
-                            $buy_debit_pal_total = $buy_debit_pal-$inputValPal;
-                            $('#now_remain_pal').val($buy_debit_pal_total);
+                            $buy_debit_pal_total=$buy_debit_pal-$inputValPal;
+                            $('#net_pay_pal').val($buy_debit_pal_total);
                         }
                         else if($inputValPal > $buy_debit_pal){
-                            $test1=parseInt($('#now_remain_kyat').val()-1);
-                            $('#now_remain_kyat').val($test1);
+                            $test1=parseInt($('#net_pay_kyat').val()-1);
+                            $('#net_pay_kyat').val($test1);
                             $buy_debit_pal1=parseInt($buy_debit_pal)+16;
                             $buy_debit_pal2=parseInt($buy_debit_pal1-$inputValPal);
-                            $('#now_remain_pal').val($buy_debit_pal2);
+                            $('#net_pay_pal').val($buy_debit_pal2);
                         }
                         else if($inputValPal==$buy_debit_pal){
                             $buy_debit_pal3=parseInt($buy_debit_pal);
                             $buy_debit_pal4=parseInt($buy_debit_pal3-$inputValPal);
 
-                            $('#now_remain_pal').val($buy_debit_pal4);
+                            $('#net_pay_pal').val($buy_debit_pal4);
 
                         }
                     }
                 });
                 $buy_debit_yae6=parseFloat($('#buy_debit_yae').val()).toFixed(2);
                 $buy_debit_yae=parseFloat($buy_debit_yae6);
-                $now_remain_pal12=parseInt($('#now_remain_pal').val());
-                $('.form-group .pc25').each(function () {
+                $now_remain_pal12=parseInt($('#net_pay_pal').val());
+                $('.form-group .return_gold_yae').each(function () {
                     $inputValYae=$(this).val();
                     if($.isNumeric($inputValYae)){
                        if($inputValYae <= $buy_debit_yae){
                            $buy_debit_yae=parseFloat($buy_debit_yae-$inputValYae).toFixed(2);
-                           $('#now_remain_yae').val($buy_debit_yae);
+                           $('#net_pay_yae').val($buy_debit_yae);
                        }
                        else if($inputValYae > $buy_debit_yae){
                            // $test=parseInt($('#now_remain_pal').val()-1);
                            // $('#now_remain_pal').val($test);
                            if ($inputValPal < $buy_debit_pal) {
                                $test=parseInt($buy_debit_pal_total-1);
-                               $('#now_remain_pal').val($test);
+                               $('#net_pay_pal').val($test);
                            }
                            else if($inputValPal > $buy_debit_pal){
                                $test5=parseInt($buy_debit_pal2-1);
-                               $('#now_remain_pal').val($test5);
+                               $('#net_pay_pal').val($test5);
                            }
                            else if($inputValPal == $buy_debit_pal){
-                               $test2=parseInt($('#now_remain_kyat').val()-1);
-                               $('#now_remain_kyat').val($test2);
+                               $test2=parseInt($('#net_pay_kyat').val()-1);
+                               $('#net_pay_kyat').val($test2);
                                $buy_debit_pal4=parseInt($buy_debit_pal4+16);
-                               $('#now_remain_pal').val($buy_debit_pal4-1);
+                               $('#net_pay_pal').val($buy_debit_pal4-1);
                            }
 
                            $buy_debit_yae1=parseFloat($buy_debit_yae)+8;
@@ -1211,17 +1287,354 @@
             });
         });
     </script>
-    {{--<script>--}}
-        {{--$(document).ready(function () {--}}
-            {{--$('#customer_id').click(function () {--}}
-                {{--$('.form-group .previous_remain_kyat').each(function () {--}}
-                    {{--<? $hell0=DB::select("select * from customers");?>--}}
-                    {{--$('#previous_remain_kyat').val($hell0);--}}
-                {{--});--}}
-            {{--});--}}
-        {{--});--}}
 
-    {{--</script>--}}
+    <script>
+        $(document).ready(function () {
+            $('#payment_btn').click(function () {
+                $buy_debit_kyat_one=$('#net_pay_kyat').val();
+                $buy_debit_kyat=parseInt($buy_debit_kyat_one);
+                $('.form-group .pc23').each(function () {
+                    $inputVal=$(this).val();
+                    if($.isNumeric($inputVal)){
+                        if ($inputVal <= $buy_debit_kyat) {
+                            $buy_debit_kyat=$buy_debit_kyat-$inputVal;
+                            $('#now_remain_kyat').val($buy_debit_kyat);
+                        }
+                        else if($inputVal > $buy_debit_kyat){
+
+                            $buy_debit_kyat=$inputVal-$buy_debit_kyat;
+                            $('#now_remain_kyat').val(-$buy_debit_kyat);
+                        }
+                    }
+                });
+                $netpaypal=$('#net_pay_pal').val();
+                $netpaypal=parseInt($netpaypal);
+                $payment_kyat_pal=$('#payment_kyat').val();
+                $payment_kyat_pal=parseInt($payment_kyat_pal);
+                $net_pay_kyat_pal=$('#net_pay_kyat').val();
+                $net_pay_kyat_pal=parseInt($net_pay_kyat_pal);
+
+                $('.form-group .pc24').each(function () {
+                    $inputValPal=$(this).val();
+                    if($.isNumeric($inputValPal)) {
+                       if ($payment_kyat_pal < $net_pay_kyat_pal) {
+                        if ($inputValPal < $netpaypal) {
+                            $netpaypal = $netpaypal - $inputValPal;
+                            $('#now_remain_pal').val($netpaypal);
+                        }
+                        else if ($inputValPal > $netpaypal) {
+                            $test1 = parseInt($('#now_remain_kyat').val()) - 1;
+                            $('#now_remain_kyat').val($test1);
+                            $netpaypal1 = parseInt($netpaypal) + 16;
+                            $netpaypal1 = parseInt($netpaypal1 - $inputValPal);
+                            $('#now_remain_pal').val($netpaypal1);
+                        }
+                        else if ($inputValPal == $netpaypal) {
+                            $netpaypal2 = parseInt($netpaypal);
+                            $netpaypal2 = parseInt($netpaypal2 - $inputValPal);
+
+                            $('#now_remain_pal').val($netpaypal2);
+                        }
+                       //}
+                        // else if($inputValkyatfour1 > $buy_debit_kyat){
+                        //     $('#now_remain_pal').val("$buy_debit_pal_total");
+                        //
+                        // }
+                        }
+                       else if($payment_kyat_pal > $net_pay_kyat_pal){
+                           if ($inputValPal > $netpaypal) {
+                               $netpaypal = $inputValPal - $netpaypal;
+                               $('#now_remain_pal').val(-$netpaypal);
+                           }
+                           else if ($inputValPal < $netpaypal) {
+                               $test1 = parseInt($('#now_remain_kyat').val()) + 1;
+                               $('#now_remain_kyat').val($test1);
+                               $inputValPal = parseInt($inputValPal) + 16;
+                               $netpaypal1 = parseInt($inputValPal - $netpaypal);
+                               $('#now_remain_pal').val(-$netpaypal1);
+
+                               // if($inputValYae < $netpayyae){
+                               //     $inputValPal4=parseInt($inputValPal-1);
+                               //     $netpaypal1 = parseInt($inputValPal4)+16;
+                               //     $netpaypal1 = parseInt($netpaypal1 - $netpaypal);
+                               //     $('#now_remain_pal').val(-$netpaypal1);
+                               // }
+                               // else if ($inputValYae >= $netpayyae){
+                               //     $netpaypal1 = parseInt($inputValPal) + 16;
+                               //     $netpaypal1 = parseInt($netpaypal1 - $netpaypal);
+                               //     $('#now_remain_pal').val(-$netpaypal1);
+                               // }
+                           }
+                           else if ($inputValPal == $netpaypal) {
+                               $netpaypal2 = parseInt($netpaypal);
+                               $netpaypal2 = parseInt($netpaypal2 - $inputValPal);
+
+                               $('#now_remain_pal').val($netpaypal2);
+                           }
+                       }
+                       else if($payment_kyat_pal == $net_pay_kyat_pal){
+                           if ($inputValPal > $netpaypal) {
+                               $netpaypal = $inputValPal - $netpaypal;
+                               $('#now_remain_pal').val(-$netpaypal);
+                           }
+                           else if ($inputValPal < $netpaypal) {
+                               $test1 = parseInt($('#now_remain_kyat').val()) - 1;
+                               $('#now_remain_kyat').val($test1);
+                               $netpaypal1 = parseInt($inputValPal)+16;
+                               $netpaypal = parseInt($netpaypal1 - $netpaypal);
+                               $('#now_remain_pal').val(-$netpaypal);
+                               // else if ($inputValYae >= $netpayyae){
+                               //     $netpaypal1 = parseInt($inputValPal) + 16;
+                               //     $netpaypal7 = parseInt($netpaypal1 - $netpaypal);
+                               //     $('#now_remain_pal').val(-$netpaypal7);
+                               // }
+                           }
+                           else if ($inputValPal == $netpaypal) {
+                               $netpaypal2 = parseInt($netpaypal);
+                               $netpaypal2 = parseInt($netpaypal2 - $inputValPal);
+
+                               $('#now_remain_pal').val($netpaypal2);
+                           }
+                       }
+
+                    }
+                });
+                $netpayyae1=parseFloat($('#net_pay_yae').val()).toFixed(2);
+                $netpayyae=parseFloat($netpayyae1);
+
+                $netpaypal=$('#net_pay_pal').val();
+                $netpaypal=parseInt($netpaypal);
+
+                $inputValPal=$('#payment_pal').val();
+                $inputValPal=parseInt($inputValPal);
+
+                $inputValkyatOne=parseInt($('#payment_kyat').val());
+                $netpaykyat=parseInt($('#net_pay_kyat').val());
+                $('.form-group .pc25').each(function () {
+                    $inputValYae=$(this).val();
+                    if($.isNumeric($inputValYae)) {
+                        if ($inputValYae < $netpayyae) {
+                            if ($inputValkyatOne < $netpaykyat) {
+                                $netpayyae = $netpayyae - $inputValYae;
+                                $netpayyae = parseFloat($netpayyae).toFixed(2);
+                                $('#now_remain_yae').val($netpayyae);
+                            }
+                            else if ($inputValkyatOne > $netpaykyat) {
+                                if($inputValPal < $netpaypal || $inputValPal > $netpaypal){
+                                    $test = parseInt($('#now_remain_pal').val())+1;
+                                    $('#now_remain_pal').val($test);
+                                }
+                                else if ($inputValPal == $netpaypal){
+                                    $test1=parseInt($inputValkyatOne)-1;
+                                    $test1=$test1-$netpaykyat;
+                                    $test1=parseInt($test1);
+                                    $('#now_remain_kyat').val(-$test1);
+                                    $inputValPal=parseInt($inputValPal)-1;
+                                    $inputValPal=parseInt($inputValPal)+16;
+                                    $test=$inputValPal-$netpaypal;
+                                    $test=parseInt($test);
+                                    $('#now_remain_pal').val(-$test);
+
+                                }
+
+                                $inputValYae = parseFloat($inputValYae) + 8;
+                                $netpayyae = parseFloat($inputValYae - $netpayyae).toFixed(2);
+                                $('#now_remain_yae').val(-$netpayyae);
+                            }
+                            else if($inputValkyatOne == $netpaykyat){
+
+                                if($inputValPal == $netpaypal){
+                                    $inputValkyatOne=$netpaykyat-$inputValkyatOne;
+                                    $inputValkyatOne=parseInt($inputValkyatOne);
+                                    $('#now_remain_kyat').val($inputValkyatOne);
+
+                                    $inputValPal=$netpaypal-$inputValPal;
+                                    $inputValPal=parseInt($inputValPal);
+                                    $('#now_remain_pal').val($inputValPal);
+
+
+                                    $inputValYae=$netpayyae-$inputValYae;
+                                    $inputValYae=parseFloat($inputValYae).toFixed(2);
+                                    $('#now_remain_yae').val($inputValYae);
+
+                                }
+                                else if($inputValPal < $netpaypal){
+                                    $inputValkyatOne=$netpaykyat-$inputValkyatOne;
+                                    $inputValkyatOne=parseInt($inputValkyatOne);
+                                    $('#now_remain_kyat').val($inputValkyatOne);
+
+                                    $inputValPal=$netpaypal-$inputValPal;
+                                    $inputValPal=parseInt($inputValPal);
+                                    $('#now_remain_pal').val($inputValPal);
+
+                                    $inputValYae=$netpayyae-$inputValYae;
+                                    $inputValYae=parseFloat($inputValYae).toFixed(2);
+                                    $('#now_remain_yae').val($inputValYae);
+
+                                }
+                                else if($inputValPal > $netpaypal){
+
+                                    $inputValPal=parseInt($inputValPal)-1;
+                                    $inputValPal=$inputValPal-$netpaypal;
+                                    $inputValPal=parseInt($inputValPal);
+                                    $('#now_remain_pal').val(-$inputValPal);
+                                    $inputValYae=parseFloat($inputValYae)+8;
+                                    $netpayyae =$inputValYae-$netpayyae;
+                                    $netpayyae = parseFloat($netpayyae).toFixed(2);
+                                    $('#now_remain_yae').val(-$netpayyae);
+                                }
+
+                            }
+
+                        }
+                        else if ($inputValYae > $netpayyae) {
+                            if($inputValkyatOne < $netpaykyat){
+                                if ($inputValPal < $netpaypal) {
+                                    $test=parseInt($netpaypal-1);
+                                    $test=$test-$inputValPal;
+                                    $('#now_remain_pal').val($test);
+                                }
+                                else if ($inputValPal > $netpaypal) {
+                                    $test5 = parseInt($netpaypal1 - 1);
+                                    $('#now_remain_pal').val($test5);
+                                }
+                                else if ($inputValPal == $netpaypal){
+                                    $kyatkyat=parseInt($('#now_remain_kyat').val())-1;
+                                    $('#now_remain_kyat').val($kyatkyat);
+                                    $inputValPalo=parseInt($netpaypal)+16;
+                                    $inputValPaloo=$inputValPalo-$inputValPal;
+                                    $inputValPal0=parseInt($inputValPaloo)-1;
+                                    $('#now_remain_pal').val($inputValPal0);
+                                }
+                                $netpayyae = parseFloat($netpayyae) + 8;
+                                $netpayyae = parseFloat($netpayyae - $inputValYae).toFixed(2);
+                                $('#now_remain_yae').val($netpayyae);
+                            }
+                            else if($inputValkyatOne > $netpaykyat){
+                                $netpayyae=parseFloat($inputValYae-$netpayyae).toFixed(2);
+                                $('#now_remain_yae').val(-$netpayyae);
+                            }
+                            else if ($inputValkyatOne == $netpaykyat){
+                                if ($inputValPal < $netpaypal) {
+                                    $inputValkyatOne=$netpaykyat-$inputValkyatOne;
+                                    $inputValkyatOne=parseInt($inputValkyatOne);
+                                    $('#now_remain_kyat').val($inputValkyatOne);
+
+                                    $netpaypal=parseInt($netpaypal)-1;
+                                    $inputValPal=$netpaypal-$inputValPal;
+                                    $inputValPal=parseInt($inputValPal);
+                                    $('#now_remain_pal').val($inputValPal);
+
+                                    $netpayyae = parseFloat($netpayyae) + 8;
+                                    $netpayyae = parseFloat($netpayyae - $inputValYae).toFixed(2);
+                                    $('#now_remain_yae').val($netpayyae);
+
+                                }
+                                else if ($inputValPal > $netpaypal) {
+                                    $test5 = parseInt($inputValPal-$netpaypal);
+                                    $('#now_remain_pal').val(-$test5);
+
+                                    $netpayyae = parseFloat($netpayyae);
+                                    $netpayyae = parseFloat($inputValYae-$netpayyae).toFixed(2);
+                                    $('#now_remain_yae').val(-$netpayyae);
+                                }
+                                else if ($inputValPal == $netpaypal) {
+                                    $netpayyae = parseFloat($netpayyae);
+                                    $netpayyae = parseFloat($inputValYae-$netpayyae).toFixed(2);
+                                    $('#now_remain_yae').val(-$netpayyae);
+                                }
+
+
+                                }
+                        }
+                        else if ($inputValYae == $netpayyae) {
+                                if ($inputValkyatOne > $netpaykyat) {
+                                    if ($inputValPal < $netpaypal){
+                                        $inputValkyatOne=parseInt($inputValkyatOne)-1;
+                                        $inputValkyatOne=$inputValkyatOne-$netpaykyat;
+                                        $inputValkyatOne=parseInt($inputValkyatOne);
+                                        $('#now_remain_kyat').val(-$inputValkyatOne);
+
+                                        $inputValPal=parseInt($inputValPal)+16;
+                                        $inputValPal=$inputValPal-$netpaypal;
+                                        $inputValPal=parseInt($inputValPal);
+                                        $('#now_remain_pal').val(-$inputValPal);
+                                    }
+                                    $netpayyae = $netpayyae - $inputValYae;
+                                    $netpayyae = parseFloat($netpayyae).toFixed(2);
+                                 $('#now_remain_yae').val($netpayyae);
+                                }
+                                else if($inputValkyatOne < $netpaykyat){
+                                    if ($inputValPal < $netpaypal){
+                                        $netpaykyat=parseInt($netpaykyat);
+                                        $inputValkyatOne=$netpaykyat-$inputValkyatOne;
+                                        $inputValkyatOne=parseInt($inputValkyatOne);
+                                        $('#now_remain_kyat').val($inputValkyatOne);
+
+                                        $inputValPal=$netpaypal-$inputValPal;
+                                        $inputValPal=parseInt($inputValPal);
+                                        $('#now_remain_pal').val($inputValPal);
+                                    }
+                                    // $inputValkyatOne=$netpaykyat-$inputValkyatOne;
+                                    // $inputValkyatOne=parseInt($inputValkyatOne);
+                                    // $('#now_remain_kyat').val($inputValkyatOne);
+
+                                    $netpayyae = $netpayyae - $inputValYae;
+                                    $netpayyae = parseFloat($netpayyae).toFixed(2);
+                                    $('#now_remain_yae').val($netpayyae);
+                                }
+                                else if($inputValkyatOne == $netpaykyat){
+                                    if ($inputValPal < $netpaypal){
+                                        $netpaykyat=parseInt($netpaykyat);
+                                        $inputValkyatOne=$netpaykyat-$inputValkyatOne;
+                                        $inputValkyatOne=parseInt($inputValkyatOne);
+                                        $('#now_remain_kyat').val($inputValkyatOne);
+
+                                        $inputValPal=$netpaypal-$inputValPal;
+                                        $inputValPal=parseInt($inputValPal);
+                                        $('#now_remain_pal').val($inputValPal);
+
+                                        $netpayyae = $netpayyae - $inputValYae;
+                                        $netpayyae = parseFloat($netpayyae).toFixed(2);
+                                        $('#now_remain_yae').val($netpayyae);
+                                    }
+                                    else if ($inputValPal > $netpaypal){
+                                        $netpaykyat=parseInt($netpaykyat);
+                                        $inputValkyatOne=$netpaykyat-$inputValkyatOne;
+                                        $inputValkyatOne=parseInt($inputValkyatOne);
+                                        $('#now_remain_kyat').val($inputValkyatOne);
+
+                                        $inputValPal=$inputValPal-$netpaypal;
+                                        $inputValPal=parseInt($inputValPal);
+                                        $('#now_remain_pal').val(-$inputValPal);
+
+                                        $netpayyae = $netpayyae - $inputValYae;
+                                        $netpayyae = parseFloat($netpayyae).toFixed(2);
+                                        $('#now_remain_yae').val($netpayyae);
+                                    }
+                                }
+                            }
+                        }
+                });
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#customer_id').click(function () {
+                $('.form-group .previous_remain_kyat').each(function () {
+                    $bb=parseInt($('#customer_id').val());
+                    $('#previous_remain_kyat').val($sql);
+
+
+                });
+            });
+        });
+
+    </script>
     {{--<script>--}}
         {{--$(document).ready(function () {--}}
             {{--$('.form-group').on('input','.customer',function () {--}}
