@@ -15,24 +15,25 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default(null);
-            $table->string('user_name')->default(null);
-            $table->string('dob')->default(null);
-            $table->text('address')->default(null);
-            $table->string('phone_number')->default(null);
-            $table->string('shop_name')->default(null);
-            $table->string('town')->default(null)   ;
-            $table->text('nrc')->default(null);
-            $table->text('path')->default(null);
-            $table->text('profile')->default(null);
-            $table->text('debit_kyat')->default(null);
-            $table->text('debit_pal')->default(null);
-            $table->text('debit_yae')->default(null);
-            $table->text('password')->default(null);
-            $table->text('status')->default(null);
-            $table->text('voucher_number')->default(null);
-            $table->text('sale_name')->default(null);
-            $table->text('sale_date')->default(null);
+            $table->string('name');
+            $table->string('user_name');
+            $table->string('dob');
+            $table->text('address');
+            $table->string('phone_number');
+            $table->string('shop_name');
+            $table->string('town')   ;
+            $table->text('nrc');
+            $table->text('path');
+            $table->text('profile');
+            $table->text('debit_kyat');
+            $table->text('debit_pal');
+            $table->text('debit_yae');
+            $table->text('password');
+            $table->text('status');
+            $table->text('total_point');
+            $table->text('voucher');
+            $table->text('s_name');
+            $table->text('s_date');
             $table->timestamps();
         });
     }

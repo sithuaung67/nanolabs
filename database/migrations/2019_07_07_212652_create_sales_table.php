@@ -15,13 +15,14 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sale_name')->default(null);
-            $table->string('user_name')->default(null);
-            $table->string('birthday')->default(null);
-            $table->text('address')->default(null);
-            $table->string('phone')->default(null);
-            $table->string('town')->default(null);
-            $table->text('profile')->default(null);
+            $table->string('sale_name');
+            $table->string('user_name');
+            $table->string('birthday');
+            $table->text('address');
+            $table->string('phone');
+            $table->string('town');
+            $table->text('profile');
+            $table->text('status');
             $table->timestamps();
         });
     }

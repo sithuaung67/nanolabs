@@ -64,11 +64,11 @@
                                     <tr>
                                         <td>Sale Name</td>
                                         <td>
-                                            @foreach($sale as $sal)
-                                                @if($sal->id==$invoice->sale_user_name)
-                                                    {{$sal->name}}
-                                                @endif
-                                            @endforeach
+                                            {{--@foreach($sale as $sal)--}}
+                                                {{--@if($sal->id==$invoice->sale_user_name)--}}
+                                                    {{$invoice->sale_user_name}}
+                                                {{--@endif--}}
+                                            {{--@endforeach--}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -79,29 +79,74 @@
                                         <td>Point Eight</td>
                                         <td>{{$invoice->point_eight}}</td>
                                     </tr>
-                                    {{--<tr>--}}
-                                        {{--<td>Kyat</td>--}}
-                                        {{--<td>{{$invoice->kyat}}</td>--}}
-                                    {{--</tr>--}}
-                                    {{--<tr>--}}
-                                        {{--<td>Pal</td>--}}
-                                        {{--<td>{{$invoice->pal}}</td>--}}
-                                    {{--</tr>--}}
-                                    {{--<tr>--}}
-                                        {{--<td>Yway</td>--}}
-                                        {{--<td>{{$invoice->yae}}</td>--}}
-                                    {{--</tr>--}}
                                     <tr>
-                                        <td style="font-size: 15px;">ရွှေချိန်</td>
+                                        <td style="font-size: 15px;">Gram</td>
+                                        <td>{{$invoice->gram}}</td>
+                                    </tr>
+                                     <tr>
+                                        <td style="font-size: 15px;">Gram</td>
                                         <td style="font-size: 15px">{{$invoice->kyat}} ကျပ် - {{$invoice->pal}} ပဲ - {{$invoice->yae}} ရွေး</td>
                                     </tr>
                                     <tr>
-                                        <td>Gram</td>
-                                        <td>{{$invoice->gram}}</td>
+                                        <td style="font-size: 15px;">return_gram</td>
+                                        <td>{{$invoice->return_gram}}</td>
                                     </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">now_remain_gram</td>
+                                        <td>{{$invoice->now_remain_gram}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">now_remain_gram</td>
+                                        <td style="font-size: 15px">{{$invoice->sub_return_kyat}} ကျပ် - {{$invoice->sub_return_pal}} ပဲ - {{$invoice->sub_return_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">ရွှေချိန်</td>
+                                        <td style="font-size: 15px">{{$invoice->total_kyat}} ကျပ် - {{$invoice->total_pal}} ပဲ - {{$invoice->total_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">ယခင်ကျန်</td>
+                                        <td style="font-size: 15px">{{$invoice->previous_remain_kyat}} ကျပ် - {{$invoice->previous_remain_pal}} ပဲ - {{$invoice->previous_remain_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">စုစုပေါင်းရွှေချိန်</td>
+                                        <td style="font-size: 15px">{{$invoice->buy_debit_kyat}} ကျပ် - {{$invoice->buy_debit_pal}} ပဲ - {{$invoice->buy_debit_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">ပြန်ပေးရွှေချိန် + အလျော့</td>
+                                        <td style="font-size: 15px">{{$invoice->return_gold_kyat}} ကျပ် - {{$invoice->return_gold_pal}} ပဲ - {{$invoice->return_gold_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">ပြန်ပေးရွှေချိန် + အလျော့ result</td>
+                                        <td style="font-size: 15px">{{$invoice->net_pay_kyat}} ကျပ် - {{$invoice->net_pay_pal}} ပဲ - {{$invoice->net_pay_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">ယခုပေးချေမည့်ရွှေချိန်</td>
+                                        <td style="font-size: 15px">{{$invoice->payment_kyat}} ကျပ် - {{$invoice->payment_pal}} ပဲ - {{$invoice->payment_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">လက်ကျန်အကြွေး</td>
+                                        <td style="font-size: 15px">{{$invoice->now_remain_kyat}} ကျပ် - {{$invoice->now_remain_pal}} ပဲ - {{$invoice->now_remain_yae}} ရွေး</td>
+                                    </tr>
+                                     <tr>
+                                        <td style="font-size: 15px;">စုစုပေါင်းအလျော့</td>
+                                        <td style="font-size: 15px">{{$invoice->total_ayot_kyat}} ကျပ် - {{$invoice->total_ayot_pal}} ပဲ - {{$invoice->total_ayot_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">ပြန်ပေး အလျော့</td>
+                                        <td style="font-size: 15px">{{$invoice->return_ayot_kyat}} ကျပ် - {{$invoice->return_ayot_pal}} ပဲ - {{$invoice->return_ayot_yae}} ရွေး</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 15px;">ယခုလက်ကျန်  စုစုပေါင်းအလျော့</td>
+                                        <td style="font-size: 15px">{{$invoice->now_total_ayot_kyat}} ကျပ် - {{$invoice->now_total_ayot_pal}} ပဲ - {{$invoice->now_total_ayot_yae}} ရွေး</td>
+                                    </tr>
+
                                     <tr>
                                         <td>Coupon</td>
                                         <td>{{$invoice->cupon_code}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Note</td>
+                                        <td>{{$invoice->note}}</td>
                                     </tr>
                                     <tr>
                                         <td>Sale Date</td>

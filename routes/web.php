@@ -132,6 +132,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@postUpdateCustomer',
             'as'=>'customer.update'
         ]);
+        Route::post('/customer/updateRank',[
+            'uses'=>'AdminController@postUpdateRank',
+            'as'=>'rank.update'
+        ]);
         Route::get('/search/customer',[
             'uses'=>'AdminController@getSearchCustomer',
             'as'=>'search.customer'
@@ -251,6 +255,15 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'AdminController@getRank',
             'as'=>'ranks'
         ]);
+        Route::post('ranks',[
+            'uses'=>'AdminController@getRankUpdate',
+            'as'=>'ranks.update'
+        ]);
+        Route::post('sale/edit',[
+            'uses'=>'AdminController@getSaleEditUpdate',
+            'as'=>'saleEdit.update'
+        ]);
+
         //Report
         Route::get('report',[
             'uses'=>'AdminController@getReport',

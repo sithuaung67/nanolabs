@@ -30,33 +30,17 @@
             <div class="row" style="margin-bottom: 10px">
                 <div class="col-md-12">
                     <form class="form-inline" action="{{route('search.customer')}}" method="get">
-                        <input type="date" id="birthday" name="birthday" class="form-control">
-                        <select  class="form-control" id="user_name" name="user_name" >
-                            <option value="">Account Name</option>
-                            @foreach($customers as $sal)
-                                <option value="{{$sal->user_name}}"> {{$sal->user_name}}  </option>
-                            @endforeach
-                        </select>
-                        {{--<select class="form-control" id="customer_name" name="customer_name" >--}}
-                            {{--<option value="">Customer Name</option>--}}
-                            {{--@foreach($customers as $sal)--}}
-                                {{--<option value="{{$sal->name}}"> {{$sal->name}}  </option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                        <select class="form-control" id="phone" name="phone" >
-                            <option value="">Phone Number</option>
-                            @foreach($customers as $sal)
-                                <option value="{{$sal->phone_number}}"> {{$sal->phone_number}}  </option>
-                            @endforeach
-                        </select>
+                        <input type="text" id="birthday1" style="width: 150px;" placeholder="Date Of Birth" name="birthday1" class="form-control">
+                        <script>
+                            $('#birthday1').datepicker({
+
+                                format: 'dd/mm/yyyy'
+                            });
+                        </script>
+
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" style="width: 180px;">
                         <input type="text" style="width: 150px;" placeholder="Town" id="town" name="town" class="form-control">
                         <input type="text" style="width: 150px;" placeholder=" Shop" id="shop" name="shop" class="form-control">
-                        <select class="form-control" id="phone" name="phone" >
-                            <option value="">NRC</option>
-                            @foreach($customers as $sal)
-                                <option value="{{$sal->nrc}}"> {{$sal->nrc}}  </option>
-                            @endforeach
-                        </select>
                         <button id="SearchButton" class="btn" type="submit"><i class="fa fa-search"></i></button>
                         @csrf
                     </form>
@@ -89,7 +73,7 @@
                                 <td>{{$total}}</td>
                                 <td><a style="color: #1c00cf;" href="{{route('get.customerInfo',['id'=>$customer->id])}}">{{$customer->name}}</a></td>
                                 <td>{{$customer->user_name}}</td>
-                                <td>{{date("d-M-Y", strtotime($customer->dob))}}</td>
+                                <td>{{$customer->dob}}</td>
                                 <td>{{$customer->phone_number}}</td>
                                 <td>{{$customer->shop_name}}</td>
                                 <td>{{$customer->address}}</td>
@@ -126,7 +110,7 @@
                                                         </div>
                                                         <div class="form-group has-feedback @if($errors->has('birthday')) has-error @endif">
                                                             <label for="birthday" class="control-label">Date Of Birth</label>
-                                                            <input value="{{$customer->dob}}" type="date" name="birthday" id="birthday" class="form-control">
+                                                            <input value="{{$customer->dob}}" type="text" name="birthday" id="birthday" class="form-control">
                                                             <span class="glyphicon glyphicon-book form-control-feedback"></span>
                                                             @if($errors->has('birthday')) <span class="help-block">{{$errors->first('birthday')}}</span> @endif
                                                         </div>
@@ -164,7 +148,7 @@
 
                                                         <div class="form-group has-feedback @if($errors->has('password')) has-error @endif">
                                                             <label for="password" class="control-label">Password</label>
-                                                            <input  type="password" value="{{$customer->password}}" name="password" id="password" class="form-control">
+                                                            <input  type="text" value="{{$customer->password}}" name="password" id="password" class="form-control">
                                                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                                             @if($errors->has('password')) <span class="help-block">{{$errors->first('password')}}</span> @endif
                                                         </div>
@@ -204,6 +188,7 @@
                                             </form>
                                         </div>
                                     </div>
+
                                 </td>
                             </tr>
                         @endforeach

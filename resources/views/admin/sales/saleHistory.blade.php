@@ -128,7 +128,7 @@
                                         {{--</tr>--}}
                                             <tr>
                                                 <td>{{$total}}</td>
-                                                <td><a id="invoiceHistory" href="{{route('get.saleInvoiceInfo',['id'=>$customer->id])}}">{{$customer->voucher_number}}</a></td>
+                                                <td><a id="invoiceHistory" href="{{route('get.saleInvoiceInfo',['id'=>$customer->sale_invoice_id])}}">{{$customer->voucher_number}}</a></td>
                                                 <td>
                                                     @foreach($customers as $cust)
                                                         @if($cust->id==$customer->customer_id)

@@ -61,7 +61,7 @@
                                     </td>
                                     @foreach($invoice as $customer)
                                         <td>
-                                            {{$customer->id}}
+                                            {{$customer->voucher_number}}
                                         </td>
                                     @endforeach
                                 </tr>
@@ -73,7 +73,7 @@
                                     <td>
                                         @foreach($customers as $cust)
                                            @if($cust->id==$customer->customer_id)
-                                                {{$cust->customer_name}}
+                                                {{$cust->name}}
                                             @endif
                                         @endforeach
                                     </td>
@@ -85,13 +85,7 @@
                                        SaleName
                                    </td>
                                     @foreach($invoice as $customer)
-                                        <td>
-                                            @foreach($sale as $sal)
-                                                @if($sal->id==$customer->sale_user_name)
-                                                    {{$sal->sale_name}}
-                                                @endif
-                                            @endforeach
-                                        </td>
+                                        <td>{{$customer->sale_user_name}}</td>
                                     @endforeach
                                    </tr>
                                    <tr>

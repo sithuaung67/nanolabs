@@ -44,7 +44,7 @@
                             <select name="sale_user_name" id="sale_user_name" class="form-control">
                                 <option value="">Select Sale Name</option>
                                 @foreach($sale as $cus)
-                                    <option value="{{$cus->name}}">{{$cus->name}}</option>
+                                    <option value="{{$cus->user_name}}">{{$cus->user_name}}</option>
                                 @endforeach
                             </select>
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -54,11 +54,17 @@
                     <div class="col-md-6">
                         <div class="form-group has-feedback @if($errors->has('order_date')) has-error @endif">
                             <label for="order_date" class="control-label"> Date </label>
-                            <input type="date" name="order_date" id="order_date" class="form-control">
+                            <input type="text" name="order_date" id="order_date" class="form-control">
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                             @if($errors->has('order_date')) <span class="help-block">{{$errors->first('order_date')}}</span> @endif
                         </div>
                     </div>
+                    <script>
+                        $('#order_date').datepicker({
+
+                            format: 'dd/mm/yyyy'
+                        });
+                    </script>
                     {{--<div class="col-md-12">--}}
                         {{--<button onclick="myFunction()">Click me</button>--}}
 
@@ -142,7 +148,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('kyat')) has-error @endif">
                             <label for="kyat" class="control-label">ကျပ်</label>
-                            <input placeholder="0" disabled type="text" name="kyat" id="kyat" class="form-control pc2">
+                            <input placeholder="0" type="text" name="kyat" id="kyat" class="form-control pc2">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('kyat')) <span class="help-block">{{$errors->first('kyat')}}</span> @endif
                         </div>
@@ -150,7 +156,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('pal')) has-error @endif">
                             <label for="pal" class="control-label">ပဲ</label>
-                            <input onkeyup="enterNumber()" disabled placeholder="0" type="text" name="pal" id="pal" class="form-control pc3">
+                            <input placeholder="0" type="text" name="pal" id="pal" class="form-control pc3">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('pal')) <span class="help-block">{{$errors->first('pal')}}</span> @endif
                         </div>
@@ -158,7 +164,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('yae')) has-error @endif">
                             <label for="yae" class="control-label">ရွေး</label>
-                            <input placeholder="0" disabled type="text" name="yae" id="yae" class="form-control pc4">
+                            <input placeholder="0" type="text" name="yae" id="yae" class="form-control pc4">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('yae')) <span class="help-block">{{$errors->first('yae')}}</span> @endif
                         </div>
@@ -180,12 +186,12 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <a id="now_remain_gram_btn" onclick="myFunction()" class="btn btn-block bg-primary">Calculate</a>
+                        <a id="now_remain_gram_btn" style="background-color: #1e282c;color: #ffffff" class="btn btn-block">Calculate</a>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('sub_return_kyat')) has-error @endif">
                             <label for="sub_return_kyat" class="control-label">ကျပ်</label>
-                            <input placeholder="0" disabled type="text" name="sub_return_kyat" id="sub_return_kyat" class="form-control pc2">
+                            <input placeholder="0" type="text" name="sub_return_kyat" id="sub_return_kyat" class="form-control pc2">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('sub_return_kyat')) <span class="help-block">{{$errors->first('sub_return_kyat')}}</span> @endif
                         </div>
@@ -193,7 +199,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('sub_return_pal')) has-error @endif">
                             <label for="sub_return_pal" class="control-label">ပဲ</label>
-                            <input placeholder="0" disabled type="text" name="sub_return_pal" id="sub_return_pal" class="form-control pc3">
+                            <input placeholder="0" type="text" name="sub_return_pal" id="sub_return_pal" class="form-control pc3">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('sub_return_pal')) <span class="help-block">{{$errors->first('sub_return_pal')}}</span> @endif
                         </div>
@@ -201,7 +207,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('sub_return_yae')) has-error @endif">
                             <label for="sub_return_yae" class="control-label">ရွေး</label>
-                            <input placeholder="0" disabled type="text" name="yae" id="sub_return_yae" class="form-control pc4">
+                            <input placeholder="0" type="text" name="sub_return_yae" id="sub_return_yae" class="form-control pc4">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('sub_return_yae')) <span class="help-block">{{$errors->first('sub_return_yae')}}</span> @endif
                         </div>
@@ -222,7 +228,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('total_pal')) has-error @endif">
                             <label for="total_pal" class="control-label">ပဲ</label>
-                            <input placeholder="0" onkeyup="enterNumber()" type="text" name="total_pal" id="total_pal" class="form-control">
+                            <input placeholder="0" type="text" name="total_pal" id="total_pal" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('total_pal')) <span class="help-block">{{$errors->first('total_pal')}}</span> @endif
                         </div>
@@ -238,22 +244,68 @@
                     <div class="col-md-12">
                         <div class="form-group has-feedback @if($errors->has('customer_id')) has-error @endif">
                             <label for="customer_id" class="control-label">Customer Name</label>
-                            <form id="myForm" action="userInfo.php" method="post">
                             <select name="customer_id"  id="customer_id" class="form-control customer">
                                 <option value="">Select Customer Name</option>
                                 @foreach($customer as $cus)
-                                    <option value="{{$cus->id}}">{{$cus->user_name}}</option>
+                                    <option value="{{$cus->id}}">{{$cus->name}}</option>
                                 @endforeach
 
                             </select>
-                            </form>
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                             @if($errors->has('customer_id')) <span class="help-block">{{$errors->first('customer_id')}}</span> @endif
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <a id="payment_btn1" class="btn btn-block bg-primary">Calculate</a>
-                    </div>
+                        <div class="form-group col-md-4">
+                            <select name="first_name" id="first_name" class="form-control testing">
+                                <option value="0">Select Sale Name</option>
+                                @foreach($customer as $cust)
+                                <option value="{{$cust->debit_kyat}}">{{$cust->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <select name="first_name1" id="first_name1" class="form-control testing1">
+                                <option value="0">Select Sale Name</option>
+                                @foreach($customer as $cust)
+                                    <option value="{{$cust->debit_pal}}">{{$cust->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <select name="first_name2" id="first_name2" class="form-control testing22">
+                                <option value="0">Select Sale Name</option>
+                                @foreach($customer as $cust)
+                                    <option value="{{$cust->debit_yae}}">{{$cust->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{--<div class="col-md-6">--}}
+                            {{--<input placeholder='Total Point' name="num1" id='texto' type='text' class='form-control'>--}}
+                        {{--</div>--}}
+
+                    {{--<div class="form-group col-md-12">--}}
+                        {{--<form action="" method="post">--}}
+                            {{--<div class="form-group">--}}
+                                {{--<select name="first_name" id="first_name" class="form-control testing2">--}}
+                                    {{--<option value="0">Select Sale Name</option>--}}
+                                    {{--@foreach($invoice as $cus)--}}
+                                        {{--<option value="{{$cus->id}}">--}}
+                                            {{--@foreach($customer as $cust)--}}
+                                                {{--@if($cust->id==$cus->customer_id)--}}
+                                                    {{--{{$cust->name}}--}}
+                                                {{--@endif--}}
+                                            {{--@endforeach--}}
+                                        {{--</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<button id="searchkyat" class="btn btn-block">Calculate</button>--}}
+                            {{--</div>--}}
+                        {{--</form>--}}
+                    {{--</div>--}}
+
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="before_debit" class="control-label" style="font-size: 20px">ယခင် လက်ကျန်အကြွေး (100%)</label>
@@ -270,7 +322,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('previous_remain_pal')) has-error @endif">
                             <label for="previous_remain_pal" class="control-label">ပဲ</label>
-                            <input placeholder="0"   type="text" name="previous_remain_pal" id="previous_remain_pal" class="form-control previous_remain_pal">
+                            <input placeholder="0" type="text" name="previous_remain_pal" id="previous_remain_pal" class="form-control previous_remain_pal">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('previous_remain_pal')) <span class="help-block">{{$errors->first('previous_remain_pal')}}</span> @endif
                         </div>
@@ -281,6 +333,11 @@
                             <input placeholder="0" type="text" name="previous_remain_yae" id="previous_remain_yae" class="form-control previous_remain_yae">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('previous_remain_yae')) <span class="help-block">{{$errors->first('previous_remain_yae')}}</span> @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a id="plus" style="background-color: #1e282c;color: #ffffff" class="btn btn-block">calculate</a>
                         </div>
                     </div>
                     {{--<div class="col-md-12">--}}
@@ -297,7 +354,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('buy_debit_kyat')) has-error @endif">
                             <label for="buy_debit_kyat" class="control-label">ကျပ်</label>
-                            <input placeholder="0" disabled maxlength="10" type="text" name="buy_debit_kyat" id="buy_debit_kyat" class="form-control">
+                            <input placeholder="0" type="text" name="buy_debit_kyat" id="buy_debit_kyat" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('buy_debit_kyat')) <span class="help-block">{{$errors->first('buy_debit_kyat')}}</span> @endif
                         </div>
@@ -305,7 +362,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('buy_debit_pal')) has-error @endif">
                             <label for="buy_debit_pal" class="control-label">ပဲ</label>
-                            <input placeholder="0" disabled onkeyup="enterNumber()" maxlength="2" type="text" name="buy_debit_pal" id="buy_debit_pal" class="form-control">
+                            <input placeholder="0"  type="text" name="buy_debit_pal" id="buy_debit_pal" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('buy_debit_pal')) <span class="help-block">{{$errors->first('buy_debit_pal')}}</span> @endif
                         </div>
@@ -313,7 +370,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('buy_debit_yae')) has-error @endif">
                             <label for="buy_debit_yae" class="control-label">ရွေး</label>
-                            <input placeholder="0" disabled onkeyup="enterNumber()" type="text" name="buy_debit_yae" id="buy_debit_yae" class="form-control">
+                            <input placeholder="0" type="text" name="buy_debit_yae" id="buy_debit_yae" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('buy_debit_yae')) <span class="help-block">{{$errors->first('buy_debit_yae')}}</span> @endif
                         </div>
@@ -326,7 +383,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('return_gold_kyat')) has-error @endif">
                             <label for="return_gold_kyat" class="control-label">ကျပ်</label>
-                            <input placeholder="0" value="0"  maxlength="10" type="text" name="return_gold_kyat" id="return_gold_kyat" class="form-control return_gold_kyat">
+                            <input placeholder="0" value="0" type="text" name="return_gold_kyat" id="return_gold_kyat" class="form-control return_gold_kyat">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('return_gold_kyat')) <span class="help-block">{{$errors->first('return_gold_kyat')}}</span> @endif
                         </div>
@@ -348,12 +405,12 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <a id="return_gold_btn" class="btn btn-block bg-primary">Calculate</a>
+                        <a id="return_gold_btn" style="background-color: #1e282c;color: white" class="btn btn-block">Calculate</a>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('net_pay_kyat')) has-error @endif">
                             <label for="net_pay_kyat" class="control-label">ကျပ်</label>
-                            <input placeholder="0"  maxlength="10" type="text" name="net_pay_kyat" id="net_pay_kyat" class="form-control">
+                            <input placeholder="0"  type="text" name="net_pay_kyat" id="net_pay_kyat" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('net_pay_kyat')) <span class="help-block">{{$errors->first('net_pay_kyat')}}</span> @endif
                         </div>
@@ -361,7 +418,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('net_pay_pal')) has-error @endif">
                             <label for="net_pay_pal" class="control-label">ပဲ</label>
-                            <input placeholder="0" maxlength="2" type="text" name="net_pay_pal" id="net_pay_pal" class="form-control">
+                            <input placeholder="0" type="text" name="net_pay_pal" id="net_pay_pal" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('net_pay_pal')) <span class="help-block">{{$errors->first('net_pay_pal')}}</span> @endif
                         </div>
@@ -404,7 +461,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <a id="payment_btn" class="btn btn-block bg-primary">Calculate</a>
+                        <a id="payment_btn" style="background-color: #1e282c;color: white" class="btn btn-block">Calculate</a>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -414,7 +471,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('now_remain_kyat')) has-error @endif">
                             <label for="now_remain_kyat" class="control-label">ကျပ်</label>
-                            <input placeholder="0" disabled onkeyup="enterNumber()" maxlength="10" type="text" name="now_remain_kyat" id="now_remain_kyat" class="form-control">
+                            <input value="0" style="background-color: #ff6464;color: white;" type="text" name="now_remain_kyat" id="now_remain_kyat" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('now_remain_kyat')) <span class="help-block">{{$errors->first('now_remain_kyat')}}</span> @endif
                         </div>
@@ -422,7 +479,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('now_remain_pal')) has-error @endif">
                             <label for="now_remain_pal" class="control-label">ပဲ</label>
-                            <input placeholder="0" disabled type="text" name="now_remain_pal" id="now_remain_pal" class="form-control">
+                            <input value="0" style="background-color: #ff6464;color: white" type="text" name="now_remain_pal" id="now_remain_pal" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('now_remain_pal')) <span class="help-block">{{$errors->first('now_remain_pal')}}</span> @endif
                         </div>
@@ -430,7 +487,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('now_remain_yae')) has-error @endif">
                             <label for="now_remain_yae" class="control-label">ရွေး</label>
-                            <input placeholder="0" disabled  type="text" name="now_remain_yae" id="now_remain_yae" class="form-control">
+                            <input value="0" style="background-color: #ff6464;color: white" type="text" name="now_remain_yae" id="now_remain_yae" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('now_remain_yae')) <span class="help-block">{{$errors->first('now_remain_yae')}}</span> @endif
                         </div>
@@ -494,7 +551,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <a id="now_total_ayot_btn" class="btn btn-block bg-primary">Calculate</a>
+                        <a id="now_total_ayot_btn" style="background-color: #1e282c;color: white" class="btn btn-block">Calculate</a>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -504,7 +561,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('now_total_ayot_kyat')) has-error @endif">
                             <label for="now_total_ayot_kyat" class="control-label">ကျပ်</label>
-                            <input placeholder="0" disabled type="text" name="now_total_ayot_kyat" id="now_total_ayot_kyat" class="form-control">
+                            <input placeholder="0" type="text" name="now_total_ayot_kyat" id="now_total_ayot_kyat" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('now_total_ayot_kyat')) <span class="help-block">{{$errors->first('now_total_ayot_kyat')}}</span> @endif
                         </div>
@@ -512,7 +569,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('now_total_ayot_pal')) has-error @endif">
                             <label for="now_total_ayot_pal" class="control-label">ပဲ</label>
-                            <input placeholder="0" disabled type="text" name="now_total_ayot_pal" id="now_total_ayot_pal" class="form-control">
+                            <input placeholder="0"  type="text" name="now_total_ayot_pal" id="now_total_ayot_pal" class="form-control">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('now_total_ayot_pal')) <span class="help-block">{{$errors->first('now_total_ayot_pal')}}</span> @endif
                         </div>
@@ -520,7 +577,7 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback @if($errors->has('now_total_ayot_yae')) has-error @endif">
                             <label for="now_total_ayot_yae" class="control-label">ရွေး</label>
-                            <input placeholder="0" disabled type="text" name="now_total_ayot_yae" id="now_total_ayot_yae" class="form-control ">
+                            <input placeholder="0"  type="text" name="now_total_ayot_yae" id="now_total_ayot_yae" class="form-control ">
                             <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
                             @if($errors->has('now_total_ayot_yae')) <span class="help-block">{{$errors->first('now_total_ayot_yae')}}</span> @endif
                         </div>
@@ -565,42 +622,42 @@
 
     </div>
 @stop
-{{--<script type="text/javascript">--}}
+<script type="text/javascript">
 
-    {{--function enterNumber(){--}}
+    function enterNumber(){
 
-        {{--var e = document.getElementById('previous_remain_yae');--}}
-        {{--var w = document.getElementById('bye_debit_yae');--}}
-        {{--var r = document.getElementById('payment_yae');--}}
-        {{--var y = document.getElementById('now_remain_yae');--}}
-        {{--var t = document.getElementById('total_ayot_yae');--}}
+        // var e = document.getElementById('total_kyat');
+        var w = document.getElementById('total_pal');
+        var r = document.getElementById('total_yae');
+        var y = document.getElementById('now_remain_yae');
+        var t = document.getElementById('total_ayot_yae');
 
 
-        {{--// if (!/^[0-8]+$/.test(e.value))--}}
-        {{--// {--}}
-        {{--//     alert("Please enter onyl number.");--}}
-        {{--//     e.value = e.value.substring(0,e.value.length-1);--}}
-        {{--// }--}}
-        {{--// if (!/^[0-7.99]+$/.test(w.value))--}}
-        {{--// {--}}
-        {{--//     w.value = w.value.substring(0,w.value.length-1);--}}
-        {{--// }--}}
-        {{--// if (!/^[0-7.99]+$/.test(r.value))--}}
-        {{--// {--}}
-        {{--//     r.value = r.value.substring(0,r.value.length-1);--}}
-        {{--// }--}}
-        {{--// if (!/^[0-7.99]+$/.test(y.value))--}}
-        {{--// {--}}
-        {{--//     y.value = y.value.substring(0,y.value.length-1);--}}
-        {{--// }--}}
-        {{--// if (!/^[0-7.99]+$/.test(t.value))--}}
-        {{--// {--}}
-        {{--//     t.value = t.value.substring(0,t.value.length-1);--}}
-        {{--// }--}}
+        if (!/^[0-8]+$/.test(e.value))
+        {
+            alert("Please enter onyl number.");
+            e.value = e.value.substring(0,e.value.length-1);
+        }
+        if (!/^[0-15]+$/.test(w.value))
+        {
+            w.value = w.value.substring(0,w.value.length-1);
+        }
+        if (!/^[0-7.99]+$/.test(r.value))
+        {
+            r.value = r.value.substring(0,r.value.length-1);
+        }
+        // if (!/^[0-7.99]+$/.test(y.value))
+        // {
+        //     y.value = y.value.substring(0,y.value.length-1);
+        // }
+        // if (!/^[0-7.99]+$/.test(t.value))
+        // {
+        //     t.value = t.value.substring(0,t.value.length-1);
+        // }
 
-    {{--}--}}
+    }
 
-{{--</script>--}}
+</script>
 
 
 

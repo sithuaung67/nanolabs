@@ -27,28 +27,27 @@
         <?php
         $sql = DB::select('select * from sale_invoices');
         $length=count($sql);
+
         $j=0;
         $sum=0;
-        $name=0;
+        $name="";
         $sale_name="";
         $aa=DB::select("DELETE FROM `reports`");
-        for($i=1;$i<=$length;$i++){
-            $sql1 = DB::select('select * from sale_invoices where sale_user_name = ?', [$i] );
+            $sale=DB::select('select * from sales');
+
+            foreach ($sale as $sal){
+                $aa=$sal->user_name;
+
+                $sql1 = DB::select('select * from sale_invoices where sale_user_name = ?', [$aa] );
             foreach ($sql1 as $result){
                 $sum+=$result->qty;
                 $name=$result->sale_user_name;
             }
-            $cus=DB::select('select * from sales');
-            foreach ($cus as $cu){
-                if($cu->name==$name){
-                    $sale_name= $cu->id;
-                    $sql2=DB::select("INSERT INTO `reports`(`point`,`sale_name`) VALUES ($sum,$sale_name)");
-                    $name=0;
-                    $sum =0;
-                    $sale_name="";
-                }
             }
-        }
+
+            $sql2=DB::select("INSERT INTO `reports`(`point`,`sale_name`) VALUES ('$sum','$name' )");
+
+
         ?>
         <section class="content">
             <div class="row">
@@ -66,12 +65,7 @@
                                     <option value="0">Select Sale Name</option>
                                     @foreach($sql6 as $cus)
                                         <option value="{{$cus->point}}">
-                                            {{--{{$cus->sale_name}}--}}
-                                            @foreach($customer as $cust)
-                                                @if($cust->id==$cus->sale_name)
-                                                    {{$cust->name}}
-                                                @endif
-                                            @endforeach
+                                           {{$cus->sale_name}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -86,12 +80,7 @@
                                     <option value="">Select Sale Name</option>
                                     @foreach($sql6 as $cus)
                                         <option value="{{$cus->point}}">
-                                            {{--{{$cus->sale_name}}--}}
-                                            @foreach($customer as $cust)
-                                                @if($cust->id==$cus->sale_name)
-                                                    {{$cust->name}}
-                                                @endif
-                                            @endforeach
+                                            {{$cus->sale_name}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -106,12 +95,7 @@
                                     <option value="">Select Sale Name</option>
                                     @foreach($sql6 as $cus)
                                         <option value="{{$cus->point}}">
-                                            {{--{{$cus->sale_name}}--}}
-                                            @foreach($customer as $cust)
-                                                @if($cust->id==$cus->sale_name)
-                                                    {{$cust->name}}
-                                                @endif
-                                            @endforeach
+                                            {{$cus->sale_name}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -126,12 +110,7 @@
                                     <option value="">Select Sale Name</option>
                                     @foreach($sql6 as $cus)
                                         <option value="{{$cus->point}}">
-                                            {{--{{$cus->sale_name}}--}}
-                                            @foreach($customer as $cust)
-                                                @if($cust->id==$cus->sale_name)
-                                                    {{$cust->name}}
-                                                @endif
-                                            @endforeach
+                                            {{$cus->sale_name}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -146,12 +125,7 @@
                                     <option value="">Select Sale Name</option>
                                     @foreach($sql6 as $cus)
                                         <option value="{{$cus->point}}">
-                                            {{--{{$cus->sale_name}}--}}
-                                            @foreach($customer as $cust)
-                                                @if($cust->id==$cus->sale_name)
-                                                    {{$cust->name}}
-                                                @endif
-                                            @endforeach
+                                            {{$cus->sale_name}}
                                         </option>
                                     @endforeach
                                 </select>
